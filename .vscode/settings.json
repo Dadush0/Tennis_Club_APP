@@ -1,0 +1,16 @@
+{
+      "files.exclude": {
+        "ios/**": true,
+        "linux/**": true,
+        "macos/**": true,
+        "web/**": true,
+        "android/**": true,
+        "windows/**": true,
+        "build/**": true,
+        ".dart_tool/**": true,
+        ".metadata":true,
+        "analysis_options.yaml":true,
+        "pubspec.lock":true,
+        ".gitignore":true
+      },
+    }
