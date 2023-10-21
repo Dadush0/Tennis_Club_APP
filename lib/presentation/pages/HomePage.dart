@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_club_app/presentation/widgets/LineupWidget.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -49,14 +50,13 @@ class _MyHomePageState extends State<MyHomePage> {
           child: const Text('Page 1'),
         ),
         Container(
-          color: Colors.green,
+          color: Colors.blue,
           alignment: Alignment.center,
           child: const Text('Page 2'),
         ),
         Container(
-          color: Colors.blue,
           alignment: Alignment.center,
-          child: const Text('Page 3'),
+          child: LineupTable(),
         ),
         Container(
           color: Colors.amber,
