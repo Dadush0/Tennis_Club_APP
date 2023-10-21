@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_club_app/presentation/pages/LineupPage.dart';
 import 'package:tennis_club_app/presentation/widgets/LineupWidget.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -56,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         Container(
           alignment: Alignment.center,
-          child: LineupWidget(),
+          child: LineupPage(),
         ),
         Container(
           color: Colors.amber,
