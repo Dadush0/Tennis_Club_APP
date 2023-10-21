@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LineupTable extends StatelessWidget {
-  const LineupTable({super.key});
+class LineupWidget extends StatelessWidget {
+  const LineupWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

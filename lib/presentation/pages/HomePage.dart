@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         Container(
           alignment: Alignment.center,
-          child: LineupTable(),
+          child: LineupWidget(),
         ),
         Container(
           color: Colors.amber,
