@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:tennis_club_app/presentation/widgets/LineupWidget.dart';
 
@@ -8,6 +6,6 @@ class LineupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LineupWidget();
+    return const LineupWidget();
   }
 }
