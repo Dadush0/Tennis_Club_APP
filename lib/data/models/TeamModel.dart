@@ -1,11 +1,9 @@
+import 'package:tennis_club_app/data/models/GameModel.dart';
 import 'package:tennis_club_app/data/models/PlayerModel.dart';
 
 class TeamModel {
   late String teamName;
-  late DateTime date;
+  late List<GameModel> games;
   late List<PlayerModel> players;
-  late String location;
-  late String opponentName;
-  late List<PlayerModel> cakes;
-  late PlayerModel manager;
+  late PlayerModel trainer;
 }

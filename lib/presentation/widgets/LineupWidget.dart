@@ -1,10 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_club_app/locator.dart';
+import 'package:tennis_club_app/presentation/stores/LineupStore.dart';
 
 class LineupWidget extends StatelessWidget {
-  const LineupWidget({super.key});
+  LineupWidget({super.key});
+  final LineupStore _lineupStore = locator<LineupStore>();
+
+  List<DataRow> convertGamesToDataRows() {
+    List<DataRow> rows = [];
+    for (var game in _lineupStore.lineup.first.games) {
+      List<String> gameInfo = game.convertToStringList();
+      DataRow row = DataRow(cells: []);
+      for (var element in gameInfo) {
+        row.cells.add(DataCell(Text(element)));
+      }
+      rows.add(row);
+    }
+    return rows;
+  }
 
   @override
   Widget build(BuildContext context) {
+    _lineupStore.getLineup();
+
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: SingleChildScrollView(
@@ -19,6 +37,7 @@ class LineupWidget extends StatelessWidget {
                 ),
               ),
             ),
+            /*
             DataColumn(
               label: Expanded(
                 child: Text(
@@ -35,6 +54,7 @@ class LineupWidget extends StatelessWidget {
                 ),
               ),
             ),
+            */
             DataColumn(
               label: Expanded(
                 child: Text(
@@ -77,7 +97,8 @@ class LineupWidget extends StatelessWidget {
               ),
             ),
           ],
-          rows: const <DataRow>[
+          rows:
+              convertGamesToDataRows(), /*const <DataRow>[
             DataRow(cells: <DataCell>[
               DataCell(Text('21/10/2023')),
               DataCell(Text('13:00')),
@@ -198,7 +219,7 @@ class LineupWidget extends StatelessWidget {
               DataCell(Text('Writz')),
               DataCell(Text('Mineself')),
             ])
-          ],
+          ],*/
         ),
       ),
     );

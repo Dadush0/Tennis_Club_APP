@@ -10,7 +10,7 @@ part of 'MainStore.dart';
 
 mixin _$MainStore on MainBase, Store {
   late final _$pageIndexAtom =
-      Atom(name: 'HomeBase.pageIndex', context: context);
+      Atom(name: 'MainBase.pageIndex', context: context);
 
   @override
   int get pageIndex {
@@ -25,7 +25,7 @@ mixin _$MainStore on MainBase, Store {
     });
   }
 
-  late final _$loggedInAtom = Atom(name: 'HomeBase.loggedIn', context: context);
+  late final _$loggedInAtom = Atom(name: 'MainBase.loggedIn', context: context);
 
   @override
   bool get loggedIn {
@@ -41,7 +41,7 @@ mixin _$MainStore on MainBase, Store {
   }
 
   late final _$adminModeAtom =
-      Atom(name: 'HomeBase.adminMode', context: context);
+      Atom(name: 'MainBase.adminMode', context: context);
 
   @override
   bool get adminMode {
@@ -56,17 +56,17 @@ mixin _$MainStore on MainBase, Store {
     });
   }
 
-  late final _$HomeBaseActionController =
-      ActionController(name: 'HomeBase', context: context);
+  late final _$MainBaseActionController =
+      ActionController(name: 'MainBase', context: context);
 
   @override
   void changePage(int index) {
     final _$actionInfo =
-        _$HomeBaseActionController.startAction(name: 'HomeBase.changePage');
+        _$MainBaseActionController.startAction(name: 'MainBase.changePage');
     try {
       return super.changePage(index);
     } finally {
-      _$HomeBaseActionController.endAction(_$actionInfo);
+      _$MainBaseActionController.endAction(_$actionInfo);
     }
   }
 
