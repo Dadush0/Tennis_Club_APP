@@ -12,8 +12,11 @@ class DataStub {
     player2.displayName = "Dagostini";
 
     LineupModel lineupModel = LineupModel(teams: [], favoriteTeam: '');
-    lineupModel.teams = [TeamModel()];
-    lineupModel.teams.first.games = [GameModel(), GameModel()];
+    lineupModel.teams = [TeamModel(), TeamModel()];
+
+    lineupModel.teams.first.teamName = "Team1";
+
+    lineupModel.teams.first.games = [GameModel()];
     lineupModel.teams.first.games.first.opponentName = "opponent1";
     lineupModel.teams.first.games.first.date = DateTime.now();
     lineupModel.teams.first.games.first.location = "Home";
@@ -21,12 +24,15 @@ class DataStub {
     lineupModel.teams.first.games.first.cakes = [player1, player2];
     lineupModel.teams.first.games.first.players = [player1, player2];
 
-    lineupModel.teams.first.games.last.opponentName = "opponent2";
-    lineupModel.teams.first.games.last.date = DateTime.now();
-    lineupModel.teams.first.games.last.location = "Away";
-    lineupModel.teams.first.games.last.manager = player2;
-    lineupModel.teams.first.games.last.cakes = [player1, player2];
-    lineupModel.teams.first.games.last.players = [player1, player2];
+    lineupModel.teams.last.teamName = "Team2";
+
+    lineupModel.teams.last.games = [GameModel()];
+    lineupModel.teams.last.games.first.opponentName = "opponent2";
+    lineupModel.teams.last.games.first.date = DateTime.now();
+    lineupModel.teams.last.games.first.location = "Away";
+    lineupModel.teams.last.games.first.manager = player2;
+    lineupModel.teams.last.games.first.cakes = [player1, player2];
+    lineupModel.teams.last.games.first.players = [player1, player2];
 
     return lineupModel;
   }

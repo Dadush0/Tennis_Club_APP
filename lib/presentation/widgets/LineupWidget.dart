@@ -21,7 +21,7 @@ class LineupWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _lineupStore.getLineup();
+    _lineupStore.getGamesByTeam("Team2");
 
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
