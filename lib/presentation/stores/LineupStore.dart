@@ -1,5 +1,4 @@
 import 'package:mobx/mobx.dart';
-import 'package:tennis_club_app/data/models/TeamModel.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/usecases/GetGamesByTeam.dart';
 import 'package:tennis_club_app/usecases/GetLineup.dart';
@@ -21,6 +20,7 @@ abstract class _LineupStore with Store {
 
   @action
   Future<void> getGamesByTeam(String teamname) async {
+    lineup.clear();
     lineup.add(_getGamesByTeam.call(teamname));
   }
 }

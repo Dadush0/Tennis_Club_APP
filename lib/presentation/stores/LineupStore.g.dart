@@ -12,13 +12,13 @@ mixin _$LineupStore on _LineupStore, Store {
   late final _$lineupAtom = Atom(name: '_LineupStore.lineup', context: context);
 
   @override
-  ObservableList<TeamModel> get lineup {
+  ObservableList<dynamic> get lineup {
     _$lineupAtom.reportRead();
     return super.lineup;
   }
 
   @override
-  set lineup(ObservableList<TeamModel> value) {
+  set lineup(ObservableList<dynamic> value) {
     _$lineupAtom.reportWrite(value, super.lineup, () {
       super.lineup = value;
     });
@@ -30,6 +30,15 @@ mixin _$LineupStore on _LineupStore, Store {
   @override
   Future<void> getLineup() {
     return _$getLineupAsyncAction.run(() => super.getLineup());
+  }
+
+  late final _$getGamesByTeamAsyncAction =
+      AsyncAction('_LineupStore.getGamesByTeam', context: context);
+
+  @override
+  Future<void> getGamesByTeam(String teamname) {
+    return _$getGamesByTeamAsyncAction
+        .run(() => super.getGamesByTeam(teamname));
   }
 
   @override
