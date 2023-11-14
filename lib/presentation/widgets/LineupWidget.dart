@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tennis_club_app/locator.dart';
@@ -22,6 +20,14 @@ class LineupWidget extends StatelessWidget {
     return rows;
   }
 
+  List<DropdownMenuEntry<String>> convertTeamNamesToEntries() {
+    List<DropdownMenuEntry<String>> entries = [];
+    for (var name in _lineupStore.teamNames) {
+      entries.add(DropdownMenuEntry<String>(value: name, label: name));
+    }
+    return entries;
+  }
+
   @override
   Widget build(BuildContext context) {
     _lineupStore.getGamesByTeam('Team1');
@@ -35,10 +41,7 @@ class LineupWidget extends StatelessWidget {
                 initialSelection: 'Team1',
                 label: const Text("Team Name"),
                 enableSearch: false,
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry<String>(value: 'Team1', label: 'Team1'),
-                  DropdownMenuEntry<String>(value: 'Team2', label: 'Team2')
-                ],
+                dropdownMenuEntries: convertTeamNamesToEntries(),
                 onSelected: (value) => _lineupStore.getGamesByTeam(value!),
               ),
             ),

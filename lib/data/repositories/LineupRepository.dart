@@ -22,4 +22,13 @@ class LineupRepository {
     }
     return lineup.teams.first;
   }
+
+  List<String> getAllTeams() {
+    List<String> teamNames = [];
+    var lineup = data.getLineUp();
+    for (var element in lineup.teams) {
+      teamNames.add(element.teamName);
+    }
+    return teamNames;
+  }
 }

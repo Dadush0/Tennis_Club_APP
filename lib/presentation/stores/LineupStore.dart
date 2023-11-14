@@ -1,5 +1,6 @@
 import 'package:mobx/mobx.dart';
 import 'package:tennis_club_app/locator.dart';
+import 'package:tennis_club_app/usecases/GetAllTeams.dart';
 import 'package:tennis_club_app/usecases/GetGamesByTeam.dart';
 import 'package:tennis_club_app/usecases/GetLineup.dart';
 
@@ -10,8 +11,10 @@ class LineupStore = _LineupStore with _$LineupStore;
 abstract class _LineupStore with Store {
   final GetLineup _getLineup = locator<GetLineup>();
   final GetGamesByTeam _getGamesByTeam = locator<GetGamesByTeam>();
+  final GetAllTeams _getAllTeams = locator<GetAllTeams>();
   @observable
-  late ObservableList lineup = [].asObservable();
+  ObservableList lineup = [].asObservable();
+  List<String> teamNames = [];
 
   @action
   Future<void> getLineup() async {
@@ -22,5 +25,10 @@ abstract class _LineupStore with Store {
   Future<void> getGamesByTeam(String teamname) async {
     lineup.clear();
     lineup.add(_getGamesByTeam.call(teamname));
+  }
+
+  @action
+  Future<void> getAllTeams() async {
+    teamNames.addAll(_getAllTeams.call());
   }
 }
