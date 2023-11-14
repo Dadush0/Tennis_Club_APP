@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tennis_club_app/locator.dart';
@@ -22,6 +20,31 @@ class LineupWidget extends StatelessWidget {
     return rows;
   }
 
+  List<DataColumn> createTableHeaderRow() {
+    List<DataColumn> columns = [];
+    List<String> headers = [
+      'Date',
+      'Where TF',
+      'Opponent',
+      'Players',
+      'Cake and Pints',
+      'Supervisor'
+    ]; // to be moved in string file
+    for (var header in headers) {
+      columns.add(
+        DataColumn(
+          label: Expanded(
+            child: Text(
+              header,
+              style: const TextStyle(fontStyle: FontStyle.italic),
+            ),
+          ),
+        ),
+      );
+    }
+    return columns;
+  }
+
   @override
   Widget build(BuildContext context) {
     _lineupStore.getGamesByTeam('Team1');
@@ -31,76 +54,32 @@ class LineupWidget extends StatelessWidget {
           children: <Widget>[
             Container(
               margin: const EdgeInsets.only(top: 16.0),
-              child: DropdownMenu<String>(
-                initialSelection: 'Team1',
-                label: const Text("Team Name"),
-                enableSearch: false,
-                dropdownMenuEntries: const [
-                  DropdownMenuEntry<String>(value: 'Team1', label: 'Team1'),
-                  DropdownMenuEntry<String>(value: 'Team2', label: 'Team2')
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  DropdownMenu<String>(
+                    initialSelection: 'Team1',
+                    label: const Text("Team Name"),
+                    enableSearch: false,
+                    dropdownMenuEntries: const [
+                      DropdownMenuEntry<String>(value: 'Team1', label: 'Team1'),
+                      DropdownMenuEntry<String>(value: 'Team2', label: 'Team2')
+                    ],
+                    onSelected: (value) => _lineupStore.getGamesByTeam(value!),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {}, // create UseCase -> setFavouriteTeam
+                    child: const Text('Mark as Favourite'),
+                  ),
                 ],
-                onSelected: (value) => _lineupStore.getGamesByTeam(value!),
               ),
             ),
             Observer(
               builder: (_) => SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    columns: const <DataColumn>[
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Date',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Where TF',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Opponent',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Players',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                            overflow: TextOverflow.visible,
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Cake and Pints',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Supervisor',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                      ),
-                    ],
-                    rows: convertGamesToDataRows(),
-                  ),
+                child: DataTable(
+                  columns: createTableHeaderRow(),
+                  rows: convertGamesToDataRows(),
                 ),
               ),
             ),
