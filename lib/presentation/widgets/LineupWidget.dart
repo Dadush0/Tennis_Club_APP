@@ -20,6 +20,13 @@ class LineupWidget extends StatelessWidget {
     return rows;
   }
 
+  List<DropdownMenuEntry<String>> convertTeamNamesToEntries() {
+    List<DropdownMenuEntry<String>> entries = [];
+    for (var name in _lineupStore.teamNames) {
+      entries.add(DropdownMenuEntry<String>(value: name, label: name));
+    }
+    return entries;
+  }
   List<DataColumn> createTableHeaderRow() {
     List<DataColumn> columns = [];
     List<String> headers = [
@@ -61,11 +68,8 @@ class LineupWidget extends StatelessWidget {
                     initialSelection: 'Team1',
                     label: const Text("Team Name"),
                     enableSearch: false,
-                    dropdownMenuEntries: const [
-                      DropdownMenuEntry<String>(value: 'Team1', label: 'Team1'),
-                      DropdownMenuEntry<String>(value: 'Team2', label: 'Team2')
-                    ],
-                    onSelected: (value) => _lineupStore.getGamesByTeam(value!),
+                    dropdownMenuEntries: convertTeamNamesToEntries(),
+                onSelected: (value) => _lineupStore.getGamesByTeam(value!),
                   ),
                   ElevatedButton(
                     onPressed: () {}, // create UseCase -> setFavouriteTeam

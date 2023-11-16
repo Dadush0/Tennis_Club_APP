@@ -3,6 +3,7 @@ import 'package:tennis_club_app/data/datasources/dataStub.dart';
 import 'package:tennis_club_app/data/repositories/LineupRepository.dart';
 import 'package:tennis_club_app/presentation/stores/LineupStore.dart';
 import 'package:tennis_club_app/presentation/stores/MainStore.dart';
+import 'package:tennis_club_app/usecases/GetAllTeams.dart';
 import 'package:tennis_club_app/usecases/GetGamesByTeam.dart';
 import 'package:tennis_club_app/usecases/GetLineup.dart';
 
@@ -16,6 +17,7 @@ void init() {
   // Use cases
   locator.registerLazySingleton(() => GetLineup(locator()));
   locator.registerLazySingleton(() => GetGamesByTeam(locator()));
+  locator.registerLazySingleton(() => GetAllTeams(locator()));
   // Datasources
   locator.registerLazySingleton(() => DataStub());
 
