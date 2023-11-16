@@ -27,6 +27,30 @@ class LineupWidget extends StatelessWidget {
     }
     return entries;
   }
+  List<DataColumn> createTableHeaderRow() {
+    List<DataColumn> columns = [];
+    List<String> headers = [
+      'Date',
+      'Where TF',
+      'Opponent',
+      'Players',
+      'Cake and Pints',
+      'Supervisor'
+    ]; // to be moved in string file
+    for (var header in headers) {
+      columns.add(
+        DataColumn(
+          label: Expanded(
+            child: Text(
+              header,
+              style: const TextStyle(fontStyle: FontStyle.italic),
+            ),
+          ),
+        ),
+      );
+    }
+    return columns;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,73 +61,29 @@ class LineupWidget extends StatelessWidget {
           children: <Widget>[
             Container(
               margin: const EdgeInsets.only(top: 16.0),
-              child: DropdownMenu<String>(
-                initialSelection: 'Team1',
-                label: const Text("Team Name"),
-                enableSearch: false,
-                dropdownMenuEntries: convertTeamNamesToEntries(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  DropdownMenu<String>(
+                    initialSelection: 'Team1',
+                    label: const Text("Team Name"),
+                    enableSearch: false,
+                    dropdownMenuEntries: convertTeamNamesToEntries(),
                 onSelected: (value) => _lineupStore.getGamesByTeam(value!),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {}, // create UseCase -> setFavouriteTeam
+                    child: const Text('Mark as Favourite'),
+                  ),
+                ],
               ),
             ),
             Observer(
               builder: (_) => SingleChildScrollView(
                 scrollDirection: Axis.vertical,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                    columns: const <DataColumn>[
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Date',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Where TF',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Opponent',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Players',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                            overflow: TextOverflow.visible,
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Cake and Pints',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Expanded(
-                          child: Text(
-                            'Supervisor',
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          ),
-                        ),
-                      ),
-                    ],
-                    rows: convertGamesToDataRows(),
-                  ),
+                child: DataTable(
+                  columns: createTableHeaderRow(),
+                  rows: convertGamesToDataRows(),
                 ),
               ),
             ),
