@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:tennis_club_app/presentation/pages/LineupPage.dart';
+import 'package:tennis_club_app/presentation/widgets/GameWidget.dart';
 
 part 'MainStore.g.dart';
 
@@ -10,7 +11,7 @@ abstract class MainBase with Store {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   // Pages need to go here!
   List<Widget> pages = [
-    const Text('News'), // NewsPage()
+    GameWidget(), // NewsPage()
     const Text('Courts'), // CourtPage()
     const LineupPage(), // LineUpPage()
     const Text('Pints'), // Eventpage()

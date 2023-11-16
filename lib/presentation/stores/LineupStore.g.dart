@@ -24,6 +24,22 @@ mixin _$LineupStore on _LineupStore, Store {
     });
   }
 
+  late final _$customTileExpandedAtom =
+      Atom(name: '_LineupStore.customTileExpanded', context: context);
+
+  @override
+  Observable<bool> get customTileExpanded {
+    _$customTileExpandedAtom.reportRead();
+    return super.customTileExpanded;
+  }
+
+  @override
+  set customTileExpanded(Observable<bool> value) {
+    _$customTileExpandedAtom.reportWrite(value, super.customTileExpanded, () {
+      super.customTileExpanded = value;
+    });
+  }
+
   late final _$getLineupAsyncAction =
       AsyncAction('_LineupStore.getLineup', context: context);
 
@@ -41,10 +57,19 @@ mixin _$LineupStore on _LineupStore, Store {
         .run(() => super.getGamesByTeam(teamname));
   }
 
+  late final _$getAllTeamsAsyncAction =
+      AsyncAction('_LineupStore.getAllTeams', context: context);
+
+  @override
+  Future<void> getAllTeams() {
+    return _$getAllTeamsAsyncAction.run(() => super.getAllTeams());
+  }
+
   @override
   String toString() {
     return '''
-lineup: ${lineup}
+lineup: ${lineup},
+customTileExpanded: ${customTileExpanded}
     ''';
   }
 }

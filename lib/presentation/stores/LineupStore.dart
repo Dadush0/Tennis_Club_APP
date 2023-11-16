@@ -16,6 +16,9 @@ abstract class _LineupStore with Store {
   ObservableList lineup = [].asObservable();
   List<String> teamNames = [];
 
+  @observable
+  Observable<bool> customTileExpanded = false.obs();
+
   @action
   Future<void> getLineup() async {
     lineup.addAll(_getLineup.call().teams);

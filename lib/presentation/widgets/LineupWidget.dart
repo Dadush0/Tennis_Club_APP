@@ -27,6 +27,7 @@ class LineupWidget extends StatelessWidget {
     }
     return entries;
   }
+
   List<DataColumn> createTableHeaderRow() {
     List<DataColumn> columns = [];
     List<String> headers = [
@@ -54,7 +55,8 @@ class LineupWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _lineupStore.getGamesByTeam('Team1');
+    _lineupStore.getGamesByTeam('Team1'); // getFavoriteTeam or first or none
+    _lineupStore.getAllTeams();
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -65,14 +67,16 @@ class LineupWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   DropdownMenu<String>(
-                    initialSelection: 'Team1',
-                    label: const Text("Team Name"),
+                    initialSelection:
+                        'Team1', // TODO: create UseCase -> getFavoriteTeam
+                    label: const Text('Teamname'),
                     enableSearch: false,
                     dropdownMenuEntries: convertTeamNamesToEntries(),
-                onSelected: (value) => _lineupStore.getGamesByTeam(value!),
+                    onSelected: (value) => _lineupStore.getGamesByTeam(value!),
                   ),
                   ElevatedButton(
-                    onPressed: () {}, // create UseCase -> setFavouriteTeam
+                    onPressed:
+                        () {}, // TODO: create UseCase -> setFavouriteTeam
                     child: const Text('Mark as Favourite'),
                   ),
                 ],
