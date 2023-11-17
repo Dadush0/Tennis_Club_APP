@@ -9,10 +9,12 @@ class DataStub {
   DataStub() {
     PlayerModel player1 = PlayerModel(displayName: 'Wirtz');
     PlayerModel player2 = PlayerModel(displayName: 'Dagostini');
+    PlayerModel player3 = PlayerModel(displayName: 'Cunt');
+    PlayerModel player4 = PlayerModel(displayName: 'DumbFuck');
 
     GameModel gameModel1 = GameModel(
         date: DateTime.now(),
-        players: [player1, player2],
+        players: [player1, player2, player3, player4],
         location: "Home",
         opponentName: "opponent1",
         cakes: [player1, player2],

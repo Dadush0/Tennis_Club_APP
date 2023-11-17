@@ -12,13 +12,13 @@ mixin _$LineupStore on _LineupStore, Store {
   late final _$lineupAtom = Atom(name: '_LineupStore.lineup', context: context);
 
   @override
-  ObservableList<dynamic> get lineup {
+  ObservableList<TeamModel> get lineup {
     _$lineupAtom.reportRead();
     return super.lineup;
   }
 
   @override
-  set lineup(ObservableList<dynamic> value) {
+  set lineup(ObservableList<TeamModel> value) {
     _$lineupAtom.reportWrite(value, super.lineup, () {
       super.lineup = value;
     });
