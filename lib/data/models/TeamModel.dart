@@ -6,4 +6,6 @@ class TeamModel {
   late List<GameModel> games;
   late List<PlayerModel> players;
   late PlayerModel trainer;
+
+  TeamModel({required this.teamName});
 }
