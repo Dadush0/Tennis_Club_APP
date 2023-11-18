@@ -40,6 +40,38 @@ mixin _$LineupStore on _LineupStore, Store {
     });
   }
 
+  late final _$dialogIndexAtom =
+      Atom(name: '_LineupStore.dialogIndex', context: context);
+
+  @override
+  Observable<int> get dialogIndex {
+    _$dialogIndexAtom.reportRead();
+    return super.dialogIndex;
+  }
+
+  @override
+  set dialogIndex(Observable<int> value) {
+    _$dialogIndexAtom.reportWrite(value, super.dialogIndex, () {
+      super.dialogIndex = value;
+    });
+  }
+
+  late final _$submitButtonAtom =
+      Atom(name: '_LineupStore.submitButton', context: context);
+
+  @override
+  Observable<String> get submitButton {
+    _$submitButtonAtom.reportRead();
+    return super.submitButton;
+  }
+
+  @override
+  set submitButton(Observable<String> value) {
+    _$submitButtonAtom.reportWrite(value, super.submitButton, () {
+      super.submitButton = value;
+    });
+  }
+
   late final _$getLineupAsyncAction =
       AsyncAction('_LineupStore.getLineup', context: context);
 
@@ -65,11 +97,31 @@ mixin _$LineupStore on _LineupStore, Store {
     return _$getAllTeamsAsyncAction.run(() => super.getAllTeams());
   }
 
+  late final _$setFavouriteTeamAsyncAction =
+      AsyncAction('_LineupStore.setFavouriteTeam', context: context);
+
+  @override
+  Future<void> setFavouriteTeam(String favourite) {
+    return _$setFavouriteTeamAsyncAction
+        .run(() => super.setFavouriteTeam(favourite));
+  }
+
+  late final _$changeSubmitButtonTextAsyncAction =
+      AsyncAction('_LineupStore.changeSubmitButtonText', context: context);
+
+  @override
+  Future<void> changeSubmitButtonText(String text) {
+    return _$changeSubmitButtonTextAsyncAction
+        .run(() => super.changeSubmitButtonText(text));
+  }
+
   @override
   String toString() {
     return '''
 lineup: ${lineup},
-customTileExpanded: ${customTileExpanded}
+customTileExpanded: ${customTileExpanded},
+dialogIndex: ${dialogIndex},
+submitButton: ${submitButton}
     ''';
   }
 }

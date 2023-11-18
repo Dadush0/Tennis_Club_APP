@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/stores/LineupStore.dart';
+import 'package:tennis_club_app/presentation/widgets/GameAddWidget.dart';
 import 'package:tennis_club_app/presentation/widgets/GameWidget.dart';
 
 class LineupWidget extends StatelessWidget {
@@ -54,6 +55,7 @@ class LineupWidget extends StatelessWidget {
                         selectedItem), // TODO: create UseCase -> setFavouriteTeam
                     child: const Text('Mark as Favourite'),
                   ),
+                  GameAddWidget(),
                 ],
               ),
             ),

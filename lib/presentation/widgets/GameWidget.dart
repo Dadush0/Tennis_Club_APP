@@ -4,6 +4,7 @@ import 'package:mobx/mobx.dart';
 import 'package:tennis_club_app/data/models/GameModel.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/stores/LineupStore.dart';
+import 'package:tennis_club_app/presentation/widgets/GameEditorWidget.dart';
 
 class GameWidget extends StatelessWidget {
   GameWidget({super.key, required this.gameModel});
@@ -52,9 +53,11 @@ class GameWidget extends StatelessWidget {
                         child: Text(
                             '${gameModel.location} against ${gameModel.opponentName}')),
                     subtitle: Center(child: Text(gameModel.date.toString())),
-                    trailing: Icon(_lineupStore.customTileExpanded.value
+                    controlAffinity: ListTileControlAffinity.leading,
+                    leading: Icon(_lineupStore.customTileExpanded.value
                         ? Icons.arrow_drop_down_circle
                         : Icons.arrow_drop_down),
+                    trailing: GameEditorWidget(gameModel: gameModel),
                     initiallyExpanded: false,
                     onExpansionChanged: (bool expanded) {
                       _lineupStore.customTileExpanded = expanded.obs();

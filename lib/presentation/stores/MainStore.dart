@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:tennis_club_app/presentation/pages/CourtPage.dart';
 import 'package:tennis_club_app/presentation/pages/LineupPage.dart';
 
 part 'MainStore.g.dart';
@@ -11,7 +12,7 @@ abstract class MainBase with Store {
   // Pages need to go here!
   List<Widget> pages = [
     const Text('News'), // NewsPage()
-    const Text('Courts'), // CourtPage()
+    CourtPage(), // CourtPage()
     const LineupPage(), // LineUpPage()
     const Text('Pints'), // Eventpage()
   ];

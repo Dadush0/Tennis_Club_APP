@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
+    print(Theme.of(context).platform); // needed for courtpage probably
     return MaterialApp(
       title: 'Tennis Club',
       theme: ThemeData(

@@ -15,23 +15,4 @@ class GameModel {
       required this.opponentName,
       required this.cakes,
       required this.manager});
-
-  List<String> convertToStringList() {
-    List<String> values = [];
-    String text = '';
-    values.add(date.toString());
-    values.add(location);
-    values.add(opponentName);
-    for (var element in players) {
-      text += '${element.displayName}\n';
-    }
-    values.add(text);
-    text = '';
-    for (var element in cakes) {
-      text += '${element.displayName}\n';
-    }
-    values.add(text);
-    values.add(manager.displayName);
-    return values;
-  }
 }

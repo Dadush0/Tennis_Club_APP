@@ -23,6 +23,12 @@ abstract class _LineupStore with Store {
   @observable
   Observable<bool> customTileExpanded = false.obs();
 
+  @observable
+  Observable<int> dialogIndex = 0.obs();
+
+  @observable
+  Observable<String> submitButton = 'Next'.obs();
+
   @action
   Future<void> getLineup() async {
     lineup.addAll(_getLineup.call().teams);
@@ -43,5 +49,10 @@ abstract class _LineupStore with Store {
   @action
   Future<void> setFavouriteTeam(String favourite) async {
     _setFavouriteTeam.call(favourite);
+  }
+
+  @action
+  Future<void> changeSubmitButtonText(String text) async {
+    submitButton = text.obs();
   }
 }
