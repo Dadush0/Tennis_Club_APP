@@ -31,4 +31,8 @@ class LineupRepository {
     }
     return teamNames;
   }
+
+  void SetFavouriteTeam(String favourite) {
+    data.setFavouriteTeam(favourite);
+  }
 }

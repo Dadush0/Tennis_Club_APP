@@ -6,6 +6,7 @@ import 'package:tennis_club_app/presentation/stores/MainStore.dart';
 import 'package:tennis_club_app/usecases/GetAllTeams.dart';
 import 'package:tennis_club_app/usecases/GetGamesByTeam.dart';
 import 'package:tennis_club_app/usecases/GetLineup.dart';
+import 'package:tennis_club_app/usecases/SetFavouriteTeam.dart';
 
 final locator = GetIt.instance;
 
@@ -18,6 +19,7 @@ void init() {
   locator.registerLazySingleton(() => GetLineup(locator()));
   locator.registerLazySingleton(() => GetGamesByTeam(locator()));
   locator.registerLazySingleton(() => GetAllTeams(locator()));
+  locator.registerLazySingleton(() => SetFavouriteTeam(locator()));
   // Datasources
   locator.registerLazySingleton(() => DataStub());
 
