@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:tennis_club_app/data/models/TeamModel.dart';
 import 'package:tennis_club_app/locator.dart';
+import 'package:tennis_club_app/presentation/widgets/GameAddWidget.dart';
 import 'package:tennis_club_app/usecases/GetAllTeams.dart';
 import 'package:tennis_club_app/usecases/GetGamesByTeam.dart';
 import 'package:tennis_club_app/usecases/GetLineup.dart';
@@ -8,6 +9,7 @@ import 'package:tennis_club_app/usecases/SetFavouriteTeam.dart';
 
 part 'LineupStore.g.dart';
 
+// TODO: consider private or public see MainStore
 // ignore: library_private_types_in_public_api
 class LineupStore = _LineupStore with _$LineupStore;
 
@@ -24,10 +26,15 @@ abstract class _LineupStore with Store {
   Observable<bool> customTileExpanded = false.obs();
 
   @observable
-  Observable<int> dialogIndex = 0.obs();
+  Observable<int> dialogIndex = DialogState.gameInfo.index.obs();
 
   @observable
   Observable<String> submitButton = 'Next'.obs();
+
+  @observable
+  Observable<bool> switchButton = false.obs();
+
+  String selectedItem = '';
 
   @action
   Future<void> getLineup() async {
@@ -54,5 +61,10 @@ abstract class _LineupStore with Store {
   @action
   Future<void> changeSubmitButtonText(String text) async {
     submitButton = text.obs();
+  }
+
+  @action
+  Future<void> changeSwitchButton(bool value) async {
+    switchButton.value = value;
   }
 }

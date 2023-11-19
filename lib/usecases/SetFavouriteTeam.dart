@@ -5,6 +5,6 @@ class SetFavouriteTeam {
   SetFavouriteTeam(this.repository);
 
   void call(String favourite) {
-    repository.SetFavouriteTeam(favourite);
+    repository.setFavouriteTeam(favourite);
   }
 }

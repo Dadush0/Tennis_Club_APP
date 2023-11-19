@@ -32,7 +32,7 @@ class LineupRepository {
     return teamNames;
   }
 
-  void SetFavouriteTeam(String favourite) {
+  void setFavouriteTeam(String favourite) {
     data.setFavouriteTeam(favourite);
   }
 }

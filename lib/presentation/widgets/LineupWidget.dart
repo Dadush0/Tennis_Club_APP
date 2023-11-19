@@ -8,7 +8,6 @@ import 'package:tennis_club_app/presentation/widgets/GameWidget.dart';
 class LineupWidget extends StatelessWidget {
   LineupWidget({super.key});
   final LineupStore _lineupStore = locator<LineupStore>();
-  String selectedItem = '';
 
   List<GameWidget> convertGamesToWidgets() {
     List<GameWidget> widgets = [];
@@ -47,12 +46,12 @@ class LineupWidget extends StatelessWidget {
                     dropdownMenuEntries: convertTeamNamesToEntries(),
                     onSelected: (value) {
                       _lineupStore.getGamesByTeam(value!);
-                      selectedItem = value;
+                      _lineupStore.selectedItem = value;
                     },
                   ),
                   ElevatedButton(
-                    onPressed: () => _lineupStore.setFavouriteTeam(
-                        selectedItem), // TODO: create UseCase -> setFavouriteTeam
+                    onPressed: () => _lineupStore
+                        .setFavouriteTeam(_lineupStore.selectedItem),
                     child: const Text('Mark as Favourite'),
                   ),
                   GameAddWidget(),

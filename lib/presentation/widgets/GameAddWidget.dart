@@ -5,32 +5,12 @@ import 'package:tennis_club_app/data/models/GameModel.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/stores/LineupStore.dart';
 
+enum DialogState { gameInfo, playerInfo, orgaInfo, finished }
+
 class GameAddWidget extends StatelessWidget {
   GameAddWidget({super.key});
   final LineupStore _lineupStore = locator<LineupStore>();
   late GameModel gameModel;
-
-  @action
-  List<Widget> createGameEditorForm() {
-    List<Widget> fields = [];
-    if (_lineupStore.dialogIndex.value == 0) {
-      fields.add(TextFormField(
-        decoration: const InputDecoration(hintText: "Player"),
-      ));
-    } else if (_lineupStore.dialogIndex.value == 1) {
-      fields.add(TextFormField(
-        decoration: const InputDecoration(hintText: "Player"),
-      ));
-    } else {
-      fields.add(TextFormField(
-        decoration: const InputDecoration(hintText: "Cake"),
-      ));
-      fields.add(TextFormField(
-        decoration: const InputDecoration(hintText: "Manager"),
-      ));
-    }
-    return fields;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,18 +28,13 @@ class GameAddWidget extends StatelessWidget {
           return Observer(
             builder: (context) => AlertDialog(
               title: const Text('Add new Game'),
-              content: const Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text('Work in Progress')
-                ], // createGameEditorForm(),
-              ),
+              content: const Text('WIP'), // AddGameInfoWidget(),
               actions: <Widget>[
                 OutlinedButton(
                   child: const Text('Cancel'),
                   onPressed: () {
                     Navigator.pop(context);
-                    _lineupStore.dialogIndex.value = 0;
+                    _lineupStore.dialogIndex.value = DialogState.gameInfo.index;
                     _lineupStore.changeSubmitButtonText('Next');
                   },
                 ),
@@ -67,18 +42,47 @@ class GameAddWidget extends StatelessWidget {
                     child: Text(_lineupStore.submitButton.value),
                     onPressed: () {
                       _lineupStore.dialogIndex.value++;
-                      if (_lineupStore.dialogIndex.value == 3) {
+                      if (_lineupStore.dialogIndex.value ==
+                          DialogState.finished.index) {
                         // Save Game
                         Navigator.pop(context);
                         _lineupStore.dialogIndex.value = 0;
                         _lineupStore.changeSubmitButtonText('Next');
-                      } else if (_lineupStore.dialogIndex.value == 2) {
+                      } else if (_lineupStore.dialogIndex.value ==
+                          DialogState.orgaInfo.index) {
                         _lineupStore.changeSubmitButtonText('Submit');
                       }
+                      // TODO: Consider Reaction Builder
                     })
               ],
             ),
           );
         });
+  }
+}
+
+class AddGameInfoWidget extends StatelessWidget {
+  AddGameInfoWidget({super.key});
+  final LineupStore _lineupStore = locator<LineupStore>();
+  late GameModel gameModel;
+
+  @override
+  @action
+  Widget build(BuildContext context) {
+    gameModel = _lineupStore.lineup.first.games.first;
+    return Observer(
+        builder: (context) => Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Switch(
+                    value: _lineupStore.switchButton.value,
+                    activeColor: Colors.blue,
+                    inactiveThumbColor: Colors.red,
+                    onChanged: (bool value) {
+                      _lineupStore.switchButton.value = value;
+                      _lineupStore.changeSwitchButton(value);
+                    }),
+              ],
+            ));
   }
 }

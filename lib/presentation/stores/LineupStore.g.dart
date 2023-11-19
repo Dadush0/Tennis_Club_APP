@@ -72,6 +72,22 @@ mixin _$LineupStore on _LineupStore, Store {
     });
   }
 
+  late final _$switchButtonAtom =
+      Atom(name: '_LineupStore.switchButton', context: context);
+
+  @override
+  Observable<bool> get switchButton {
+    _$switchButtonAtom.reportRead();
+    return super.switchButton;
+  }
+
+  @override
+  set switchButton(Observable<bool> value) {
+    _$switchButtonAtom.reportWrite(value, super.switchButton, () {
+      super.switchButton = value;
+    });
+  }
+
   late final _$getLineupAsyncAction =
       AsyncAction('_LineupStore.getLineup', context: context);
 
@@ -115,13 +131,23 @@ mixin _$LineupStore on _LineupStore, Store {
         .run(() => super.changeSubmitButtonText(text));
   }
 
+  late final _$changeSwitchButtonAsyncAction =
+      AsyncAction('_LineupStore.changeSwitchButton', context: context);
+
+  @override
+  Future<void> changeSwitchButton(bool value) {
+    return _$changeSwitchButtonAsyncAction
+        .run(() => super.changeSwitchButton(value));
+  }
+
   @override
   String toString() {
     return '''
 lineup: ${lineup},
 customTileExpanded: ${customTileExpanded},
 dialogIndex: ${dialogIndex},
-submitButton: ${submitButton}
+submitButton: ${submitButton},
+switchButton: ${switchButton}
     ''';
   }
 }

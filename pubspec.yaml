@@ -1,5 +1,5 @@
 name: tennis_club_app
-description: A new Flutter project.
+description: TB/ASV Regenstauf Tennis
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -42,6 +42,8 @@ dependencies:
   mobx_codegen: ^2.4.0
   expansion_tile_card: ^3.0.0
   url_launcher: ^6.2.1
+  flutter_lints: ^3.0.1
+  webview_flutter: ^4.4.2
 
 dev_dependencies:
   flutter_test:
@@ -52,7 +54,6 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -66,8 +67,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

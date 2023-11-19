@@ -13,7 +13,7 @@ class MainPage extends StatelessWidget {
         builder: (_) => Scaffold(
               key: _store.scaffoldKey,
               appBar: AppBar(
-                backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+                backgroundColor: Theme.of(context).colorScheme.primary,
                 title: const Text('TB/ASV Regenstauf Tennis'),
               ),
               bottomNavigationBar: NavigationBar(
