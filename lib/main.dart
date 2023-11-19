@@ -13,12 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     print(Theme.of(context).platform); // needed for courtpage probably
     return MaterialApp(
-      title: 'Tennis Club',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
         useMaterial3: true,
       ),
-      home: const MainPage(title: 'Tennis Club News'),
+      home: MainPage(),
     );
   }
 }
