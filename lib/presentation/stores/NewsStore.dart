@@ -17,6 +17,7 @@ abstract class _NewsStore with Store {
 
   @action
   Future<void> getNews() async {
+    newsModel.clear();
     newsModel.addAll(_getNews.call());
   }
 }

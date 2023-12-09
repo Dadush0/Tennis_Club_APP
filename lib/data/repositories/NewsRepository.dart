@@ -9,6 +9,12 @@ class NewsRepository {
   });
 
   List<NewsModel> getNews() {
-    return data.getNews();
+    List<NewsModel> newsModel = data.getNews();
+    newsModel.sort(sortNewsByDate);
+    return newsModel;
+  }
+
+  int sortNewsByDate(NewsModel a, NewsModel b) {
+    return a.date.compareTo(b.date) * (-1); // Desc
   }
 }
