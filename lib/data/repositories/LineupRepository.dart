@@ -35,4 +35,8 @@ class LineupRepository {
   void setFavouriteTeam(String favourite) {
     data.setFavouriteTeam(favourite);
   }
+
+  String getFavouriteTeam() {
+    return data.getFavouriteTeam();
+  }
 }

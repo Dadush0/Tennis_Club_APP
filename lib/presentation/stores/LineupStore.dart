@@ -3,6 +3,7 @@ import 'package:tennis_club_app/data/models/TeamModel.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/widgets/GameAddWidget.dart';
 import 'package:tennis_club_app/usecases/GetAllTeams.dart';
+import 'package:tennis_club_app/usecases/GetFavouriteTeam.dart';
 import 'package:tennis_club_app/usecases/GetGamesByTeam.dart';
 import 'package:tennis_club_app/usecases/GetLineup.dart';
 import 'package:tennis_club_app/usecases/SetFavouriteTeam.dart';
@@ -18,6 +19,8 @@ abstract class _LineupStore with Store {
   final GetGamesByTeam _getGamesByTeam = locator<GetGamesByTeam>();
   final GetAllTeams _getAllTeams = locator<GetAllTeams>();
   final SetFavouriteTeam _setFavouriteTeam = locator<SetFavouriteTeam>();
+  final GetFavouriteTeam _getFavouriteTeam = locator<GetFavouriteTeam>();
+
   @observable
   ObservableList<TeamModel> lineup = <TeamModel>[].asObservable();
   List<String> teamNames = [];
@@ -56,6 +59,11 @@ abstract class _LineupStore with Store {
   @action
   Future<void> setFavouriteTeam(String favourite) async {
     _setFavouriteTeam.call(favourite);
+  }
+
+  @action
+  Future<void> getFavouriteTeam() async {
+    selectedItem = _getFavouriteTeam.call();
   }
 
   @action

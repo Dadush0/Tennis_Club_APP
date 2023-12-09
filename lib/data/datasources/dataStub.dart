@@ -51,4 +51,8 @@ class DataStub {
   void setFavouriteTeam(String favorite) {
     lineupModel.favoriteTeam = favorite;
   }
+
+  String getFavouriteTeam() {
+    return lineupModel.favoriteTeam;
+  }
 }

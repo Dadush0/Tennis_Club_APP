@@ -27,7 +27,8 @@ class LineupWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _lineupStore.getGamesByTeam('Team1'); // getFavoriteTeam or first or none
+    _lineupStore.getFavouriteTeam();
+    _lineupStore.getGamesByTeam(_lineupStore.selectedItem);
     _lineupStore.getAllTeams();
     return Scaffold(
       body: SafeArea(
@@ -39,8 +40,9 @@ class LineupWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   DropdownMenu<String>(
-                    initialSelection:
-                        'Team1', // TODO: create UseCase -> getFavoriteTeam
+                    initialSelection: _lineupStore.selectedItem != ''
+                        ? _lineupStore.selectedItem
+                        : _lineupStore.teamNames.first,
                     label: const Text('Teamname'),
                     enableSearch: false,
                     dropdownMenuEntries: convertTeamNamesToEntries(),
