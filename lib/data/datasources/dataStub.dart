@@ -11,6 +11,8 @@ class DataStub {
     PlayerModel player2 = PlayerModel(displayName: 'Dagostini');
     PlayerModel player3 = PlayerModel(displayName: 'Cunt');
     PlayerModel player4 = PlayerModel(displayName: 'DumbFuck');
+    PlayerModel player5 = PlayerModel(displayName: 'Pascal');
+    PlayerModel player6 = PlayerModel(displayName: 'Dadush');
 
     GameModel gameModel1 = GameModel(
         date: DateTime.now(),
@@ -22,7 +24,7 @@ class DataStub {
 
     GameModel gameModel2 = GameModel(
         date: DateTime.now(),
-        players: [player1, player2],
+        players: [player1, player2, player5, player6],
         location: "Away",
         opponentName: "opponent2",
         cakes: [player1, player2],
@@ -30,7 +32,7 @@ class DataStub {
 
     GameModel gameModel3 = GameModel(
         date: DateTime.now(),
-        players: [player1, player2],
+        players: [player1, player2, player4, player6],
         location: "Home",
         opponentName: "opponent3",
         cakes: [player1, player2],
@@ -54,5 +56,19 @@ class DataStub {
 
   String getFavouriteTeam() {
     return lineupModel.favoriteTeam;
+  }
+
+  void addGame(GameModel game, String teamName) {
+    lineupModel.teams
+        .firstWhere((element) => element.teamName == teamName)
+        .games
+        .add(game);
+  }
+
+  void deleteGame(GameModel model, String teamName) {
+    lineupModel.teams
+        .firstWhere((element) => element.teamName == teamName)
+        .games
+        .remove(model);
   }
 }

@@ -56,7 +56,7 @@ class LineupWidget extends StatelessWidget {
                         .setFavouriteTeam(_lineupStore.selectedItem),
                     child: const Text('Mark as Favourite'),
                   ),
-                  GameAddWidget(),
+                  GameAddForm(),
                 ],
               ),
             ),

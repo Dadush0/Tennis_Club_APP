@@ -6,6 +6,8 @@ import 'package:tennis_club_app/data/repositories/NewsRepository.dart';
 import 'package:tennis_club_app/presentation/stores/LineupStore.dart';
 import 'package:tennis_club_app/presentation/stores/MainStore.dart';
 import 'package:tennis_club_app/presentation/stores/NewsStore.dart';
+import 'package:tennis_club_app/usecases/AddGame.dart';
+import 'package:tennis_club_app/usecases/DeleteGame.dart';
 import 'package:tennis_club_app/usecases/GetAllTeams.dart';
 import 'package:tennis_club_app/usecases/GetFavouriteTeam.dart';
 import 'package:tennis_club_app/usecases/GetGamesByTeam.dart';
@@ -27,6 +29,8 @@ void init() {
   locator.registerLazySingleton(() => GetAllTeams(locator()));
   locator.registerLazySingleton(() => SetFavouriteTeam(locator()));
   locator.registerLazySingleton(() => GetFavouriteTeam(locator()));
+  locator.registerLazySingleton(() => AddGame(locator()));
+  locator.registerLazySingleton(() => DeleteGame(locator()));
 
   locator.registerLazySingleton(() => GetNews(locator()));
 

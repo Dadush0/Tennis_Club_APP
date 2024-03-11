@@ -1,7 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:tennis_club_app/data/models/GameModel.dart';
+import 'package:tennis_club_app/data/models/PlayerModel.dart';
 import 'package:tennis_club_app/data/models/TeamModel.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/widgets/GameAddWidget.dart';
+import 'package:tennis_club_app/usecases/AddGame.dart';
+import 'package:tennis_club_app/usecases/DeleteGame.dart';
 import 'package:tennis_club_app/usecases/GetAllTeams.dart';
 import 'package:tennis_club_app/usecases/GetFavouriteTeam.dart';
 import 'package:tennis_club_app/usecases/GetGamesByTeam.dart';
@@ -20,6 +25,14 @@ abstract class _LineupStore with Store {
   final GetAllTeams _getAllTeams = locator<GetAllTeams>();
   final SetFavouriteTeam _setFavouriteTeam = locator<SetFavouriteTeam>();
   final GetFavouriteTeam _getFavouriteTeam = locator<GetFavouriteTeam>();
+  final AddGame _addGame = locator<AddGame>();
+  final DeleteGame _deleteGame = locator<DeleteGame>();
+
+  String opponentName = '';
+  String location = 'Home';
+  List<String> playerNames = ['', '', '', ''];
+  List<String> cakeNames = ['', ''];
+  String manager = '';
 
   @observable
   ObservableList<TeamModel> lineup = <TeamModel>[].asObservable();
@@ -74,5 +87,53 @@ abstract class _LineupStore with Store {
   @action
   Future<void> changeSwitchButton(bool value) async {
     switchButton.value = value;
+  }
+
+  Future<void> addGame() async {
+    List<PlayerModel> players =
+        playerNames.map((e) => PlayerModel(displayName: e)).toList();
+    List<PlayerModel> cakes = cakeNames
+        .map((e) => players.firstWhere((element) => e == element.displayName))
+        .toList();
+    PlayerModel manager =
+        players.firstWhere((element) => element.displayName == this.manager);
+    GameModel game = GameModel(
+        date: DateTime.now(),
+        players: players,
+        location: location,
+        opponentName: opponentName,
+        cakes: cakes,
+        manager: manager);
+
+    String teamName = selectedItem != '' ? selectedItem : teamNames.first;
+    _addGame.call(game, teamName);
+    resetGameInfo();
+  }
+
+  void editGame(GameModel gameModel) {
+    deleteGame(gameModel);
+    addGame();
+  }
+
+  Future<void> deleteGame(GameModel gameModel) async {
+    String teamName = selectedItem != '' ? selectedItem : teamNames.first;
+    _deleteGame.call(gameModel, teamName);
+  }
+
+  void setGameInfo(GameModel gameModel) {
+    opponentName = gameModel.opponentName;
+    location = gameModel.location;
+    changeSwitchButton(location == 'Away');
+    playerNames = gameModel.players.map((e) => e.displayName).toList();
+    cakeNames = gameModel.cakes.map((e) => e.displayName).toList();
+    manager = gameModel.manager.displayName;
+  }
+
+  void resetGameInfo() {
+    opponentName = '';
+    location = 'Home';
+    playerNames = ['', '', '', ''];
+    cakeNames = ['', ''];
+    manager = '';
   }
 }

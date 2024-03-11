@@ -1,4 +1,5 @@
 import 'package:tennis_club_app/data/datasources/dataStub.dart';
+import 'package:tennis_club_app/data/models/GameModel.dart';
 import 'package:tennis_club_app/data/models/LineupModel.dart';
 import 'package:tennis_club_app/data/models/TeamModel.dart';
 
@@ -38,5 +39,13 @@ class LineupRepository {
 
   String getFavouriteTeam() {
     return data.getFavouriteTeam();
+  }
+
+  void addGame(GameModel game, String teamName) {
+    data.addGame(game, teamName);
+  }
+
+  void deleteGame(GameModel game, String teamName) {
+    data.deleteGame(game, teamName);
   }
 }

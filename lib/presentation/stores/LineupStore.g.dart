@@ -122,6 +122,14 @@ mixin _$LineupStore on _LineupStore, Store {
         .run(() => super.setFavouriteTeam(favourite));
   }
 
+  late final _$getFavouriteTeamAsyncAction =
+      AsyncAction('_LineupStore.getFavouriteTeam', context: context);
+
+  @override
+  Future<void> getFavouriteTeam() {
+    return _$getFavouriteTeamAsyncAction.run(() => super.getFavouriteTeam());
+  }
+
   late final _$changeSubmitButtonTextAsyncAction =
       AsyncAction('_LineupStore.changeSubmitButtonText', context: context);
 

@@ -15,4 +15,19 @@ class GameModel {
       required this.opponentName,
       required this.cakes,
       required this.manager});
+
+  GameModel.empty() {
+    GameModel(
+        opponentName: '',
+        location: '',
+        cakes: [PlayerModel.empty(), PlayerModel.empty()],
+        players: [
+          PlayerModel.empty(),
+          PlayerModel.empty(),
+          PlayerModel.empty(),
+          PlayerModel.empty()
+        ],
+        manager: PlayerModel.empty(),
+        date: DateTime.now());
+  }
 }

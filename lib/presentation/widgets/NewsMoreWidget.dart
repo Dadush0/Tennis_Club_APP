@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_club_app/data/models/NewsModel.dart';
-import 'package:tennis_club_app/presentation/stores/NewsStore.dart';
 
 class NewsMoreWidget extends StatelessWidget {
-  NewsMoreWidget({super.key, required this.newsModel});
-  late NewsModel newsModel;
+  const NewsMoreWidget({super.key, required this.newsModel});
+  final NewsModel newsModel;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,6 @@ class NewsMoreWidget extends StatelessWidget {
                     width: double.infinity,
                     child: Image.asset(newsModel.preview),
                   ),
-                  // Description and share/explore buttons.
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Text(
