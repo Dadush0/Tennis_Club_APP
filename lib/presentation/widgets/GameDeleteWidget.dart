@@ -38,6 +38,7 @@ class GameDeleteWidget extends StatelessWidget {
                   child: const Text('Yes'),
                   onPressed: () {
                     _lineupStore.deleteGame(gameModel);
+                    _lineupStore.getGamesByTeam(_lineupStore.selectedItem);
                     Navigator.pop(context);
                   })
             ],
