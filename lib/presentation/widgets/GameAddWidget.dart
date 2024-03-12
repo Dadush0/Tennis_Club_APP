@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:tennis_club_app/data/models/GameModel.dart';
+import 'package:tennis_club_app/localization.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/stores/LineupStore.dart';
 
@@ -61,6 +62,7 @@ class GameAddFormState extends State<GameAddForm> {
                         Navigator.pop(context);
                         _lineupStore.dialogIndex.value = 0;
                         _lineupStore.addGame();
+                        _lineupStore.getGamesByTeam(_lineupStore.selectedItem);
                       }
                       setState(() {});
                       // TODO: Consider Reaction Builder
@@ -88,6 +90,8 @@ class AddGameInfoWidget extends StatelessWidget {
   AddGameInfoWidget({super.key});
   final LineupStore _lineupStore = locator<LineupStore>();
 
+  TextEditingController datePickerController = TextEditingController();
+  TextEditingController timePickerController = TextEditingController();
   @override
   @action
   Widget build(BuildContext context) {
@@ -124,9 +128,50 @@ class AddGameInfoWidget extends StatelessWidget {
             ),
             const Text('Away'),
           ],
+        ),
+        TextField(
+          controller: datePickerController
+            ..text = Localization.formatDate(DateTime.now()),
+          readOnly: true,
+          decoration: const InputDecoration(hintText: "Select Date"),
+          onTap: () => onTapDateFunction(context: context),
+        ),
+        TextField(
+          controller: timePickerController
+            ..text =
+                Localization.formatTime(const TimeOfDay(hour: 9, minute: 0)),
+          readOnly: true,
+          decoration: const InputDecoration(hintText: "Select Time"),
+          onTap: () => onTapTimeFunction(context: context),
         )
       ],
     );
+  }
+
+  onTapDateFunction({required BuildContext context}) async {
+    DateTime? pickedDate = await showDatePicker(
+      context: context,
+      lastDate: DateTime(DateTime.now().year + 1),
+      firstDate: DateTime.now(),
+      initialDate: DateTime.now(),
+      // locale: Locale('de', 'DE'),
+    );
+    if (pickedDate == null) return;
+    datePickerController.text = Localization.formatDate(pickedDate);
+    _lineupStore.dateTime = DateTime.now().copyWith(
+        year: pickedDate.year, month: pickedDate.month, day: pickedDate.day);
+  }
+
+  onTapTimeFunction({required BuildContext context}) async {
+    TimeOfDay? pickedTime = await showTimePicker(
+      context: context,
+      initialTime: const TimeOfDay(hour: 9, minute: 0),
+      // locale: Locale('de', 'DE'),
+    );
+    if (pickedTime == null) return;
+    timePickerController.text = Localization.formatTime(pickedTime);
+    _lineupStore.dateTime = DateTime.now()
+        .copyWith(hour: pickedTime.hour, minute: pickedTime.minute);
   }
 }
 

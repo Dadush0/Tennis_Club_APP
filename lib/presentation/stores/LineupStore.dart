@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:tennis_club_app/data/models/GameModel.dart';
 import 'package:tennis_club_app/data/models/PlayerModel.dart';
@@ -33,6 +34,7 @@ abstract class _LineupStore with Store {
   List<String> playerNames = ['', '', '', ''];
   List<String> cakeNames = ['', ''];
   String manager = '';
+  DateTime dateTime = DateTime.now();
 
   @observable
   ObservableList<TeamModel> lineup = <TeamModel>[].asObservable();
@@ -98,7 +100,7 @@ abstract class _LineupStore with Store {
     PlayerModel manager =
         players.firstWhere((element) => element.displayName == this.manager);
     GameModel game = GameModel(
-        date: DateTime.now(),
+        date: dateTime,
         players: players,
         location: location,
         opponentName: opponentName,
@@ -127,6 +129,7 @@ abstract class _LineupStore with Store {
     playerNames = gameModel.players.map((e) => e.displayName).toList();
     cakeNames = gameModel.cakes.map((e) => e.displayName).toList();
     manager = gameModel.manager.displayName;
+    dateTime = gameModel.date;
   }
 
   void resetGameInfo() {
@@ -135,5 +138,6 @@ abstract class _LineupStore with Store {
     playerNames = ['', '', '', ''];
     cakeNames = ['', ''];
     manager = '';
+    dateTime = DateTime.now();
   }
 }

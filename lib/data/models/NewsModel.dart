@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class NewsModel {
   late String title;
   late String shortText;

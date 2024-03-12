@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
 import 'package:tennis_club_app/data/models/GameModel.dart';
+import 'package:tennis_club_app/localization.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/stores/LineupStore.dart';
 import 'package:tennis_club_app/presentation/widgets/GameDeleteWidget.dart';
@@ -53,7 +54,9 @@ class GameWidget extends StatelessWidget {
                     title: Center(
                         child: Text(
                             '${gameModel.location} against ${gameModel.opponentName}')),
-                    subtitle: Center(child: Text(gameModel.date.toString())),
+                    subtitle: Center(
+                        child:
+                            Text(Localization.formatDateTime(gameModel.date))),
                     controlAffinity: ListTileControlAffinity.leading,
                     leading: Icon(_lineupStore.customTileExpanded.value
                         ? Icons.arrow_drop_down_circle

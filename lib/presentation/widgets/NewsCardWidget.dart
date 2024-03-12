@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_club_app/data/models/NewsModel.dart';
+import 'package:tennis_club_app/localization.dart';
 import 'package:tennis_club_app/presentation/widgets/NewsMoreWidget.dart';
 
 class NewsCardWidget extends StatelessWidget {
@@ -43,7 +44,7 @@ class NewsCardWidget extends StatelessWidget {
                           ),
                         ),
                         Text(newsModel.shortText),
-                        Text(newsModel.date.toString()),
+                        Text(Localization.formatDateTime(newsModel.date)),
                         ElevatedButton(
                             onPressed: () {
                               Navigator.push(

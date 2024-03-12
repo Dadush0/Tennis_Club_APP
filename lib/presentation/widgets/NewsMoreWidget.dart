@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_club_app/data/models/NewsModel.dart';
+import 'package:tennis_club_app/localization.dart';
 
 class NewsMoreWidget extends StatelessWidget {
   const NewsMoreWidget({super.key, required this.newsModel});
@@ -50,7 +51,7 @@ class NewsMoreWidget extends StatelessWidget {
                     maxLines: 30,
                   ),
                   const Text(''),
-                  Text(newsModel.date.toString()),
+                  Text(Localization.formatDateTime(newsModel.date)),
                 ],
               ),
             ),
