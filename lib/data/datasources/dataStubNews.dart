@@ -58,4 +58,8 @@ class DataStubNews {
   List<NewsModel> getNews() {
     return newsModel;
   }
+
+  void addNews(NewsModel newsModel) {
+    this.newsModel.add(newsModel);
+  }
 }

@@ -25,34 +25,18 @@ mixin _$MainStore on MainBase, Store {
     });
   }
 
-  late final _$loggedInAtom = Atom(name: 'MainBase.loggedIn', context: context);
+  late final _$adminAtom = Atom(name: 'MainBase.admin', context: context);
 
   @override
-  bool get loggedIn {
-    _$loggedInAtom.reportRead();
-    return super.loggedIn;
+  bool get admin {
+    _$adminAtom.reportRead();
+    return super.admin;
   }
 
   @override
-  set loggedIn(bool value) {
-    _$loggedInAtom.reportWrite(value, super.loggedIn, () {
-      super.loggedIn = value;
-    });
-  }
-
-  late final _$adminModeAtom =
-      Atom(name: 'MainBase.adminMode', context: context);
-
-  @override
-  bool get adminMode {
-    _$adminModeAtom.reportRead();
-    return super.adminMode;
-  }
-
-  @override
-  set adminMode(bool value) {
-    _$adminModeAtom.reportWrite(value, super.adminMode, () {
-      super.adminMode = value;
+  set admin(bool value) {
+    _$adminAtom.reportWrite(value, super.admin, () {
+      super.admin = value;
     });
   }
 
@@ -74,8 +58,7 @@ mixin _$MainStore on MainBase, Store {
   String toString() {
     return '''
 pageIndex: ${pageIndex},
-loggedIn: ${loggedIn},
-adminMode: ${adminMode}
+admin: ${admin}
     ''';
   }
 }

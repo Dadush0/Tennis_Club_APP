@@ -51,7 +51,7 @@ class NewsMoreWidget extends StatelessWidget {
                     maxLines: 30,
                   ),
                   const Text(''),
-                  Text(Localization.formatDateTime(newsModel.date)),
+                  Text(Localization.formatDate(newsModel.date)),
                 ],
               ),
             ),

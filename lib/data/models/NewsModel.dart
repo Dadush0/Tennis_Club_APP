@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-
 class NewsModel {
   late String title;
   late String shortText;
@@ -17,5 +15,13 @@ class NewsModel {
       required this.preview,
       this.images = const []}) {
     releaseDate = DateTime.now();
+  }
+
+  NewsModel.empty() {
+    title = '';
+    shortText = '';
+    content = '';
+    date = DateTime.now();
+    preview = 'assets/images/tenniscamp23.png'; // TODO: Add blank image
   }
 }

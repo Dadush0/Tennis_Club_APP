@@ -25,6 +25,21 @@ mixin _$NewsStore on _NewsStore, Store {
     });
   }
 
+  late final _$newNewsAtom = Atom(name: '_NewsStore.newNews', context: context);
+
+  @override
+  Observable<NewsModel> get newNews {
+    _$newNewsAtom.reportRead();
+    return super.newNews;
+  }
+
+  @override
+  set newNews(Observable<NewsModel> value) {
+    _$newNewsAtom.reportWrite(value, super.newNews, () {
+      super.newNews = value;
+    });
+  }
+
   late final _$getNewsAsyncAction =
       AsyncAction('_NewsStore.getNews', context: context);
 
@@ -33,10 +48,25 @@ mixin _$NewsStore on _NewsStore, Store {
     return _$getNewsAsyncAction.run(() => super.getNews());
   }
 
+  late final _$_NewsStoreActionController =
+      ActionController(name: '_NewsStore', context: context);
+
+  @override
+  void setNews(NewsModel newsModel) {
+    final _$actionInfo =
+        _$_NewsStoreActionController.startAction(name: '_NewsStore.setNews');
+    try {
+      return super.setNews(newsModel);
+    } finally {
+      _$_NewsStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
-newsModel: ${newsModel}
+newsModel: ${newsModel},
+newNews: ${newNews}
     ''';
   }
 }

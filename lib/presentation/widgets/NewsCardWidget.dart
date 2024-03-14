@@ -44,17 +44,22 @@ class NewsCardWidget extends StatelessWidget {
                           ),
                         ),
                         Text(newsModel.shortText),
-                        Text(Localization.formatDateTime(newsModel.date)),
-                        ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute<void>(
-                                      builder: (BuildContext context) =>
-                                          NewsMoreWidget(
-                                              newsModel: newsModel)));
-                            }, // TODO: improve routing/page system
-                            child: const Text('Read more'))
+                        Text(Localization.formatDate(newsModel.date)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute<void>(
+                                          builder: (BuildContext context) =>
+                                              NewsMoreWidget(
+                                                  newsModel: newsModel)));
+                                }, // TODO: improve routing/page system
+                                child: const Text('Read more'))
+                          ],
+                        )
                       ],
                     ),
                   ),

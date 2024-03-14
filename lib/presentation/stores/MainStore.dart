@@ -27,11 +27,7 @@ abstract class MainBase with Store {
 
   // Maybe needed in the future
   @observable
-  bool loggedIn = false;
-
-  // Maybe needed in the future
-  @observable
-  bool adminMode = false;
+  bool admin = true;
 
   @action
   void changePage(int index) {

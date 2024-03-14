@@ -3,6 +3,7 @@ import 'package:tennis_club_app/locator.dart' as injector;
 import 'package:tennis_club_app/presentation/pages/MainPage.dart';
 
 TargetPlatform platform = TargetPlatform.android;
+bool admin = true; // TODO: Set when logging in
 
 void main() {
   injector.init();

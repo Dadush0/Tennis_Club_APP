@@ -14,6 +14,10 @@ class NewsRepository {
     return newsModel;
   }
 
+  void addNews(NewsModel newsModel) {
+    data.addNews(newsModel);
+  }
+
   int sortNewsByDate(NewsModel a, NewsModel b) {
     return a.date.compareTo(b.date) * (-1); // Desc
   }

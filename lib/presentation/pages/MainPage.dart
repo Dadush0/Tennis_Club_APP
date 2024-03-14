@@ -15,6 +15,19 @@ class MainPage extends StatelessWidget {
               appBar: AppBar(
                 backgroundColor: Theme.of(context).colorScheme.primary,
                 title: const Text('TB/ASV Regenstauf Tennis'),
+                actions: <Widget>[
+                  PopupMenuButton<String>(
+                    onSelected: (value) => {},
+                    itemBuilder: (BuildContext context) {
+                      return {'Login', 'English'}.map((String choice) {
+                        return PopupMenuItem<String>(
+                          value: choice,
+                          child: Text(choice),
+                        );
+                      }).toList();
+                    },
+                  ),
+                ],
               ),
               bottomNavigationBar: NavigationBar(
                 onDestinationSelected: (int index) {

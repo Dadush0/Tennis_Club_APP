@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tennis_club_app/locator.dart';
+import 'package:tennis_club_app/main.dart';
 import 'package:tennis_club_app/presentation/stores/LineupStore.dart';
 import 'package:tennis_club_app/presentation/widgets/GameAddWidget.dart';
 import 'package:tennis_club_app/presentation/widgets/GameWidget.dart';
@@ -56,7 +57,7 @@ class LineupWidget extends StatelessWidget {
                         .setFavouriteTeam(_lineupStore.selectedItem),
                     child: const Text('Mark as Favourite'),
                   ),
-                  GameAddForm(),
+                  Visibility(visible: admin, child: const GameAddForm()),
                 ],
               ),
             ),
