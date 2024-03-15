@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/stores/NewsStore.dart';
-import 'package:tennis_club_app/presentation/widgets/NewsAddWidget.dart';
 import 'package:tennis_club_app/presentation/widgets/NewsCardWidget.dart';
 
 class NewsWidget extends StatelessWidget {

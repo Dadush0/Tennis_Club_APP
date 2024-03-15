@@ -1,15 +1,21 @@
 import 'package:get_it/get_it.dart';
 import 'package:tennis_club_app/data/datasources/dataStub.dart';
+import 'package:tennis_club_app/data/datasources/dataStubEvents.dart';
 import 'package:tennis_club_app/data/datasources/dataStubNews.dart';
+import 'package:tennis_club_app/data/repositories/EventRepository.dart';
 import 'package:tennis_club_app/data/repositories/LineupRepository.dart';
 import 'package:tennis_club_app/data/repositories/NewsRepository.dart';
+import 'package:tennis_club_app/presentation/stores/EventStore.dart';
 import 'package:tennis_club_app/presentation/stores/LineupStore.dart';
 import 'package:tennis_club_app/presentation/stores/MainStore.dart';
 import 'package:tennis_club_app/presentation/stores/NewsStore.dart';
+import 'package:tennis_club_app/usecases/AddEvent.dart';
 import 'package:tennis_club_app/usecases/AddGame.dart';
 import 'package:tennis_club_app/usecases/AddNews.dart';
+import 'package:tennis_club_app/usecases/DeleteEvent.dart';
 import 'package:tennis_club_app/usecases/DeleteGame.dart';
 import 'package:tennis_club_app/usecases/GetAllTeams.dart';
+import 'package:tennis_club_app/usecases/GetEvents.dart';
 import 'package:tennis_club_app/usecases/GetFavouriteTeam.dart';
 import 'package:tennis_club_app/usecases/GetGamesByTeam.dart';
 import 'package:tennis_club_app/usecases/GetLineup.dart';
@@ -23,6 +29,7 @@ void init() {
   locator.registerLazySingleton(() => MainStore());
   locator.registerLazySingleton(() => LineupStore());
   locator.registerLazySingleton(() => NewsStore());
+  locator.registerLazySingleton(() => EventStore());
 
   // Use cases
   locator.registerLazySingleton(() => GetLineup(locator()));
@@ -36,9 +43,14 @@ void init() {
   locator.registerLazySingleton(() => GetNews(locator()));
   locator.registerLazySingleton(() => AddNews(locator()));
 
+  locator.registerLazySingleton(() => GetEvents(locator()));
+  locator.registerLazySingleton(() => AddEvent(locator()));
+  locator.registerLazySingleton(() => DeleteEvent(locator()));
+
   // Datasources
   locator.registerLazySingleton(() => DataStub());
   locator.registerLazySingleton(() => DataStubNews());
+  locator.registerLazySingleton(() => DataStubEvents());
 
   // Repository
   locator.registerLazySingleton<LineupRepository>(
@@ -48,6 +60,12 @@ void init() {
   );
   locator.registerLazySingleton<NewsRepository>(
     () => NewsRepository(
+      data: locator(),
+    ),
+  );
+
+  locator.registerLazySingleton<EventRepository>(
+    () => EventRepository(
       data: locator(),
     ),
   );

@@ -68,6 +68,15 @@ class NewsAddWidget extends StatelessWidget {
                 Navigator.pop(context);
               },
               child: const Text('Create'),
+            ),
+            const Padding(
+              padding: EdgeInsets.all(8),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Cancel'),
             )
           ],
         ),
@@ -81,7 +90,7 @@ class NewsAddWidget extends StatelessWidget {
       lastDate: DateTime(DateTime.now().year + 1),
       firstDate: DateTime(DateTime.now().year - 1),
       initialDate: DateTime.now(),
-      // locale: Locale('de', 'DE'),
+      locale: const Locale('de', 'DE'),
     );
     if (pickedDate == null) return;
     datePickerController.text = Localization.formatDate(pickedDate);

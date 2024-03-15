@@ -3,6 +3,7 @@ import 'package:mobx/mobx.dart';
 import 'package:tennis_club_app/main.dart';
 import 'package:tennis_club_app/presentation/pages/CourtEmbedPage.dart';
 import 'package:tennis_club_app/presentation/pages/CourtPage.dart';
+import 'package:tennis_club_app/presentation/pages/EventPage.dart';
 import 'package:tennis_club_app/presentation/pages/LineupPage.dart';
 import 'package:tennis_club_app/presentation/pages/NewsPage.dart';
 
@@ -19,7 +20,7 @@ abstract class MainBase with Store {
         ? CourtEmbedPage()
         : CourtPage(), // CourtPage()
     const LineupPage(), // LineUpPage()
-    const Text('Event'), // Eventpage()
+    const EventPage(), // Eventpage()
   ];
 
   @observable
