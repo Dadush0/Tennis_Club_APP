@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tennis_club_app/localization.dart';
@@ -55,10 +58,15 @@ class NewsAddWidget extends StatelessWidget {
               padding: EdgeInsets.all(8),
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 ImagePicker picker = ImagePicker();
-                Future<XFile?> image =
-                    picker.pickImage(source: ImageSource.gallery);
+                XFile? image =
+                    await picker.pickImage(source: ImageSource.gallery);
+                //_newsStore.newNews.nonObservableValue.preview = Image.file(File(
+                // image!.path)); // TODO: File operation
+                final Uint8List bytes = await image!.readAsBytes();
+                _newsStore.newNews.nonObservableValue.preview =
+                    Image.memory(bytes);
               },
               child: const Text('Add picture'),
             ),

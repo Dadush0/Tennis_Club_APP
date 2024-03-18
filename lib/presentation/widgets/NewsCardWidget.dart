@@ -25,7 +25,7 @@ class NewsCardWidget extends StatelessWidget {
               SizedBox(
                 height: 184,
                 width: double.infinity,
-                child: Image.asset(newsModel.preview),
+                child: newsModel.preview,
               ),
               Semantics(
                 container: true,

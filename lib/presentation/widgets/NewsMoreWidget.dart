@@ -30,7 +30,7 @@ class NewsMoreWidget extends StatelessWidget {
                   SizedBox(
                     height: 184,
                     width: double.infinity,
-                    child: Image.asset(newsModel.preview),
+                    child: newsModel.preview,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),

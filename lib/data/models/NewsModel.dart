@@ -1,10 +1,14 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+
 class NewsModel {
   late String title;
   late String shortText;
   late String content;
   late DateTime date;
   late DateTime releaseDate;
-  late String preview;
+  late Image preview;
   late List<String> images;
 
   NewsModel(
@@ -22,6 +26,7 @@ class NewsModel {
     shortText = '';
     content = '';
     date = DateTime.now();
-    preview = 'assets/images/tenniscamp23.png'; // TODO: Add blank image
+    preview =
+        Image.asset('assets/images/tenniscamp23.png'); // TODO: Add blank image
   }
 }

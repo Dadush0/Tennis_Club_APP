@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:tennis_club_app/data/models/NewsModel.dart';
 
 class DataStubNews {
@@ -18,7 +19,7 @@ class DataStubNews {
               'kurz. Ein Abschlussturnier und das gemeinsame Pizzaessen, eine '
               'feste Institution zum Ende des Tenniscamps, ließen die vier '
               'sportlichen Tage ausklingen.',
-          preview: 'assets/images/tenniscamp23.png',
+          preview: Image.asset('assets/images/tenniscamp23.png'),
           date: DateTime(2023, 7, 30)),
       NewsModel(
           title: 'Tenniscamp2 2023',
@@ -34,7 +35,7 @@ class DataStubNews {
               'kurz. Ein Abschlussturnier und das gemeinsame Pizzaessen, eine '
               'feste Institution zum Ende des Tenniscamps, ließen die vier '
               'sportlichen Tage ausklingen.',
-          preview: 'assets/images/tenniscamp23.png',
+          preview: Image.asset('assets/images/tenniscamp23.png'),
           date: DateTime(2023, 7, 28)),
       NewsModel(
           title: 'Tenniscamp3 2023',
@@ -50,7 +51,7 @@ class DataStubNews {
               'kurz. Ein Abschlussturnier und das gemeinsame Pizzaessen, eine '
               'feste Institution zum Ende des Tenniscamps, ließen die vier '
               'sportlichen Tage ausklingen.',
-          preview: 'assets/images/tenniscamp23.png',
+          preview: Image.asset('assets/images/tenniscamp23.png'),
           date: DateTime(2023, 7, 29))
     ];
   }
