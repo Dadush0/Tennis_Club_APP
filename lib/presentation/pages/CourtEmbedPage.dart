@@ -14,9 +14,9 @@ class CourtEmbedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Try to remove footer (this following line doesnt work)
+    // Tries to remove footer, doesn't work on all devices
     controller.runJavaScript(
-        "document.getElementsByTagName('footer')[0].style.display='none'");
+        "document.getElementById('footer').style.setProperty('display', 'none', 'important');");
     return Scaffold(
       body: WebViewWidget(
         controller: controller,
