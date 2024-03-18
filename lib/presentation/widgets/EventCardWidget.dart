@@ -47,7 +47,7 @@ class EventCardWidget extends StatelessWidget {
                         Text(
                             'Register Until?  ${Localization.formatDate(eventModel.registerDate)}'),
                         Text(
-                            'Max. Participantss?  ${eventModel.maxParticipants.toString()}'),
+                            'Max. Participants?  ${eventModel.maxParticipants.toString()}'),
                         Text('Cost?  ${eventModel.cost}€'),
                         ElevatedButton(
                           onPressed: () {},

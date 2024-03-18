@@ -14,8 +14,6 @@ abstract class _MainStore with Store {
   @observable
   int pageIndex = 0;
 
-  //bool adminView = true;
-
   @observable
   Observable<bool> adminView = false.obs();
 

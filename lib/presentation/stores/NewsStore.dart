@@ -1,9 +1,9 @@
 import 'package:mobx/mobx.dart';
 import 'package:tennis_club_app/data/models/NewsModel.dart';
 import 'package:tennis_club_app/locator.dart';
-import 'package:tennis_club_app/main.dart';
 import 'package:tennis_club_app/usecases/AddNews.dart';
 import 'package:tennis_club_app/usecases/GetNews.dart';
+import 'package:tennis_club_app/usecases/DeleteNews.dart';
 
 part 'NewsStore.g.dart';
 
@@ -14,6 +14,7 @@ class NewsStore = _NewsStore with _$NewsStore;
 abstract class _NewsStore with Store {
   final GetNews _getNews = locator<GetNews>();
   final AddNews _addNews = locator<AddNews>();
+  final DeleteNews _deleteNews = locator<DeleteNews>();
 
   @observable
   ObservableList<NewsModel> newsModel = <NewsModel>[].asObservable();
@@ -34,6 +35,10 @@ abstract class _NewsStore with Store {
 
   void addNews() {
     _addNews.call(newNews.value);
+  }
+
+  void deleteNews(NewsModel newsModel) {
+    _deleteNews.call(newsModel);
   }
 
   void resetNews() {

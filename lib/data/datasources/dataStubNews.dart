@@ -62,4 +62,8 @@ class DataStubNews {
   void addNews(NewsModel newsModel) {
     this.newsModel.add(newsModel);
   }
+
+  void deleteNews(NewsModel newsModel) {
+    this.newsModel.remove(newsModel);
+  }
 }

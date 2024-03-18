@@ -18,6 +18,10 @@ class NewsRepository {
     data.addNews(newsModel);
   }
 
+  void deleteNews(NewsModel newsModel) {
+    data.deleteNews(newsModel);
+  }
+
   int sortNewsByDate(NewsModel a, NewsModel b) {
     return a.date.compareTo(b.date) * (-1); // Desc
   }

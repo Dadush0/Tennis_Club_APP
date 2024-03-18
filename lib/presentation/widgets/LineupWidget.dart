@@ -58,9 +58,11 @@ class LineupWidget extends StatelessWidget {
                         .setFavouriteTeam(_lineupStore.selectedItem),
                     child: const Text('Mark as Favourite'),
                   ),
-                  Visibility(
-                      visible: _mainStore.adminView.value,
-                      child: const GameAddForm()),
+                  Observer(
+                    builder: (_) => Visibility(
+                        visible: _mainStore.adminView.value,
+                        child: const GameAddForm()),
+                  )
                 ],
               ),
             ),

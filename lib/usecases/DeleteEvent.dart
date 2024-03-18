@@ -5,7 +5,7 @@ class DeleteEvent {
   final EventRepository repository;
   DeleteEvent(this.repository);
 
-  void call(EventModel game) {
-    repository.deleteEvent(game);
+  void call(EventModel eventModel) {
+    repository.deleteEvent(eventModel);
   }
 }

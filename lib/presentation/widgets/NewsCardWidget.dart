@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tennis_club_app/data/models/NewsModel.dart';
 import 'package:tennis_club_app/localization.dart';
+import 'package:tennis_club_app/locator.dart';
+import 'package:tennis_club_app/presentation/stores/MainStore.dart';
+import 'package:tennis_club_app/presentation/widgets/NewsDeleteWidget.dart';
 import 'package:tennis_club_app/presentation/widgets/NewsMoreWidget.dart';
 
 class NewsCardWidget extends StatelessWidget {
-  const NewsCardWidget({super.key, required this.newsModel});
+  NewsCardWidget({super.key, required this.newsModel});
   final NewsModel newsModel;
+  final MainStore _mainStore = locator<MainStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +62,14 @@ class NewsCardWidget extends StatelessWidget {
                                               NewsMoreWidget(
                                                   newsModel: newsModel)));
                                 }, // TODO: improve routing/page system
-                                child: const Text('Read more'))
+                                child: const Text('Read more')),
+                            Observer(
+                                builder: (_) => Visibility(
+                                      visible: _mainStore.adminView.value,
+                                      child: NewsDeleteWidget(
+                                        newsModel: newsModel,
+                                      ),
+                                    ))
                           ],
                         )
                       ],
