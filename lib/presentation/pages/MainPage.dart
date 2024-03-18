@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tennis_club_app/locator.dart';
+import 'package:tennis_club_app/main.dart';
+import 'package:tennis_club_app/presentation/pages/NewsPage.dart';
 import 'package:tennis_club_app/presentation/stores/MainStore.dart';
+import 'package:tennis_club_app/presentation/pages/CourtEmbedPage.dart';
+import 'package:tennis_club_app/presentation/pages/CourtPage.dart';
+import 'package:tennis_club_app/presentation/pages/EventPage.dart';
+import 'package:tennis_club_app/presentation/pages/LineupPage.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({super.key});
-  final MainBase _store = locator<MainStore>();
+  final MainStore _store = locator<MainStore>();
+  // Pages need to go here!
+  List<Widget> pages = [
+    NewsPage(),
+    (platform == TargetPlatform.android || platform == TargetPlatform.iOS)
+        ? CourtEmbedPage()
+        : CourtPage(),
+    const LineupPage(),
+    EventPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +32,22 @@ class MainPage extends StatelessWidget {
                 title: const Text('TB/ASV Regenstauf Tennis'),
                 actions: <Widget>[
                   PopupMenuButton<String>(
-                    onSelected: (value) => {},
-                    itemBuilder: (BuildContext context) {
-                      return {'Login', 'English'}.map((String choice) {
-                        return PopupMenuItem<String>(
-                          value: choice,
-                          child: Text(choice),
-                        );
-                      }).toList();
-                    },
-                  ),
+                      onSelected: (value) => {},
+                      itemBuilder: (BuildContext context) =>
+                          <PopupMenuEntry<String>>[
+                            PopupMenuItem<String>(
+                              child: Text(
+                                  _store.adminView.value ? 'Logout' : 'Login'),
+                              onTap: () => _store.adminView.value
+                                  ? {_store.checkPassword('')}
+                                  : _dialogBuilder(context),
+                            ),
+                            PopupMenuItem<String>(
+                                child: Text(language == 'de_DE'
+                                    ? 'English'
+                                    : 'Deutsch'),
+                                onTap: () => {/* TODO: switch language */}),
+                          ]),
                 ],
               ),
               bottomNavigationBar: NavigationBar(
@@ -52,7 +73,41 @@ class MainPage extends StatelessWidget {
                       icon: Icon(Icons.stadium), label: 'Events')
                 ],
               ),
-              body: _store.pages[_store.pageIndex],
+              body: pages[_store.pageIndex],
             ));
+  }
+
+  Future<void> _dialogBuilder(BuildContext context) {
+    TextEditingController password = TextEditingController();
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Login as Admin'),
+            content: null,
+            actions: <Widget>[
+              TextField(
+                  controller: password,
+                  decoration: const InputDecoration(
+                    labelText: 'Password',
+                    hintText: 'Password',
+                  )),
+              const Padding(
+                padding: EdgeInsets.all(8),
+              ),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                MaterialButton(
+                  color: Colors.green,
+                  textColor: Colors.white,
+                  child: const Text('Login'),
+                  onPressed: () {
+                    _store.checkPassword(password.value.text);
+                    Navigator.pop(context);
+                  },
+                )
+              ])
+            ],
+          );
+        });
   }
 }

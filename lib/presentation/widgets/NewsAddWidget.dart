@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:tennis_club_app/localization.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/stores/NewsStore.dart';
@@ -54,7 +55,11 @@ class NewsAddWidget extends StatelessWidget {
               padding: EdgeInsets.all(8),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                ImagePicker picker = ImagePicker();
+                Future<XFile?> image =
+                    picker.pickImage(source: ImageSource.gallery);
+              },
               child: const Text('Add picture'),
             ),
             const Padding(

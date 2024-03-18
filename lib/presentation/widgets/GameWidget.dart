@@ -4,14 +4,15 @@ import 'package:mobx/mobx.dart';
 import 'package:tennis_club_app/data/models/GameModel.dart';
 import 'package:tennis_club_app/localization.dart';
 import 'package:tennis_club_app/locator.dart';
-import 'package:tennis_club_app/main.dart';
 import 'package:tennis_club_app/presentation/stores/LineupStore.dart';
+import 'package:tennis_club_app/presentation/stores/MainStore.dart';
 import 'package:tennis_club_app/presentation/widgets/GameDeleteWidget.dart';
 import 'package:tennis_club_app/presentation/widgets/GameEditorWidget.dart';
 
 class GameWidget extends StatelessWidget {
   GameWidget({super.key, required this.gameModel});
   final LineupStore _lineupStore = locator<LineupStore>();
+  final MainStore _mainStore = locator<MainStore>();
   final GameModel gameModel;
 
   List<Widget> convertGameToExpansion() {
@@ -64,10 +65,10 @@ class GameWidget extends StatelessWidget {
                         : Icons.arrow_drop_down),
                     trailing: Wrap(children: <Widget>[
                       Visibility(
-                          visible: admin,
+                          visible: _mainStore.adminView.value,
                           child: GameEditorWidget(gameModel: gameModel)),
                       Visibility(
-                          visible: admin,
+                          visible: _mainStore.adminView.value,
                           child: GameDeleteWidget(gameModel: gameModel)),
                     ]),
                     initiallyExpanded: false,

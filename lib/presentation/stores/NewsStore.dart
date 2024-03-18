@@ -1,6 +1,7 @@
 import 'package:mobx/mobx.dart';
 import 'package:tennis_club_app/data/models/NewsModel.dart';
 import 'package:tennis_club_app/locator.dart';
+import 'package:tennis_club_app/main.dart';
 import 'package:tennis_club_app/usecases/AddNews.dart';
 import 'package:tennis_club_app/usecases/GetNews.dart';
 

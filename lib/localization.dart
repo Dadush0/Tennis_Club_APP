@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:tennis_club_app/main.dart';
 
 abstract class Localization {
-  static String language = 'de_DE';
   static String formatDateTime(DateTime dateTime) {
     DateFormat dateFormat = DateFormat("dd. MMMM yyyy HH:mm");
 

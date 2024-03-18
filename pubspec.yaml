@@ -45,9 +45,9 @@ dependencies:
   flutter_lints: ^3.0.1
   webview_flutter: ^4.4.2
   intl: any
-  flutter_localization: ^0.2.0
   flutter_localizations:
     sdk: flutter
+  image_picker: ^1.0.7
 
 dev_dependencies:
   flutter_test:

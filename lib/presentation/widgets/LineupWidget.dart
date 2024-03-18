@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tennis_club_app/locator.dart';
-import 'package:tennis_club_app/main.dart';
 import 'package:tennis_club_app/presentation/stores/LineupStore.dart';
+import 'package:tennis_club_app/presentation/stores/MainStore.dart';
 import 'package:tennis_club_app/presentation/widgets/GameAddWidget.dart';
 import 'package:tennis_club_app/presentation/widgets/GameWidget.dart';
 
 class LineupWidget extends StatelessWidget {
   LineupWidget({super.key});
   final LineupStore _lineupStore = locator<LineupStore>();
+  final MainStore _mainStore = locator<MainStore>();
 
   List<GameWidget> convertGamesToWidgets() {
     List<GameWidget> widgets = [];
@@ -57,7 +58,9 @@ class LineupWidget extends StatelessWidget {
                         .setFavouriteTeam(_lineupStore.selectedItem),
                     child: const Text('Mark as Favourite'),
                   ),
-                  Visibility(visible: admin, child: const GameAddForm()),
+                  Visibility(
+                      visible: _mainStore.adminView.value,
+                      child: const GameAddForm()),
                 ],
               ),
             ),

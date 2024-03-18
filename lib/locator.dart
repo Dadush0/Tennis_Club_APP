@@ -4,6 +4,7 @@ import 'package:tennis_club_app/data/datasources/dataStubEvents.dart';
 import 'package:tennis_club_app/data/datasources/dataStubNews.dart';
 import 'package:tennis_club_app/data/repositories/EventRepository.dart';
 import 'package:tennis_club_app/data/repositories/LineupRepository.dart';
+import 'package:tennis_club_app/data/repositories/MainRepository.dart';
 import 'package:tennis_club_app/data/repositories/NewsRepository.dart';
 import 'package:tennis_club_app/presentation/stores/EventStore.dart';
 import 'package:tennis_club_app/presentation/stores/LineupStore.dart';
@@ -12,6 +13,7 @@ import 'package:tennis_club_app/presentation/stores/NewsStore.dart';
 import 'package:tennis_club_app/usecases/AddEvent.dart';
 import 'package:tennis_club_app/usecases/AddGame.dart';
 import 'package:tennis_club_app/usecases/AddNews.dart';
+import 'package:tennis_club_app/usecases/CheckPassword.dart';
 import 'package:tennis_club_app/usecases/DeleteEvent.dart';
 import 'package:tennis_club_app/usecases/DeleteGame.dart';
 import 'package:tennis_club_app/usecases/GetAllTeams.dart';
@@ -47,6 +49,8 @@ void init() {
   locator.registerLazySingleton(() => AddEvent(locator()));
   locator.registerLazySingleton(() => DeleteEvent(locator()));
 
+  locator.registerLazySingleton(() => CheckPassword(locator()));
+
   // Datasources
   locator.registerLazySingleton(() => DataStub());
   locator.registerLazySingleton(() => DataStubNews());
@@ -66,6 +70,12 @@ void init() {
 
   locator.registerLazySingleton<EventRepository>(
     () => EventRepository(
+      data: locator(),
+    ),
+  );
+
+  locator.registerLazySingleton<MainRepository>(
+    () => MainRepository(
       data: locator(),
     ),
   );

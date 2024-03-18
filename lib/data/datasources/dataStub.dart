@@ -71,4 +71,8 @@ class DataStub {
         .games
         .remove(model);
   }
+
+  bool checkPassword(String password) {
+    return password == 'abc';
+  }
 }
