@@ -48,6 +48,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   image_picker: ^1.0.7
+  firebase_core: ^2.27.0
+  firebase_database: ^10.4.9
 
 dev_dependencies:
   flutter_test:

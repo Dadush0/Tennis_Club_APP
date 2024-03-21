@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "908780155139",
+    "firebase_url": "https://tbasvregenstauf-f5ae6-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "tbasvregenstauf-f5ae6",
+    "storage_bucket": "tbasvregenstauf-f5ae6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:908780155139:android:39afefdf94a3345eaef936",
+        "android_client_info": {
+          "package_name": "com.example.tennis_club_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoldlvaP51YxWeMvGIarj2D_PS9QHrD6E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,7 +5,7 @@ class TeamModel {
   late String teamName;
   late List<GameModel> games;
   late List<PlayerModel> players;
-  late PlayerModel trainer;
+  late String trainer;
 
   TeamModel({required this.teamName});
 }

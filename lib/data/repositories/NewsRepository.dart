@@ -1,4 +1,5 @@
 import 'package:tennis_club_app/data/datasources/dataStubNews.dart';
+import 'package:tennis_club_app/data/models/DataModel.dart';
 import 'package:tennis_club_app/data/models/NewsModel.dart';
 
 class NewsRepository {
@@ -9,7 +10,7 @@ class NewsRepository {
   });
 
   List<NewsModel> getNews() {
-    List<NewsModel> newsModel = data.getNews();
+    List<NewsModel> newsModel = DataModel.news;
     newsModel.sort(sortNewsByDate);
     return newsModel;
   }
