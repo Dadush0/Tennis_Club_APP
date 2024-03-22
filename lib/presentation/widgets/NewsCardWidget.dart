@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:tennis_club_app/data/datasources/firebase.dart';
 import 'package:tennis_club_app/data/models/NewsModel.dart';
 import 'package:tennis_club_app/localization.dart';
 import 'package:tennis_club_app/locator.dart';
@@ -22,11 +23,15 @@ class NewsCardWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 184,
-                width: double.infinity,
-                child: newsModel.preview,
-              ),
+              FutureBuilder(
+                  future: FirebaseConnection.downloadImage(newsModel.preview),
+                  builder: (BuildContext context, AsyncSnapshot<Image> image) {
+                    return SizedBox(
+                      height: 184,
+                      width: double.infinity,
+                      child: image.data,
+                    );
+                  }),
               Semantics(
                 container: true,
                 child: Padding(

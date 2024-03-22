@@ -1,4 +1,7 @@
+import 'dart:typed_data';
+
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:tennis_club_app/data/models/DataModel.dart';
 import 'package:tennis_club_app/data/models/EventModel.dart';
@@ -8,19 +11,21 @@ import 'package:tennis_club_app/data/models/PlayerModel.dart';
 import 'package:tennis_club_app/data/models/TeamModel.dart';
 
 class FirebaseConnection {
-  static void readLineupData() async {
+  static Future<void> readLineupData() async {
     final snapshot = await FirebaseDatabase.instance.ref('lineup').get();
     final Map<String, dynamic> lineup = snapshot.value as Map<String, dynamic>;
     deserializeTeams(lineup['teams']);
   }
 
-  static void readNewsData() async {
+  static Future<void> readNewsData() async {
+    DataModel.news = [];
     final snapshot = await FirebaseDatabase.instance.ref().get();
     final Map<String, dynamic> news = snapshot.value as Map<String, dynamic>;
     deserializeNews(news['news']);
   }
 
   static Future<void> readEventData() async {
+    DataModel.events = [];
     final snapshot = await FirebaseDatabase.instance.ref().get();
     final Map<String, dynamic> events = snapshot.value as Map<String, dynamic>;
     deserializeEvents(events['events']);
@@ -34,6 +39,7 @@ class FirebaseConnection {
   }
 
   static void deserializeTeams(Map<String, dynamic> teams) {
+    DataModel.lineup.teams = [];
     teams.forEach((key, value) {
       TeamModel teamModel = TeamModel(teamName: value['teamName']);
       teamModel.games = deserializeGames(value['games']);
@@ -76,14 +82,13 @@ class FirebaseConnection {
   }
 
   static void deserializeNews(Map<String, dynamic> news) {
-    news.forEach((key, value) {
+    news.forEach((key, value) async {
       NewsModel newsModel = NewsModel(
           title: value['title'],
           shortText: value['shortText'],
           content: value['content'],
           date: DateTime.parse(value['date']),
-          preview:
-              Image.asset('assets/images/tenniscamp23.png')); // ImageLoader
+          preview: value['imagePath']);
       newsModel.releaseDate = DateTime.parse(value['releaseDate']);
       DataModel.news.add(newsModel);
     });
@@ -117,7 +122,7 @@ class FirebaseConnection {
 
   static void writeLineupData() async {
     DatabaseReference databaseReference =
-        FirebaseDatabase.instance.ref('lineup');
+        FirebaseDatabase.instance.ref('lineup/teams');
     await databaseReference.set(serializeLineup());
   }
 
@@ -130,7 +135,7 @@ class FirebaseConnection {
         "title": element.title,
         "shortText": element.shortText,
         "content": element.content,
-        "imagePath": "pathTODO",
+        "imagePath": element.preview,
         "date": element.date.toString(),
         "releaseDate": element.releaseDate.toString(),
       };
@@ -189,7 +194,7 @@ class FirebaseConnection {
         "cakes": serializePlayers(element.cakes),
         "players": serializePlayers(element.players),
       };
-      gameList.putIfAbsent("g$index", () => games);
+      gameList.putIfAbsent("g$index", () => game);
       index++;
     }
     return gameList;
@@ -203,5 +208,17 @@ class FirebaseConnection {
       index++;
     }
     return playerList;
+  }
+
+  static Future<Image> downloadImage(String imageName) async {
+    final storageRef = FirebaseStorage.instance.ref();
+    final imageUrl = await storageRef.child(imageName).getDownloadURL();
+    return Image.network(imageUrl);
+  }
+
+  static void uploadImage(Uint8List imageBytes, String imageName) {
+    final storageRef = FirebaseStorage.instance.ref();
+    final imageRef = storageRef.child(imageName);
+    imageRef.putData(imageBytes);
   }
 }

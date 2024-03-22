@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_club_app/data/datasources/firebase.dart';
 import 'package:tennis_club_app/data/models/NewsModel.dart';
 import 'package:tennis_club_app/localization.dart';
 
@@ -27,11 +28,17 @@ class NewsMoreWidget extends StatelessWidget {
                     },
                     icon: const Icon(Icons.keyboard_backspace_sharp),
                   ),
-                  SizedBox(
-                    height: 184,
-                    width: double.infinity,
-                    child: newsModel.preview,
-                  ),
+                  FutureBuilder(
+                      future:
+                          FirebaseConnection.downloadImage(newsModel.preview),
+                      builder:
+                          (BuildContext context, AsyncSnapshot<Image> image) {
+                        return SizedBox(
+                          height: 184,
+                          width: double.infinity,
+                          child: image.data,
+                        );
+                      }),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: Text(

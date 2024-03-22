@@ -74,7 +74,6 @@ class GameEditorWidget extends StatelessWidget {
                         _lineupStore.editGame(gameModel);
                       }
                       setState(() {});
-                      // TODO: Consider Reaction Builder
                     })
               ],
             );

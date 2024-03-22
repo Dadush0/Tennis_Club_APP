@@ -18,8 +18,9 @@ class GameWidget extends StatelessWidget {
   List<Widget> convertGameToExpansion() {
     List<Widget> list = [];
     for (var player in gameModel.players) {
-      if (gameModel.cakes.contains(player)) {
-        if (gameModel.manager == player) {
+      if (gameModel.cakes
+          .any((element) => element.displayName == player.displayName)) {
+        if (gameModel.manager.displayName == player.displayName) {
           list.add(Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[

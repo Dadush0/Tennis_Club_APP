@@ -11,13 +11,16 @@ TargetPlatform platform = TargetPlatform.android;
 String language = 'de_DE';
 
 void main() async {
+  injector.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  injector.init();
-  FirebaseConnection.readLineupData();
-  FirebaseConnection.readNewsData();
-  FirebaseConnection.readEventData();
+  Future.wait([
+    FirebaseConnection.readLineupData(),
+    FirebaseConnection.readNewsData(),
+    FirebaseConnection.readEventData()
+  ]);
+
   runApp(const MyApp());
 }
 

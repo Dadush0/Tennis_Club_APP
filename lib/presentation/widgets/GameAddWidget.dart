@@ -65,7 +65,6 @@ class GameAddFormState extends State<GameAddForm> {
                         _lineupStore.getGamesByTeam(_lineupStore.selectedItem);
                       }
                       setState(() {});
-                      // TODO: Consider Reaction Builder
                     })
               ],
             );

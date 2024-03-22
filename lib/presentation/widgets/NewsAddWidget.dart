@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tennis_club_app/data/datasources/firebase.dart';
 import 'package:tennis_club_app/localization.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/stores/NewsStore.dart';
@@ -62,11 +63,9 @@ class NewsAddWidget extends StatelessWidget {
                 ImagePicker picker = ImagePicker();
                 XFile? image =
                     await picker.pickImage(source: ImageSource.gallery);
-                //_newsStore.newNews.nonObservableValue.preview = Image.file(File(
-                // image!.path)); // TODO: File operation
                 final Uint8List bytes = await image!.readAsBytes();
-                _newsStore.newNews.nonObservableValue.preview =
-                    Image.memory(bytes);
+                FirebaseConnection.uploadImage(bytes, image.name);
+                _newsStore.newNews.nonObservableValue.preview = image.name;
               },
               child: const Text('Add picture'),
             ),
