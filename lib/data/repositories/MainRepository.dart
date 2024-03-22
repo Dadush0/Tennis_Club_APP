@@ -1,13 +1,9 @@
-import 'package:tennis_club_app/data/datasources/dataStub.dart';
+import 'package:tennis_club_app/data/datasources/firebase.dart';
 
 class MainRepository {
-  final DataStub data;
+  MainRepository();
 
-  MainRepository({
-    required this.data,
-  });
-
-  bool checkPassword(String password) {
-    return data.checkPassword(password);
+  Future<bool> checkPassword(String password) {
+    return FirebaseConnection.readPassword(password);
   }
 }

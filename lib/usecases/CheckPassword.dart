@@ -4,7 +4,7 @@ class CheckPassword {
   final MainRepository repository;
   CheckPassword(this.repository);
 
-  bool call(String password) {
+  Future<bool> call(String password) {
     return repository.checkPassword(password);
   }
 }

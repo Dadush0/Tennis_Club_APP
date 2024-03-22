@@ -1,7 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:tennis_club_app/data/datasources/dataStub.dart';
-import 'package:tennis_club_app/data/datasources/dataStubEvents.dart';
-import 'package:tennis_club_app/data/datasources/dataStubNews.dart';
+import 'package:tennis_club_app/data/datasources/firebase.dart';
 import 'package:tennis_club_app/data/repositories/EventRepository.dart';
 import 'package:tennis_club_app/data/repositories/LineupRepository.dart';
 import 'package:tennis_club_app/data/repositories/MainRepository.dart';
@@ -54,31 +52,11 @@ void init() {
   locator.registerLazySingleton(() => CheckPassword(locator()));
 
   // Datasources
-  locator.registerLazySingleton(() => DataStub());
-  locator.registerLazySingleton(() => DataStubNews());
-  locator.registerLazySingleton(() => DataStubEvents());
+  locator.registerLazySingleton(() => FirebaseConnection());
 
   // Repository
-  locator.registerLazySingleton<LineupRepository>(
-    () => LineupRepository(
-      data: locator(),
-    ),
-  );
-  locator.registerLazySingleton<NewsRepository>(
-    () => NewsRepository(
-      data: locator(),
-    ),
-  );
-
-  locator.registerLazySingleton<EventRepository>(
-    () => EventRepository(
-      data: locator(),
-    ),
-  );
-
-  locator.registerLazySingleton<MainRepository>(
-    () => MainRepository(
-      data: locator(),
-    ),
-  );
+  locator.registerLazySingleton<LineupRepository>(() => LineupRepository());
+  locator.registerLazySingleton<NewsRepository>(() => NewsRepository());
+  locator.registerLazySingleton<EventRepository>(() => EventRepository());
+  locator.registerLazySingleton<MainRepository>(() => MainRepository());
 }

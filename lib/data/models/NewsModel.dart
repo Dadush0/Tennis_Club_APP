@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 class NewsModel {
@@ -26,6 +24,7 @@ class NewsModel {
     shortText = '';
     content = '';
     date = DateTime.now();
+    releaseDate = DateTime.now();
     preview =
         Image.asset('assets/images/tenniscamp23.png'); // TODO: Add blank image
   }

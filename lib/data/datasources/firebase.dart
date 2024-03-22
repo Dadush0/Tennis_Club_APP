@@ -8,36 +8,29 @@ import 'package:tennis_club_app/data/models/PlayerModel.dart';
 import 'package:tennis_club_app/data/models/TeamModel.dart';
 
 class FirebaseConnection {
-  static void readDatabase() async {}
-
-  static void readLineupData() {
-    DatabaseReference databaseReference =
-        FirebaseDatabase.instance.ref().child('data/lineup');
-    databaseReference.onValue.listen((event) {
-      final Map<String, dynamic> lineup =
-          event.snapshot.value as Map<String, dynamic>;
-      deserializeTeams(lineup['teams']);
-    });
+  static void readLineupData() async {
+    final snapshot = await FirebaseDatabase.instance.ref('lineup').get();
+    final Map<String, dynamic> lineup = snapshot.value as Map<String, dynamic>;
+    deserializeTeams(lineup['teams']);
   }
 
-  static void readNewsData() {
-    DatabaseReference databaseReference =
-        FirebaseDatabase.instance.ref().child('data');
-    databaseReference.onValue.listen((event) {
-      final Map<String, dynamic> news =
-          event.snapshot.value as Map<String, dynamic>;
-      deserializeNews(news['news']);
-    });
+  static void readNewsData() async {
+    final snapshot = await FirebaseDatabase.instance.ref().get();
+    final Map<String, dynamic> news = snapshot.value as Map<String, dynamic>;
+    deserializeNews(news['news']);
   }
 
-  static void readEventData() {
-    DatabaseReference databaseReference =
-        FirebaseDatabase.instance.ref().child('data');
-    databaseReference.onValue.listen((event) {
-      final Map<String, dynamic> events =
-          event.snapshot.value as Map<String, dynamic>;
-      deserializeEvents(events['events']);
-    });
+  static Future<void> readEventData() async {
+    final snapshot = await FirebaseDatabase.instance.ref().get();
+    final Map<String, dynamic> events = snapshot.value as Map<String, dynamic>;
+    deserializeEvents(events['events']);
+  }
+
+  static Future<bool> readPassword(String password) async {
+    final snapshot = await FirebaseDatabase.instance.ref().get();
+    final Map<String, dynamic> passwordData =
+        snapshot.value as Map<String, dynamic>;
+    return passwordData['password'].toString() == password;
   }
 
   static void deserializeTeams(Map<String, dynamic> teams) {
@@ -111,7 +104,104 @@ class FirebaseConnection {
     });
   }
 
-  // TODO: serialize
-  // update/set Data
-  //
+  static void writeNewsData() async {
+    DatabaseReference databaseReference = FirebaseDatabase.instance.ref('news');
+    await databaseReference.set(serializeNews());
+  }
+
+  static void writeEventsData() async {
+    DatabaseReference databaseReference =
+        FirebaseDatabase.instance.ref('events');
+    await databaseReference.set(serializeEvents());
+  }
+
+  static void writeLineupData() async {
+    DatabaseReference databaseReference =
+        FirebaseDatabase.instance.ref('lineup');
+    await databaseReference.set(serializeLineup());
+  }
+
+  static Map<String, dynamic> serializeNews() {
+    Map<String, dynamic> news = {};
+    Map<String, dynamic> newsList = {};
+    int index = 1;
+    for (var element in DataModel.news) {
+      news = {
+        "title": element.title,
+        "shortText": element.shortText,
+        "content": element.content,
+        "imagePath": "pathTODO",
+        "date": element.date.toString(),
+        "releaseDate": element.releaseDate.toString(),
+      };
+      newsList.putIfAbsent("n$index", () => news);
+      index++;
+    }
+    return newsList;
+  }
+
+  static Map<String, dynamic> serializeEvents() {
+    Map<String, dynamic> events = {};
+    Map<String, dynamic> eventList = {};
+    int index = 1;
+    for (var element in DataModel.events) {
+      events = {
+        "cost": element.cost,
+        "description": element.description,
+        "location": element.location,
+        "maxParticipants": element.maxParticipants,
+        "date": element.date.toString(),
+        "registerDate": element.registerDate.toString(),
+        "title": element.title,
+      };
+      eventList.putIfAbsent("e$index", () => events);
+      index++;
+    }
+    return eventList;
+  }
+
+  static Map<String, dynamic> serializeLineup() {
+    Map<String, dynamic> team = {};
+    Map<String, dynamic> teamList = {};
+    int index = 1;
+    for (var element in DataModel.lineup.teams) {
+      team = {
+        "teamName": element.teamName,
+        "trainer": element.trainer,
+        "games": serializeGames(element.games),
+      };
+      teamList.putIfAbsent("t$index", () => team);
+      index++;
+    }
+    return teamList;
+  }
+
+  static Map<String, dynamic> serializeGames(List<GameModel> games) {
+    Map<String, dynamic> game = {};
+    Map<String, dynamic> gameList = {};
+    int index = 1;
+    for (var element in games) {
+      game = {
+        "date": element.date.toString(),
+        "location": element.location,
+        "manager": element.manager.displayName,
+        "opponentName": element.opponentName,
+        "cakes": serializePlayers(element.cakes),
+        "players": serializePlayers(element.players),
+      };
+      gameList.putIfAbsent("g$index", () => games);
+      index++;
+    }
+    return gameList;
+  }
+
+  static Map<String, dynamic> serializePlayers(List<PlayerModel> players) {
+    Map<String, dynamic> playerList = {};
+    int index = 1;
+    for (var element in players) {
+      playerList.putIfAbsent("p$index", () => element.displayName);
+      index++;
+    }
+    return playerList;
+  }
 }

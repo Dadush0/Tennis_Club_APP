@@ -23,7 +23,7 @@ abstract class _MainStore with Store {
   }
 
   @action
-  void checkPassword(String password) {
-    adminView = _checkPassword.call(password).obs();
+  void checkPassword(String password) async {
+    adminView = (await _checkPassword.call(password)).obs();
   }
 }

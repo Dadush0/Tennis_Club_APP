@@ -9,6 +9,4 @@ class LineupModel {
     teams = [];
     favoriteTeam = '';
   }
-
-  LineupModel.fromJson(Map<String, dynamic> json) {}
 }

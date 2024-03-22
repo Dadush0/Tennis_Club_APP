@@ -1,13 +1,9 @@
-import 'package:tennis_club_app/data/datasources/dataStubNews.dart';
+import 'package:tennis_club_app/data/datasources/firebase.dart';
 import 'package:tennis_club_app/data/models/DataModel.dart';
 import 'package:tennis_club_app/data/models/NewsModel.dart';
 
 class NewsRepository {
-  final DataStubNews data;
-
-  NewsRepository({
-    required this.data,
-  });
+  NewsRepository();
 
   List<NewsModel> getNews() {
     List<NewsModel> newsModel = DataModel.news;
@@ -16,11 +12,13 @@ class NewsRepository {
   }
 
   void addNews(NewsModel newsModel) {
-    data.addNews(newsModel);
+    DataModel.news.add(newsModel);
+    FirebaseConnection.writeNewsData();
   }
 
   void deleteNews(NewsModel newsModel) {
-    data.deleteNews(newsModel);
+    DataModel.news.remove(newsModel);
+    FirebaseConnection.writeNewsData();
   }
 
   int sortNewsByDate(NewsModel a, NewsModel b) {
