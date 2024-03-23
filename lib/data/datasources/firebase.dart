@@ -126,6 +126,7 @@ class FirebaseConnection {
           participants: []); // List
       if (value['participants'] != null) {
         List<dynamic> data = value['participants'];
+
         for (var element in data) {
           eventModel.participants.add(element);
         }
