@@ -32,49 +32,47 @@ class LineupWidget extends StatelessWidget {
     _lineupStore.getFavouriteTeam();
     _lineupStore.getGamesByTeam(_lineupStore.selectedItem);
     _lineupStore.getAllTeams();
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(top: 16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  DropdownMenu<String>(
-                    initialSelection: _lineupStore.selectedItem != ''
-                        ? _lineupStore.selectedItem
-                        : _lineupStore.teamNames.first,
-                    label: const Text('Teamname'),
-                    enableSearch: false,
-                    dropdownMenuEntries: convertTeamNamesToEntries(),
-                    onSelected: (value) {
-                      _lineupStore.getGamesByTeam(value!);
-                      _lineupStore.selectedItem = value;
-                    },
-                  ),
-                  ElevatedButton(
-                    onPressed: () => _lineupStore
-                        .setFavouriteTeam(_lineupStore.selectedItem),
-                    child: const Text('Mark as Favourite'),
-                  ),
-                  Observer(
-                    builder: (_) => Visibility(
-                        visible: _mainStore.adminView.value,
-                        child: const GameAddForm()),
-                  )
-                ],
-              ),
+    return SafeArea(
+      child: Column(
+        children: <Widget>[
+          Container(
+            margin: const EdgeInsets.only(top: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                DropdownMenu<String>(
+                  initialSelection: _lineupStore.selectedItem != ''
+                      ? _lineupStore.selectedItem
+                      : _lineupStore.teamNames.first,
+                  label: const Text('Teamname'),
+                  enableSearch: false,
+                  dropdownMenuEntries: convertTeamNamesToEntries(),
+                  onSelected: (value) {
+                    _lineupStore.getGamesByTeam(value!);
+                    _lineupStore.selectedItem = value;
+                  },
+                ),
+                ElevatedButton(
+                  onPressed: () =>
+                      _lineupStore.setFavouriteTeam(_lineupStore.selectedItem),
+                  child: const Text('Mark as Favourite'),
+                ),
+                Observer(
+                  builder: (_) => Visibility(
+                      visible: _mainStore.adminView.value,
+                      child: const GameAddForm()),
+                )
+              ],
             ),
-            Observer(
-              builder: (_) => SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    children: convertGamesToWidgets(),
-                  )),
-            ),
-          ],
-        ),
+          ),
+          Observer(
+            builder: (_) => SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  children: convertGamesToWidgets(),
+                )),
+          ),
+        ],
       ),
     );
   }

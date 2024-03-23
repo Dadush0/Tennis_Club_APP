@@ -6,6 +6,8 @@ class LineupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LineupWidget();
+    return Scaffold(
+        body: SingleChildScrollView(
+            scrollDirection: Axis.vertical, child: LineupWidget()));
   }
 }

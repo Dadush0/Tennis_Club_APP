@@ -37,7 +37,7 @@ class FirebaseConnection {
   static Future<bool> readPassword(String password) async {
     final snapshot = await FirebaseDatabase.instance.ref().get();
     final Map<String, dynamic> passwordData =
-        snapshot.value as Map<String, dynamic>;
+        Map<String, dynamic>.from(snapshot.value as Map);
     return passwordData['password'].toString() == password;
   }
 

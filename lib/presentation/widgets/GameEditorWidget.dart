@@ -72,6 +72,7 @@ class GameEditorWidget extends StatelessWidget {
                         Navigator.pop(context);
                         _lineupStore.dialogIndex.value = 0;
                         _lineupStore.editGame(gameModel);
+                        _lineupStore.getGamesByTeam(_lineupStore.selectedItem);
                       }
                       setState(() {});
                     })

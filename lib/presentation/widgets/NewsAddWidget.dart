@@ -86,6 +86,7 @@ class NewsAddWidget extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
+                _newsStore.resetNews();
                 Navigator.pop(context);
               },
               child: const Text('Cancel'),

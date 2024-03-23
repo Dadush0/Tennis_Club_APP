@@ -9,21 +9,17 @@ class EventCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 360,
-      child: Card(
-        clipBehavior: Clip.antiAlias,
-        child: Semantics(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Semantics(
-                container: true,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                  child: DefaultTextStyle(
-                    softWrap: false,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleMedium!,
+        width: double.infinity,
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          child: Semantics(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Semantics(
+                  container: true,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -39,6 +35,8 @@ class EventCardWidget extends StatelessWidget {
                         ),
                         Text(
                           eventModel.description,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
                           maxLines: 30,
                         ),
                         Text(
@@ -53,15 +51,16 @@ class EventCardWidget extends StatelessWidget {
                           onPressed: () {},
                           child: const Text('Sign up'),
                         ),
+                        const Padding(
+                          padding: EdgeInsets.all(8),
+                        ),
                       ],
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
