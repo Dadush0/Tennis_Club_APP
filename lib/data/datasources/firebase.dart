@@ -107,7 +107,13 @@ class FirebaseConnection {
           registerDate: DateTime.parse(value['registerDate']),
           cost: value['cost'],
           maxParticipants: value['maxParticipants'],
-          participants: []); //value['participants']); // List
+          participants: []); // List
+      if (value['participants'] != null) {
+        List<dynamic> data = value['participants'];
+        data.forEach((element) {
+          eventModel.participants.add(element);
+        });
+      }
       DataModel.events.add(eventModel);
     });
   }
@@ -161,6 +167,7 @@ class FirebaseConnection {
         "date": element.date.toString(),
         "registerDate": element.registerDate.toString(),
         "title": element.title,
+        "participants": element.participants,
       };
       eventList.putIfAbsent("e$index", () => events);
       index++;

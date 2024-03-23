@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tennis_club_app/data/models/EventModel.dart';
 import 'package:tennis_club_app/localization.dart';
+import 'package:tennis_club_app/locator.dart';
+import 'package:tennis_club_app/presentation/stores/EventStore.dart';
+import 'package:tennis_club_app/presentation/stores/MainStore.dart';
+import 'package:tennis_club_app/presentation/widgets/EventDeleteWidget.dart';
+import 'package:tennis_club_app/presentation/widgets/EventMoreWidget.dart';
 
 class EventCardWidget extends StatelessWidget {
-  const EventCardWidget({super.key, required this.eventModel});
+  EventCardWidget({super.key, required this.eventModel});
   final EventModel eventModel;
+  final EventStore _eventStore = locator<EventStore>();
+  final MainStore _mainStore = locator<MainStore>();
 
   @override
   Widget build(BuildContext context) {
+    bool full = eventModel.participants.length >= eventModel.maxParticipants;
     return SizedBox(
         width: double.infinity,
         child: Card(
@@ -47,9 +56,29 @@ class EventCardWidget extends StatelessWidget {
                         Text(
                             'Max. Participants?  ${eventModel.maxParticipants.toString()}'),
                         Text('Cost?  ${eventModel.cost}€'),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('Sign up'),
+                        Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                if (!full) _dialogBuilder(context);
+                              },
+                              child: Text(full ? 'Full' : 'Sign up'),
+                            ),
+                            Observer(
+                                builder: (_) => Visibility(
+                                      visible: _mainStore.adminView.value,
+                                      child: EventMoreWidget(
+                                        eventModel: eventModel,
+                                      ),
+                                    )),
+                            Observer(
+                                builder: (_) => Visibility(
+                                      visible: _mainStore.adminView.value,
+                                      child: EventDeleteWidget(
+                                        eventModel: eventModel,
+                                      ),
+                                    )),
+                          ],
                         ),
                         const Padding(
                           padding: EdgeInsets.all(8),
@@ -62,5 +91,43 @@ class EventCardWidget extends StatelessWidget {
             ),
           ),
         ));
+  }
+
+  Future<void> _dialogBuilder(BuildContext context) {
+    TextEditingController name = TextEditingController();
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Sign up'),
+            content: Text(eventModel.title),
+            actions: <Widget>[
+              TextField(
+                  controller: name,
+                  decoration: const InputDecoration(
+                    labelText: 'Name',
+                    hintText: 'Name',
+                  )),
+              const Padding(
+                padding: EdgeInsets.all(8),
+              ),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                MaterialButton(
+                  color: Colors.green,
+                  textColor: Colors.white,
+                  child: const Text('Sign up'),
+                  onPressed: () {
+                    eventModel.participants.add(name.text);
+                    _eventStore.setEvents(eventModel);
+                    _eventStore.deleteEvent();
+                    _eventStore.addEvent();
+                    _eventStore.getEvents();
+                    Navigator.pop(context);
+                  },
+                )
+              ])
+            ],
+          );
+        });
   }
 }
