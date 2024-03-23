@@ -19,7 +19,8 @@ void main() async {
   Future.wait([
     FirebaseConnection.readLineupData(),
     FirebaseConnection.readNewsData(),
-    FirebaseConnection.readEventData()
+    FirebaseConnection.readEventData(),
+    FirebaseConnection.readPreferences()
   ]);
 
   runApp(const MyApp());

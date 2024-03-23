@@ -26,4 +26,7 @@ abstract class _MainStore with Store {
   void checkPassword(String password) async {
     adminView = (await _checkPassword.call(password)).obs();
   }
+
+  @action
+  void getData() {}
 }

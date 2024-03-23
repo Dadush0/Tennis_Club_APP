@@ -3,14 +3,18 @@ import 'dart:typed_data';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tennis_club_app/data/models/DataModel.dart';
 import 'package:tennis_club_app/data/models/EventModel.dart';
 import 'package:tennis_club_app/data/models/GameModel.dart';
 import 'package:tennis_club_app/data/models/NewsModel.dart';
 import 'package:tennis_club_app/data/models/PlayerModel.dart';
 import 'package:tennis_club_app/data/models/TeamModel.dart';
+import 'package:tennis_club_app/locator.dart';
+import 'package:tennis_club_app/presentation/stores/NewsStore.dart';
 
 class FirebaseConnection {
+  static final NewsStore _newsStore = locator<NewsStore>();
   static Future<void> readLineupData() async {
     final snapshot = await FirebaseDatabase.instance.ref('lineup').get();
     final Map<String, dynamic> lineup =
@@ -24,6 +28,7 @@ class FirebaseConnection {
     final Map<String, dynamic> news =
         Map<String, dynamic>.from(snapshot.value as Map);
     deserializeNews(news['news']);
+    _newsStore.getNews();
   }
 
   static Future<void> readEventData() async {
@@ -39,6 +44,17 @@ class FirebaseConnection {
     final Map<String, dynamic> passwordData =
         Map<String, dynamic>.from(snapshot.value as Map);
     return passwordData['password'].toString() == password;
+  }
+
+  static Future<void> readPreferences() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? favoriteTeam = prefs.getString('favorite');
+    if (favoriteTeam != null) DataModel.lineup.favoriteTeam = favoriteTeam;
+  }
+
+  static void writePreferences(String favoriteTeam) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('favorite', favoriteTeam);
   }
 
   static void deserializeTeams(Map teams) {
@@ -107,7 +123,13 @@ class FirebaseConnection {
           registerDate: DateTime.parse(value['registerDate']),
           cost: value['cost'],
           maxParticipants: value['maxParticipants'],
-          participants: []); //value['participants']); // List
+          participants: []); // List
+      if (value['participants'] != null) {
+        List<dynamic> data = value['participants'];
+        for (var element in data) {
+          eventModel.participants.add(element);
+        }
+      }
       DataModel.events.add(eventModel);
     });
   }
@@ -161,6 +183,7 @@ class FirebaseConnection {
         "date": element.date.toString(),
         "registerDate": element.registerDate.toString(),
         "title": element.title,
+        "participants": element.participants,
       };
       eventList.putIfAbsent("e$index", () => events);
       index++;

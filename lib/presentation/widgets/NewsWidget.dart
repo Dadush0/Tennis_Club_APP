@@ -18,7 +18,6 @@ class NewsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _newsStore.getNews();
     return SafeArea(
       top: false,
       bottom: false,

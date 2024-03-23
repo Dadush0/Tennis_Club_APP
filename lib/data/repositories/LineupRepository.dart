@@ -32,6 +32,7 @@ class LineupRepository {
 
   void setFavouriteTeam(String favorite) {
     DataModel.lineup.favoriteTeam = favorite;
+    FirebaseConnection.writePreferences(favorite);
   }
 
   String getFavouriteTeam() {
