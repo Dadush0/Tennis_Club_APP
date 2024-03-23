@@ -63,8 +63,9 @@ class EventCardWidget extends StatelessWidget {
                               onPressed: () {
                                 if (!full && !tooLate) _dialogBuilder(context);
                               },
-                              child:
-                                  Text((full || tooLate) ? 'Full' : 'Sign up'),
+                              child: Text((tooLate
+                                  ? 'Too Late'
+                                  : (full ? 'Full' : 'Sign up'))),
                             ),
                             Observer(
                                 builder: (_) => Visibility(
