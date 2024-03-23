@@ -12,6 +12,7 @@ String language = 'de_DE';
 
 void main() async {
   injector.init();
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

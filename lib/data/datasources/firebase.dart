@@ -13,21 +13,24 @@ import 'package:tennis_club_app/data/models/TeamModel.dart';
 class FirebaseConnection {
   static Future<void> readLineupData() async {
     final snapshot = await FirebaseDatabase.instance.ref('lineup').get();
-    final Map<String, dynamic> lineup = snapshot.value as Map<String, dynamic>;
+    final Map<String, dynamic> lineup =
+        Map<String, dynamic>.from(snapshot.value as Map);
     deserializeTeams(lineup['teams']);
   }
 
   static Future<void> readNewsData() async {
     DataModel.news = [];
     final snapshot = await FirebaseDatabase.instance.ref().get();
-    final Map<String, dynamic> news = snapshot.value as Map<String, dynamic>;
+    final Map<String, dynamic> news =
+        Map<String, dynamic>.from(snapshot.value as Map);
     deserializeNews(news['news']);
   }
 
   static Future<void> readEventData() async {
     DataModel.events = [];
     final snapshot = await FirebaseDatabase.instance.ref().get();
-    final Map<String, dynamic> events = snapshot.value as Map<String, dynamic>;
+    final Map<String, dynamic> events =
+        Map<String, dynamic>.from(snapshot.value as Map);
     deserializeEvents(events['events']);
   }
 
@@ -38,7 +41,7 @@ class FirebaseConnection {
     return passwordData['password'].toString() == password;
   }
 
-  static void deserializeTeams(Map<String, dynamic> teams) {
+  static void deserializeTeams(Map teams) {
     DataModel.lineup.teams = [];
     teams.forEach((key, value) {
       TeamModel teamModel = TeamModel(teamName: value['teamName']);
@@ -48,7 +51,7 @@ class FirebaseConnection {
     });
   }
 
-  static List<GameModel> deserializeGames(Map<String, dynamic> games) {
+  static List<GameModel> deserializeGames(Map games) {
     List<GameModel> gameList = [];
     games.forEach((key, value) {
       GameModel gameModel = GameModel(
@@ -65,7 +68,7 @@ class FirebaseConnection {
     return gameList;
   }
 
-  static List<PlayerModel> deserializePlayers(Map<String, dynamic> players) {
+  static List<PlayerModel> deserializePlayers(Map players) {
     List<PlayerModel> playerList = [];
     players.forEach((key, value) {
       playerList.add(PlayerModel(displayName: value));
@@ -73,7 +76,7 @@ class FirebaseConnection {
     return playerList;
   }
 
-  static List<PlayerModel> deserializeCakes(Map<String, dynamic> cakes) {
+  static List<PlayerModel> deserializeCakes(Map cakes) {
     List<PlayerModel> cakeList = [];
     cakes.forEach((key, value) {
       cakeList.add(PlayerModel(displayName: value));
@@ -81,7 +84,7 @@ class FirebaseConnection {
     return cakeList;
   }
 
-  static void deserializeNews(Map<String, dynamic> news) {
+  static void deserializeNews(Map news) {
     news.forEach((key, value) async {
       NewsModel newsModel = NewsModel(
           title: value['title'],
@@ -94,7 +97,7 @@ class FirebaseConnection {
     });
   }
 
-  static void deserializeEvents(Map<String, dynamic> events) {
+  static void deserializeEvents(Map events) {
     events.forEach((key, value) {
       EventModel eventModel = EventModel(
           title: value['title'],
