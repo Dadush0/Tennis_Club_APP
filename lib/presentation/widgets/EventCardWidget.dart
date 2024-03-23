@@ -17,6 +17,7 @@ class EventCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool full = eventModel.participants.length >= eventModel.maxParticipants;
+    bool tooLate = DateTime.now().compareTo(eventModel.registerDate) == 1;
     return SizedBox(
         width: double.infinity,
         child: Card(
@@ -60,9 +61,10 @@ class EventCardWidget extends StatelessWidget {
                           children: [
                             ElevatedButton(
                               onPressed: () {
-                                if (!full) _dialogBuilder(context);
+                                if (!full && !tooLate) _dialogBuilder(context);
                               },
-                              child: Text(full ? 'Full' : 'Sign up'),
+                              child:
+                                  Text((full || tooLate) ? 'Full' : 'Sign up'),
                             ),
                             Observer(
                                 builder: (_) => Visibility(
