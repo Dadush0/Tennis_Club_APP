@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_club_app/data/models/event_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EventMoreWidget extends StatelessWidget {
   const EventMoreWidget({super.key, required this.eventModel});
@@ -18,13 +19,13 @@ class EventMoreWidget extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Participants'),
+            title: Text(AppLocalizations.of(context)!.participants),
             content: getListOfParticipants(),
             actions: <Widget>[
               MaterialButton(
                 color: Colors.red,
                 textColor: Colors.white,
-                child: const Text('Close'),
+                child: Text(AppLocalizations.of(context)!.close),
                 onPressed: () {
                   Navigator.pop(context);
                 },

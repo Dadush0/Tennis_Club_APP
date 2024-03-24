@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_club_app/localization.dart';
 import 'package:tennis_club_app/presentation/stores/events_store.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../locator.dart';
 
@@ -23,17 +24,17 @@ class EventAddWidget extends StatelessWidget {
             TextField(
               onChanged: (value) =>
                   {_eventStore.newEvent.nonObservableValue.title = value},
-              decoration: const InputDecoration(
-                labelText: 'Title',
-                hintText: 'Enter a title',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.title,
+                hintText: AppLocalizations.of(context)!.titleHint,
               ),
             ),
             TextField(
               onChanged: (value) =>
                   {_eventStore.newEvent.nonObservableValue.description = value},
-              decoration: const InputDecoration(
-                labelText: 'Description',
-                hintText: 'Enter your description',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.description,
+                hintText: AppLocalizations.of(context)!.descriptionHint,
               ),
             ),
             TextField(
@@ -41,24 +42,25 @@ class EventAddWidget extends StatelessWidget {
                   {_eventStore.newEvent.nonObservableValue.location = value},
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              decoration: const InputDecoration(
-                labelText: 'Location',
-                hintText: 'Enter your location',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.location,
+                hintText: AppLocalizations.of(context)!.locationHint,
               ),
             ),
             TextField(
               controller: datePickerController
                 ..text = Localization.formatDate(DateTime.now()),
               readOnly: true,
-              decoration: const InputDecoration(hintText: "Select Date"),
+              decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context)!.selectDate),
               onTap: () => onTapDateFunction(context: context),
             ),
             TextField(
               controller: registerDatePickerController
                 ..text = Localization.formatDate(DateTime.now()),
               readOnly: true,
-              decoration:
-                  const InputDecoration(hintText: "Select Register deadline"),
+              decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context)!.selectDeadline),
               onTap: () => onTapRegisterDateFunction(context: context),
             ),
             TextField(
@@ -66,9 +68,9 @@ class EventAddWidget extends StatelessWidget {
                 _eventStore.newEvent.nonObservableValue.cost = int.parse(value)
               },
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Cost',
-                hintText: 'Enter your cost',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.cost,
+                hintText: AppLocalizations.of(context)!.costHint,
               ),
             ),
             TextField(
@@ -77,9 +79,9 @@ class EventAddWidget extends StatelessWidget {
                     int.parse(value)
               },
               keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                labelText: 'Max. Participants',
-                hintText: 'Enter your maximum number of participants',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.maxParticipants,
+                hintText: AppLocalizations.of(context)!.maxParticipantsHint,
               ),
             ),
             const Padding(
@@ -95,7 +97,7 @@ class EventAddWidget extends StatelessWidget {
                 _eventStore.getEvents();
                 Navigator.pop(context);
               },
-              child: const Text('Create'),
+              child: Text(AppLocalizations.of(context)!.create),
             ),
             const Padding(
               padding: EdgeInsets.all(8),
@@ -105,7 +107,7 @@ class EventAddWidget extends StatelessWidget {
                 _eventStore.resetEvent();
                 Navigator.pop(context);
               },
-              child: const Text('Cancel'),
+              child: Text(AppLocalizations.of(context)!.cancel),
             )
           ],
         ),

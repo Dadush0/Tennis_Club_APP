@@ -8,6 +8,7 @@ import 'package:tennis_club_app/presentation/stores/main_store.dart';
 import 'package:tennis_club_app/presentation/stores/news_store.dart';
 import 'package:tennis_club_app/presentation/widgets/delete_widget.dart';
 import 'package:tennis_club_app/presentation/widgets/news_more_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NewsCardWidget extends StatelessWidget {
   NewsCardWidget({super.key, required this.newsModel});
@@ -69,7 +70,8 @@ class NewsCardWidget extends StatelessWidget {
                                               NewsMoreWidget(
                                                   newsModel: newsModel)));
                                 },
-                                child: const Text('Read more')),
+                                child: Text(
+                                    AppLocalizations.of(context)!.readMore)),
                             Observer(
                                 builder: (_) => Visibility(
                                       visible: _mainStore.adminView.value,

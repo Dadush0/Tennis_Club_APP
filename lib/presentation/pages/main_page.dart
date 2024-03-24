@@ -8,6 +8,7 @@ import 'package:tennis_club_app/presentation/pages/court_embed_page.dart';
 import 'package:tennis_club_app/presentation/pages/court_page.dart';
 import 'package:tennis_club_app/presentation/pages/event_page.dart';
 import 'package:tennis_club_app/presentation/pages/lineup_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({super.key});
@@ -36,17 +37,18 @@ class MainPage extends StatelessWidget {
                       itemBuilder: (BuildContext context) =>
                           <PopupMenuEntry<String>>[
                             PopupMenuItem<String>(
-                              child: Text(
-                                  _store.adminView.value ? 'Logout' : 'Login'),
+                              child: Text(_store.adminView.value
+                                  ? AppLocalizations.of(context)!.logout
+                                  : AppLocalizations.of(context)!.login),
                               onTap: () => _store.adminView.value
                                   ? {_store.checkPassword('')}
                                   : _dialogBuilder(context),
                             ),
                             PopupMenuItem<String>(
                                 child: Text(language == 'de_DE'
-                                    ? 'English'
+                                    ? AppLocalizations.of(context)!.language
                                     : 'Deutsch'),
-                                onTap: () => {/* TODO: switch language */}),
+                                onTap: () => {}),
                           ]),
                 ],
               ),
@@ -59,21 +61,22 @@ class MainPage extends StatelessWidget {
                 },
                 indicatorColor: Colors.amber[800],
                 selectedIndex: _store.pageIndex,
-                destinations: const <Widget>[
+                destinations: <Widget>[
                   NavigationDestination(
-                    icon: Icon(Icons.newspaper),
-                    label: 'News',
+                    icon: const Icon(Icons.newspaper),
+                    label: AppLocalizations.of(context)!.news,
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.sports_tennis),
-                    label: 'Court',
+                    icon: const Icon(Icons.sports_tennis),
+                    label: AppLocalizations.of(context)!.court,
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.group),
-                    label: 'Lineup',
+                    icon: const Icon(Icons.group),
+                    label: AppLocalizations.of(context)!.lineup,
                   ),
                   NavigationDestination(
-                      icon: Icon(Icons.stadium), label: 'Events')
+                      icon: const Icon(Icons.stadium),
+                      label: AppLocalizations.of(context)!.events)
                 ],
               ),
               body: pages[_store.pageIndex],
@@ -86,14 +89,14 @@ class MainPage extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Login as Admin'),
+            title: Text(AppLocalizations.of(context)!.loginAdmin),
             content: null,
             actions: <Widget>[
               TextField(
                   controller: password,
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                    hintText: 'Password',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.password,
+                    hintText: AppLocalizations.of(context)!.password,
                   )),
               const Padding(
                 padding: EdgeInsets.all(8),
@@ -102,7 +105,7 @@ class MainPage extends StatelessWidget {
                 MaterialButton(
                   color: Colors.green,
                   textColor: Colors.white,
-                  child: const Text('Login'),
+                  child: Text(AppLocalizations.of(context)!.login),
                   onPressed: () {
                     _store.checkPassword(password.value.text);
                     Navigator.pop(context);

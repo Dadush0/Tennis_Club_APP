@@ -5,6 +5,7 @@ import 'package:tennis_club_app/presentation/pages/main_page.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Globals
 TargetPlatform platform = TargetPlatform.android;
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       localizationsDelegates: const [
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

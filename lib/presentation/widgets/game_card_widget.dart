@@ -8,6 +8,7 @@ import 'package:tennis_club_app/presentation/stores/lineup_store.dart';
 import 'package:tennis_club_app/presentation/stores/main_store.dart';
 import 'package:tennis_club_app/presentation/widgets/delete_widget.dart';
 import 'package:tennis_club_app/presentation/widgets/game_editor_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GameCardWidget extends StatelessWidget {
   GameCardWidget({super.key, required this.gameModel});
@@ -15,7 +16,7 @@ class GameCardWidget extends StatelessWidget {
   final MainStore _mainStore = locator<MainStore>();
   final GameModel gameModel;
 
-  List<Widget> convertGameToExpansion() {
+  List<Widget> convertGameToExpansion(BuildContext context) {
     List<Widget> list = [];
     for (var player in gameModel.players) {
       if (gameModel.cakes
@@ -25,15 +26,21 @@ class GameCardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Flexible(child: ListTile(title: Text(player.displayName))),
-                const Flexible(child: ListTile(title: Text('Cake'))),
-                const Flexible(child: ListTile(title: Text('Manager')))
+                Flexible(
+                    child: ListTile(
+                        title: Text(AppLocalizations.of(context)!.cake))),
+                Flexible(
+                    child: ListTile(
+                        title: Text(AppLocalizations.of(context)!.manager)))
               ]));
         } else {
           list.add(Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Flexible(child: ListTile(title: Text(player.displayName))),
-                const Flexible(child: ListTile(title: Text('Cake')))
+                Flexible(
+                    child: ListTile(
+                        title: Text(AppLocalizations.of(context)!.cake)))
               ]));
         }
       } else {
@@ -56,7 +63,7 @@ class GameCardWidget extends StatelessWidget {
                   builder: (_) => ExpansionTile(
                     title: Center(
                         child: Text(
-                            '${gameModel.location} against ${gameModel.opponentName}')),
+                            '${gameModel.location} ${AppLocalizations.of(context)!.against} ${gameModel.opponentName}')),
                     subtitle: Center(
                         child:
                             Text(Localization.formatDateTime(gameModel.date))),
@@ -76,7 +83,7 @@ class GameCardWidget extends StatelessWidget {
                     onExpansionChanged: (bool expanded) {
                       _lineupStore.customTileExpanded = expanded.obs();
                     },
-                    children: convertGameToExpansion(),
+                    children: convertGameToExpansion(context),
                   ),
                 ),
               ],

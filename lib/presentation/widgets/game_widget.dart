@@ -5,6 +5,7 @@ import 'package:tennis_club_app/presentation/stores/lineup_store.dart';
 import 'package:tennis_club_app/presentation/stores/main_store.dart';
 import 'package:tennis_club_app/presentation/widgets/game_add_widget.dart';
 import 'package:tennis_club_app/presentation/widgets/game_card_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GameWidget extends StatelessWidget {
   GameWidget({super.key});
@@ -44,7 +45,7 @@ class GameWidget extends StatelessWidget {
                   initialSelection: _lineupStore.selectedItem != ''
                       ? _lineupStore.selectedItem
                       : _lineupStore.teamNames.first,
-                  label: const Text('Teamname'),
+                  label: Text(AppLocalizations.of(context)!.teamname),
                   enableSearch: false,
                   dropdownMenuEntries: convertTeamNamesToEntries(),
                   onSelected: (value) {
@@ -55,7 +56,7 @@ class GameWidget extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () =>
                       _lineupStore.setFavouriteTeam(_lineupStore.selectedItem),
-                  child: const Text('Mark as Favourite'),
+                  child: Text(AppLocalizations.of(context)!.favourite),
                 ),
                 Observer(
                   builder: (_) => Visibility(

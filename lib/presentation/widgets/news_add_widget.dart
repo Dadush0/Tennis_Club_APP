@@ -6,6 +6,7 @@ import 'package:tennis_club_app/data/datasources/firebase.dart';
 import 'package:tennis_club_app/localization.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/stores/news_store.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NewsAddWidget extends StatelessWidget {
   NewsAddWidget({super.key});
@@ -23,17 +24,17 @@ class NewsAddWidget extends StatelessWidget {
             TextField(
               onChanged: (value) =>
                   {_newsStore.newNews.nonObservableValue.title = value},
-              decoration: const InputDecoration(
-                labelText: 'Title',
-                hintText: 'Enter a title',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.title,
+                hintText: AppLocalizations.of(context)!.titleHint,
               ),
             ),
             TextField(
               onChanged: (value) =>
                   {_newsStore.newNews.nonObservableValue.shortText = value},
-              decoration: const InputDecoration(
-                labelText: 'Short text',
-                hintText: 'Enter your short text',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.shorttext,
+                hintText: AppLocalizations.of(context)!.shorttextHint,
               ),
             ),
             TextField(
@@ -41,16 +42,17 @@ class NewsAddWidget extends StatelessWidget {
                   {_newsStore.newNews.nonObservableValue.content = value},
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              decoration: const InputDecoration(
-                labelText: 'Content',
-                hintText: 'Enter your content',
+              decoration: InputDecoration(
+                labelText: AppLocalizations.of(context)!.content,
+                hintText: AppLocalizations.of(context)!.contentHint,
               ),
             ),
             TextField(
               controller: datePickerController
                 ..text = Localization.formatDate(DateTime.now()),
               readOnly: true,
-              decoration: const InputDecoration(hintText: "Select Date"),
+              decoration: InputDecoration(
+                  hintText: AppLocalizations.of(context)!.selectDate),
               onTap: () => onTapDateFunction(context: context),
             ),
             const Padding(
@@ -65,7 +67,7 @@ class NewsAddWidget extends StatelessWidget {
                 FirebaseConnection.uploadImage(bytes, image.name);
                 _newsStore.newNews.nonObservableValue.preview = image.name;
               },
-              child: const Text('Add picture'),
+              child: Text(AppLocalizations.of(context)!.addPicture),
             ),
             const Padding(
               padding: EdgeInsets.all(8),
@@ -77,7 +79,7 @@ class NewsAddWidget extends StatelessWidget {
                 _newsStore.getNews();
                 Navigator.pop(context);
               },
-              child: const Text('Create'),
+              child: Text(AppLocalizations.of(context)!.create),
             ),
             const Padding(
               padding: EdgeInsets.all(8),
@@ -87,7 +89,7 @@ class NewsAddWidget extends StatelessWidget {
                 _newsStore.resetNews();
                 Navigator.pop(context);
               },
-              child: const Text('Cancel'),
+              child: Text(AppLocalizations.of(context)!.cancel),
             )
           ],
         ),

@@ -30,13 +30,13 @@ class LineupRepository {
     return teamNames;
   }
 
-  void setFavouriteTeam(String favorite) {
-    DataModel.lineup.favoriteTeam = favorite;
-    FirebaseConnection.writePreferences(favorite);
+  void setFavouriteTeam(String favourite) {
+    DataModel.lineup.favouriteTeam = favourite;
+    FirebaseConnection.writePreferences(favourite);
   }
 
   String getFavouriteTeam() {
-    return DataModel.lineup.favoriteTeam;
+    return DataModel.lineup.favouriteTeam;
   }
 
   void addGame(GameModel game, String teamName) {

@@ -3,29 +3,33 @@ import 'package:tennis_club_app/data/models/game_model.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/stores/lineup_store.dart';
 import 'package:tennis_club_app/presentation/widgets/game_add_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class GameEditorWidget extends StatelessWidget {
   GameEditorWidget({super.key, required this.gameModel});
   final LineupStore _lineupStore = locator<LineupStore>();
   final GameModel gameModel;
 
-  List<Widget> createGameEditorForm() {
+  List<Widget> createGameEditorForm(BuildContext context) {
     List<Widget> fields = [];
     for (var player in gameModel.players) {
       fields.add(TextFormField(
         initialValue: player.displayName,
-        decoration: const InputDecoration(hintText: "Player"),
+        decoration:
+            InputDecoration(hintText: AppLocalizations.of(context)!.player),
       ));
     }
     for (var cake in gameModel.cakes) {
       fields.add(TextFormField(
         initialValue: cake.displayName,
-        decoration: const InputDecoration(hintText: "Cake"),
+        decoration:
+            InputDecoration(hintText: AppLocalizations.of(context)!.cake),
       ));
     }
     fields.add(TextFormField(
       initialValue: gameModel.manager.displayName,
-      decoration: const InputDecoration(hintText: "Manager"),
+      decoration:
+          InputDecoration(hintText: AppLocalizations.of(context)!.manager),
     ));
     return fields;
   }
@@ -39,7 +43,7 @@ class GameEditorWidget extends StatelessWidget {
   }
 
   Future<void> _dialogBuilder(BuildContext context) {
-    _lineupStore.changeSubmitButtonText('Next');
+    _lineupStore.changeSubmitButtonText(AppLocalizations.of(context)!.next);
     _lineupStore.setGameInfo(gameModel);
     return showDialog(
         context: context,
@@ -47,11 +51,11 @@ class GameEditorWidget extends StatelessWidget {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
-              title: const Text('Add new Game'),
+              title: Text(AppLocalizations.of(context)!.addNewGame),
               content: getCurrentWidget(_lineupStore.dialogIndex.value),
               actions: <Widget>[
                 OutlinedButton(
-                  child: const Text('Cancel'),
+                  child: Text(AppLocalizations.of(context)!.cancel),
                   onPressed: () {
                     Navigator.pop(context);
                     _lineupStore.dialogIndex.value = DialogState.gameInfo.index;
@@ -64,7 +68,8 @@ class GameEditorWidget extends StatelessWidget {
 
                       if (_lineupStore.dialogIndex.value ==
                           DialogState.orgaInfo.index) {
-                        _lineupStore.changeSubmitButtonText('Submit');
+                        _lineupStore.changeSubmitButtonText(
+                            AppLocalizations.of(context)!.submit);
                       }
 
                       if (_lineupStore.dialogIndex.value ==

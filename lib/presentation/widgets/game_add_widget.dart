@@ -4,6 +4,7 @@ import 'package:mobx/mobx.dart';
 import 'package:tennis_club_app/localization.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/stores/lineup_store.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum DialogState { gameInfo, playerInfo, orgaInfo, finished }
 
@@ -28,7 +29,7 @@ class GameAddFormState extends State<GameAddForm> {
   }
 
   Future<void> _dialogBuilder(BuildContext context) {
-    _lineupStore.changeSubmitButtonText('Next');
+    _lineupStore.changeSubmitButtonText(AppLocalizations.of(context)!.next);
 
     return showDialog(
         context: context,
@@ -36,11 +37,11 @@ class GameAddFormState extends State<GameAddForm> {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
-              title: const Text('Add new Game'),
+              title: Text(AppLocalizations.of(context)!.addNewGame),
               content: getCurrentWidget(_lineupStore.dialogIndex.value),
               actions: <Widget>[
                 OutlinedButton(
-                  child: const Text('Cancel'),
+                  child: Text(AppLocalizations.of(context)!.cancel),
                   onPressed: () {
                     Navigator.pop(context);
                     _lineupStore.dialogIndex.value = DialogState.gameInfo.index;
@@ -53,7 +54,8 @@ class GameAddFormState extends State<GameAddForm> {
 
                       if (_lineupStore.dialogIndex.value ==
                           DialogState.orgaInfo.index) {
-                        _lineupStore.changeSubmitButtonText('Submit');
+                        _lineupStore.changeSubmitButtonText(
+                            AppLocalizations.of(context)!.submit);
                       }
 
                       if (_lineupStore.dialogIndex.value ==
@@ -102,9 +104,9 @@ class AddGameInfoWidget extends StatelessWidget {
             onChanged: (value) {
               _lineupStore.opponentName = value;
             },
-            decoration: const InputDecoration(
-              labelText: 'Opponent',
-              hintText: 'Name of opponent',
+            decoration: InputDecoration(
+              labelText: AppLocalizations.of(context)!.opponent,
+              hintText: AppLocalizations.of(context)!.opponentName,
             )
             //errorText: 'Test'),
 
@@ -112,7 +114,7 @@ class AddGameInfoWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Text('Home'),
+            Text(AppLocalizations.of(context)!.home),
             Observer(
               builder: (_) => Switch.adaptive(
                   value: _lineupStore.switchButton.value,
@@ -121,17 +123,20 @@ class AddGameInfoWidget extends StatelessWidget {
                   inactiveThumbColor: Colors.red,
                   onChanged: (bool value) {
                     _lineupStore.changeSwitchButton(value);
-                    _lineupStore.location = value ? 'Away' : 'Home';
+                    _lineupStore.location = value
+                        ? AppLocalizations.of(context)!.away
+                        : AppLocalizations.of(context)!.home;
                   }),
             ),
-            const Text('Away'),
+            Text(AppLocalizations.of(context)!.away),
           ],
         ),
         TextField(
           controller: datePickerController
             ..text = Localization.formatDate(DateTime.now()),
           readOnly: true,
-          decoration: const InputDecoration(hintText: "Select Date"),
+          decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.selectDate),
           onTap: () => onTapDateFunction(context: context),
         ),
         TextField(
@@ -139,7 +144,8 @@ class AddGameInfoWidget extends StatelessWidget {
             ..text =
                 Localization.formatTime(const TimeOfDay(hour: 9, minute: 0)),
           readOnly: true,
-          decoration: const InputDecoration(hintText: "Select Time"),
+          decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.selectTime),
           onTap: () => onTapTimeFunction(context: context),
         )
       ],
@@ -189,37 +195,29 @@ class AddPlayerInfoWidget extends StatelessWidget {
             onChanged: (value) {
               _lineupStore.playerNames[0] = value;
             },
-            decoration: const InputDecoration(hintText: 'Player 1')
-            //errorText: 'Test'),
-            ),
+            decoration: InputDecoration(
+                hintText: AppLocalizations.of(context)!.player1)),
         TextField(
             controller: TextEditingController()
               ..text = _lineupStore.playerNames[1],
             onChanged: (value) {
               _lineupStore.playerNames[1] = value;
             },
-            decoration: const InputDecoration(
-              hintText: 'Player 2',
-            )
-            //errorText: 'Test'),
-            ),
+            decoration: InputDecoration(
+                hintText: AppLocalizations.of(context)!.player2)),
         TextField(
             controller: TextEditingController()
               ..text = _lineupStore.playerNames[2],
             onChanged: (value) {
               _lineupStore.playerNames[2] = value;
             },
-            decoration: const InputDecoration(
-              hintText: 'Player 3',
-            )
-            //errorText: 'Test'),
-            ),
+            decoration: InputDecoration(
+                hintText: AppLocalizations.of(context)!.player3)),
         TextField(
           controller: TextEditingController()
             ..text = _lineupStore.playerNames[3],
-          decoration: const InputDecoration(
-            hintText: 'Player 4',
-          ),
+          decoration:
+              InputDecoration(hintText: AppLocalizations.of(context)!.player4),
           onChanged: (value) {
             _lineupStore.playerNames[3] = value;
           },
@@ -242,29 +240,22 @@ class AddOrgaInfoWidget extends StatelessWidget {
           onChanged: (value) {
             _lineupStore.cakeNames[0] = value;
           },
-          decoration: const InputDecoration(hintText: 'Cake 1')
-          //errorText: 'Test'),
-          ),
+          decoration:
+              InputDecoration(hintText: AppLocalizations.of(context)!.cake1)),
       TextField(
           controller: TextEditingController()..text = _lineupStore.cakeNames[1],
           onChanged: (value) {
             _lineupStore.cakeNames[1] = value;
           },
-          decoration: const InputDecoration(
-            hintText: 'Cake 2',
-          )
-          //errorText: 'Test'),
-          ),
+          decoration:
+              InputDecoration(hintText: AppLocalizations.of(context)!.cake2)),
       TextField(
           controller: TextEditingController()..text = _lineupStore.manager,
           onChanged: (value) {
             _lineupStore.manager = value;
           },
-          decoration: const InputDecoration(
-            hintText: 'Manager',
-          )
-          //errorText: 'Test'),
-          ),
+          decoration:
+              InputDecoration(hintText: AppLocalizations.of(context)!.manager)),
     ]);
   }
 }

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-/// This is a temporary solution for flutter web to open the webpage externally
-/// For flutter android and ios, the webview widget should be used
+/// This will for flutter web send the user to open the webpage externally
+/// For flutter android and ios, the webview widget is used
 class CourtPage extends StatelessWidget {
   CourtPage({super.key});
   final Uri _url =
@@ -13,7 +14,7 @@ class CourtPage extends StatelessWidget {
     return Center(
       child: ElevatedButton(
         onPressed: _launchUrl,
-        child: const Text('Open Court Webpage'),
+        child: Text(AppLocalizations.of(context)!.openCourtPage),
       ),
     );
   }

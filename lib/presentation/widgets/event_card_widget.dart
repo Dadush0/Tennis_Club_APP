@@ -7,6 +7,7 @@ import 'package:tennis_club_app/presentation/stores/events_store.dart';
 import 'package:tennis_club_app/presentation/stores/main_store.dart';
 import 'package:tennis_club_app/presentation/widgets/delete_widget.dart';
 import 'package:tennis_club_app/presentation/widgets/event_more_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EventCardWidget extends StatelessWidget {
   EventCardWidget({super.key, required this.eventModel});
@@ -49,14 +50,16 @@ class EventCardWidget extends StatelessWidget {
                           softWrap: true,
                           maxLines: 30,
                         ),
+                        Text(AppLocalizations.of(context)!.when +
+                            Localization.formatDate(eventModel.date)),
+                        Text(AppLocalizations.of(context)!.where +
+                            eventModel.location),
+                        Text(AppLocalizations.of(context)!.deadline +
+                            Localization.formatDate(eventModel.registerDate)),
+                        Text(AppLocalizations.of(context)!.maxParticipants +
+                            eventModel.maxParticipants.toString()),
                         Text(
-                            'When?  ${Localization.formatDate(eventModel.date)}'),
-                        Text('Where?  ${eventModel.location}'),
-                        Text(
-                            'Register Until?  ${Localization.formatDate(eventModel.registerDate)}'),
-                        Text(
-                            'Max. Participants?  ${eventModel.maxParticipants.toString()}'),
-                        Text('Cost?  ${eventModel.cost}€'),
+                            '${AppLocalizations.of(context)!.costInfo}${eventModel.cost}€'),
                         Row(
                           children: [
                             ElevatedButton(
@@ -64,8 +67,10 @@ class EventCardWidget extends StatelessWidget {
                                 if (!full && !tooLate) _dialogBuilder(context);
                               },
                               child: Text((tooLate
-                                  ? 'Too Late'
-                                  : (full ? 'Full' : 'Sign up'))),
+                                  ? AppLocalizations.of(context)!.tooLate
+                                  : (full
+                                      ? AppLocalizations.of(context)!.full
+                                      : AppLocalizations.of(context)!.signup))),
                             ),
                             Observer(
                                 builder: (_) => Visibility(
@@ -102,14 +107,14 @@ class EventCardWidget extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Sign up'),
+            title: Text(AppLocalizations.of(context)!.signup),
             content: Text(eventModel.title),
             actions: <Widget>[
               TextField(
                   controller: name,
-                  decoration: const InputDecoration(
-                    labelText: 'Name',
-                    hintText: 'Name',
+                  decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context)!.name,
+                    hintText: AppLocalizations.of(context)!.name,
                   )),
               const Padding(
                 padding: EdgeInsets.all(8),
@@ -118,7 +123,7 @@ class EventCardWidget extends StatelessWidget {
                 MaterialButton(
                   color: Colors.green,
                   textColor: Colors.white,
-                  child: const Text('Sign up'),
+                  child: Text(AppLocalizations.of(context)!.signup),
                   onPressed: () {
                     eventModel.participants.add(name.text);
                     _eventStore.setEvents(eventModel);

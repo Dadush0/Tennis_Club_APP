@@ -5,6 +5,7 @@ import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/stores/main_store.dart';
 import 'package:tennis_club_app/presentation/widgets/event_add_widget.dart';
 import 'package:tennis_club_app/presentation/widgets/event_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EventPage extends StatelessWidget {
   EventPage({super.key});
@@ -30,6 +31,7 @@ class EventPage extends StatelessWidget {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
       localizationsDelegates: const [
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,

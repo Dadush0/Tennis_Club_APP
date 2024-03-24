@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DeleteWidget extends StatelessWidget {
   const DeleteWidget({super.key, required this.delete});
@@ -17,13 +18,13 @@ class DeleteWidget extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text('Are you sure?'),
+            title: Text(AppLocalizations.of(context)!.sure),
             content: null,
             actions: <Widget>[
               MaterialButton(
                 color: Colors.red,
                 textColor: Colors.white,
-                child: const Text('Cancel'),
+                child: Text(AppLocalizations.of(context)!.cancel),
                 onPressed: () {
                   Navigator.pop(context);
                 },
@@ -31,7 +32,7 @@ class DeleteWidget extends StatelessWidget {
               MaterialButton(
                   color: Colors.green,
                   textColor: Colors.white,
-                  child: const Text('Yes'),
+                  child: Text(AppLocalizations.of(context)!.yes),
                   onPressed: () {
                     delete();
                     Navigator.pop(context);

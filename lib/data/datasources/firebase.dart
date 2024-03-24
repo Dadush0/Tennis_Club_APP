@@ -47,13 +47,13 @@ class FirebaseConnection {
 
   static Future<void> readPreferences() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String? favoriteTeam = prefs.getString('favorite');
-    if (favoriteTeam != null) DataModel.lineup.favoriteTeam = favoriteTeam;
+    final String? favouriteTeam = prefs.getString('favourite');
+    if (favouriteTeam != null) DataModel.lineup.favouriteTeam = favouriteTeam;
   }
 
-  static void writePreferences(String favoriteTeam) async {
+  static void writePreferences(String favouriteTeam) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('favorite', favoriteTeam);
+    prefs.setString('favourite', favouriteTeam);
   }
 
   static void writeNewsData() async {

@@ -4,12 +4,12 @@ import 'package:tennis_club_app/data/models/team_model.dart';
 
 class LineupModel {
   late List<TeamModel> teams;
-  late String favoriteTeam;
+  late String favouriteTeam;
 
-  LineupModel({required this.teams, required this.favoriteTeam});
+  LineupModel({required this.teams, required this.favouriteTeam});
   LineupModel.empty() {
     teams = [];
-    favoriteTeam = '';
+    favouriteTeam = '';
   }
 
   static Map<String, dynamic> serializeLineup() {
