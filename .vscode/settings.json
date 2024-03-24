@@ -1,13 +1,13 @@
 {
       "files.exclude": {
-        "ios/**": true,
+        "ios/**": false,
         "linux/**": true,
         "macos/**": true,
         "web/**": true,
         "android/**": false,
         "windows/**": true,
-        "build/**": false,
-        ".dart_tool/**": true,
+        "build/**": true,
+        ".dart_tool/**": false,
         ".metadata":true,
         "analysis_options.yaml":true,
         "pubspec.lock":true,

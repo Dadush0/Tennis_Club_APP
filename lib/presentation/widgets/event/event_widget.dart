@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:tennis_club_app/presentation/stores/events_store.dart';
-import 'package:tennis_club_app/presentation/widgets/event_card_widget.dart';
+import 'package:tennis_club_app/presentation/widgets/event/event_card_widget.dart';
 
-import '../../locator.dart';
+import '../../../locator.dart';
 
 class EventWidget extends StatelessWidget {
   EventWidget({super.key});

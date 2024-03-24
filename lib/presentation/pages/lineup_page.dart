@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tennis_club_app/presentation/widgets/game_widget.dart';
+import 'package:tennis_club_app/presentation/widgets/game/game_widget.dart';
 
 class LineupPage extends StatelessWidget {
   const LineupPage({super.key});

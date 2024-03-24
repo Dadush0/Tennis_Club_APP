@@ -1,8 +1,8 @@
 import 'package:mobx/mobx.dart';
 import 'package:tennis_club_app/data/models/event_model.dart';
-import 'package:tennis_club_app/usecases/add_event.dart';
-import 'package:tennis_club_app/usecases/delete_event.dart';
-import 'package:tennis_club_app/usecases/get_events.dart';
+import 'package:tennis_club_app/usecases/event/add_event.dart';
+import 'package:tennis_club_app/usecases/event/delete_event.dart';
+import 'package:tennis_club_app/usecases/event/get_events.dart';
 
 import '../../locator.dart';
 

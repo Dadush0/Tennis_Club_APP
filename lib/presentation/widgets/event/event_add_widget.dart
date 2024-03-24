@@ -4,7 +4,7 @@ import 'package:tennis_club_app/main.dart';
 import 'package:tennis_club_app/presentation/stores/events_store.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../locator.dart';
+import '../../../locator.dart';
 
 class EventAddWidget extends StatelessWidget {
   EventAddWidget({super.key});

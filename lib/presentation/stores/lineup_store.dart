@@ -3,14 +3,14 @@ import 'package:tennis_club_app/data/models/game_model.dart';
 import 'package:tennis_club_app/data/models/player_model.dart';
 import 'package:tennis_club_app/data/models/team_model.dart';
 import 'package:tennis_club_app/locator.dart';
-import 'package:tennis_club_app/presentation/widgets/game_add_widget.dart';
-import 'package:tennis_club_app/usecases/add_game.dart';
-import 'package:tennis_club_app/usecases/delete_game.dart';
-import 'package:tennis_club_app/usecases/get_all_teams.dart';
-import 'package:tennis_club_app/usecases/get_favourite_team.dart';
-import 'package:tennis_club_app/usecases/get_games_by_team.dart';
-import 'package:tennis_club_app/usecases/get_lineup.dart';
-import 'package:tennis_club_app/usecases/set_favourite_team.dart';
+import 'package:tennis_club_app/presentation/widgets/game/game_add_widget.dart';
+import 'package:tennis_club_app/usecases/game/add_game.dart';
+import 'package:tennis_club_app/usecases/game/delete_game.dart';
+import 'package:tennis_club_app/usecases/game/get_all_teams.dart';
+import 'package:tennis_club_app/usecases/game/get_favourite_team.dart';
+import 'package:tennis_club_app/usecases/game/get_games_by_team.dart';
+import 'package:tennis_club_app/usecases/game/get_lineup.dart';
+import 'package:tennis_club_app/usecases/game/set_favourite_team.dart';
 
 part 'lineup_store.g.dart';
 
