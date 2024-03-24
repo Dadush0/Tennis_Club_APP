@@ -25,6 +25,7 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    language = Localizations.localeOf(context).languageCode;
     return Observer(
         builder: (_) => Scaffold(
               key: _store.scaffoldKey,
@@ -44,11 +45,6 @@ class MainPage extends StatelessWidget {
                                   ? {_store.checkPassword('')}
                                   : _dialogBuilder(context),
                             ),
-                            PopupMenuItem<String>(
-                                child: Text(language == 'de_DE'
-                                    ? AppLocalizations.of(context)!.language
-                                    : 'Deutsch'),
-                                onTap: () => {}),
                           ]),
                 ],
               ),

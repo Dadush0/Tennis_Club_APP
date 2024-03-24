@@ -9,7 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 // Globals
 TargetPlatform platform = TargetPlatform.android;
-String language = 'de_DE';
+String language = 'de';
 
 void main() async {
   injector.init();
@@ -29,6 +29,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     platform = Theme.of(context).platform;
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [Locale('de'), Locale('en')],
+      locale: Locale(language),
       home: MainPage(),
     );
   }
