@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_club_app/localization.dart';
+import 'package:tennis_club_app/main.dart';
 import 'package:tennis_club_app/presentation/stores/events_store.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -121,7 +122,7 @@ class EventAddWidget extends StatelessWidget {
       lastDate: DateTime(DateTime.now().year + 1),
       firstDate: DateTime.now(),
       initialDate: DateTime.now(),
-      locale: const Locale('de', 'DE'),
+      locale: Locale(language),
     );
     if (pickedDate == null) return;
     datePickerController.text = Localization.formatDate(pickedDate);
@@ -135,7 +136,7 @@ class EventAddWidget extends StatelessWidget {
       lastDate: _eventStore.newEvent.nonObservableValue.date,
       firstDate: DateTime(DateTime.now().year - 1),
       initialDate: DateTime.now(),
-      locale: const Locale('de', 'DE'),
+      locale: Locale(language),
     );
     if (pickedDate == null) return;
     registerDatePickerController.text = Localization.formatDate(pickedDate);

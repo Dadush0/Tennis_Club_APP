@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:tennis_club_app/data/datasources/firebase.dart';
 import 'package:tennis_club_app/localization.dart';
 import 'package:tennis_club_app/locator.dart';
+import 'package:tennis_club_app/main.dart';
 import 'package:tennis_club_app/presentation/stores/news_store.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -103,7 +104,7 @@ class NewsAddWidget extends StatelessWidget {
       lastDate: DateTime(DateTime.now().year + 1),
       firstDate: DateTime(DateTime.now().year - 1),
       initialDate: DateTime.now(),
-      locale: const Locale('de', 'DE'),
+      locale: Locale(language),
     );
     if (pickedDate == null) return;
     datePickerController.text = Localization.formatDate(pickedDate);
