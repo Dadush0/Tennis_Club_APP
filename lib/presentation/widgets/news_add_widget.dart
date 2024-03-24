@@ -14,9 +14,8 @@ class NewsAddWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: SingleChildScrollView(
-            child: Form(
+    return SingleChildScrollView(
+        child: Form(
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Column(
@@ -93,7 +92,7 @@ class NewsAddWidget extends StatelessWidget {
           ],
         ),
       ),
-    )));
+    ));
   }
 
   onTapDateFunction({required BuildContext context}) async {

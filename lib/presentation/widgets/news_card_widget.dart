@@ -68,7 +68,7 @@ class NewsCardWidget extends StatelessWidget {
                                           builder: (BuildContext context) =>
                                               NewsMoreWidget(
                                                   newsModel: newsModel)));
-                                }, // TODO: improve routing/page system
+                                },
                                 child: const Text('Read more')),
                             Observer(
                                 builder: (_) => Visibility(

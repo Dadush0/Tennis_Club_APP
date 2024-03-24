@@ -53,6 +53,9 @@ class MainPage extends StatelessWidget {
               bottomNavigationBar: NavigationBar(
                 onDestinationSelected: (int index) {
                   _store.changePage(index);
+                  if (Navigator.canPop(context)) {
+                    Navigator.of(context, rootNavigator: true).pop();
+                  }
                 },
                 indicatorColor: Colors.amber[800],
                 selectedIndex: _store.pageIndex,
@@ -73,7 +76,7 @@ class MainPage extends StatelessWidget {
                       icon: Icon(Icons.stadium), label: 'Events')
                 ],
               ),
-              body: MaterialApp(home: pages[_store.pageIndex]),
+              body: pages[_store.pageIndex],
             ));
   }
 
