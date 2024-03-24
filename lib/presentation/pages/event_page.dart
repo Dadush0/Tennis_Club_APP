@@ -20,10 +20,8 @@ class EventPage extends StatelessWidget {
             child: FloatingActionButton(
               child: const Icon(Icons.add),
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute<void>(
-                        builder: (BuildContext context) => EventAddWidget()));
+                Navigator.of(context).push(MaterialPageRoute<void>(
+                    builder: (BuildContext context) => EventAddWidget()));
               },
             )),
       ),

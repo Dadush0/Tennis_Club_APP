@@ -45,7 +45,7 @@ mixin _$MainStore on _MainStore, Store {
       AsyncAction('_MainStore.checkPassword', context: context);
 
   @override
-  Future checkPassword(String password) {
+  Future<void> checkPassword(String password) {
     return _$checkPasswordAsyncAction.run(() => super.checkPassword(password));
   }
 

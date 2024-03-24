@@ -23,7 +23,8 @@ class NewsPage extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute<void>(
-                        builder: (BuildContext context) => NewsAddWidget()));
+                        builder: (BuildContext context) => NewsAddWidget(),
+                        settings: const RouteSettings(name: "add")));
               },
             )),
       ),

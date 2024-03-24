@@ -24,7 +24,7 @@ abstract class _MainStore with Store {
   }
 
   @action
-  void checkPassword(String password) async {
+  Future<void> checkPassword(String password) async {
     adminView = (await _checkPassword.call(password)).obs();
   }
 

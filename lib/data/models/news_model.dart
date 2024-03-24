@@ -1,7 +1,6 @@
 import 'package:tennis_club_app/data/models/data_model.dart';
-import 'package:tennis_club_app/data/models/model.dart';
 
-class NewsModel extends Model {
+class NewsModel {
   late String title;
   late String shortText;
   late String content;

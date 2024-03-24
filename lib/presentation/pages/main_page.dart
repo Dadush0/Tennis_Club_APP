@@ -6,7 +6,7 @@ import 'package:tennis_club_app/presentation/pages/news_page.dart';
 import 'package:tennis_club_app/presentation/stores/main_store.dart';
 import 'package:tennis_club_app/presentation/pages/court_embed_page.dart';
 import 'package:tennis_club_app/presentation/pages/court_page.dart';
-import 'package:tennis_club_app/presentation/pages/evetn_page.dart';
+import 'package:tennis_club_app/presentation/pages/event_page.dart';
 import 'package:tennis_club_app/presentation/pages/lineup_page.dart';
 
 class MainPage extends StatelessWidget {
@@ -73,7 +73,7 @@ class MainPage extends StatelessWidget {
                       icon: Icon(Icons.stadium), label: 'Events')
                 ],
               ),
-              body: pages[_store.pageIndex],
+              body: MaterialApp(home: pages[_store.pageIndex]),
             ));
   }
 
