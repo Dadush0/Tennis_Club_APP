@@ -54,7 +54,7 @@
       "cost": "Kosten",
       "costHint": "Kosten eingeben",
       "maxParticipants": "Max. Teilnehmer",
-      "maxParticipantsInfo": "Max. Teilnehmer?",
+      "maxParticipantsInfo": "Max. Teilnehmer? ",
       "maxParticipantsHint": "Gib die maximale Anzahl an Teilnehmern an",
       "when": "Wann? ",
       "where": "Wo? ",
@@ -65,5 +65,6 @@
       "signup":"Anmelden",
       "name":"Name",
       "participants":"Teilnehmer",
-      "close": "Schließen"
+      "close": "Schließen",
+      "titleMissing": "Es muss ein Titel eingegeben werden!"
 }

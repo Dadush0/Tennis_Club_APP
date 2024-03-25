@@ -54,7 +54,7 @@
       "cost": "Cost",
       "costHint": "Enter your cost",
       "maxParticipants": "Max. Participants",
-      "maxParticipantsInfo": "Max. Participants?",
+      "maxParticipantsInfo": "Max. Participants? ",
       "maxParticipantsHint": "Enter the maximum number of participants",
       "when": "When? ",
       "where": "Were? ",
@@ -65,5 +65,6 @@
       "signup":"Sign up",
       "name":"Name",
       "participants":"Participants",
-      "close": "Close"
+      "close": "Close",
+      "titleMissing": "A title has to be entered"
 }

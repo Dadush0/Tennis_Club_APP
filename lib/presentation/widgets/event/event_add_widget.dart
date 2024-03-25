@@ -3,12 +3,14 @@ import 'package:tennis_club_app/localization.dart';
 import 'package:tennis_club_app/main.dart';
 import 'package:tennis_club_app/presentation/stores/events_store.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tennis_club_app/presentation/stores/main_store.dart';
 
 import '../../../locator.dart';
 
 class EventAddWidget extends StatelessWidget {
   EventAddWidget({super.key});
   final EventStore _eventStore = locator<EventStore>();
+  final MainStore _mainStore = locator<MainStore>();
   final TextEditingController datePickerController = TextEditingController();
   final TextEditingController registerDatePickerController =
       TextEditingController();
@@ -93,10 +95,17 @@ class EventAddWidget extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                _eventStore.addEvent();
-                _eventStore.resetEvent();
-                _eventStore.getEvents();
-                Navigator.pop(context);
+                if (_eventStore.newEvent.nonObservableValue.title != '') {
+                  _eventStore.addEvent();
+                  _eventStore.resetEvent();
+                  _eventStore.getEvents();
+                  Navigator.pop(context);
+                } else {
+                  ScaffoldMessenger.of(_mainStore.scaffoldKey.currentContext!)
+                      .showSnackBar(SnackBar(
+                          content: Text(
+                              AppLocalizations.of(context)!.titleMissing)));
+                }
               },
               child: Text(AppLocalizations.of(context)!.create),
             ),

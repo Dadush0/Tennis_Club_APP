@@ -108,10 +108,7 @@ class AddGameInfoWidget extends StatelessWidget {
             decoration: InputDecoration(
               labelText: AppLocalizations.of(context)!.opponent,
               hintText: AppLocalizations.of(context)!.opponentName,
-            )
-            //errorText: 'Test'),
-
-            ),
+            )),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -137,7 +134,8 @@ class AddGameInfoWidget extends StatelessWidget {
             ..text = Localization.formatDate(DateTime.now()),
           readOnly: true,
           decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.selectDate),
+              hintText: AppLocalizations.of(context)!.selectDate,
+              labelText: AppLocalizations.of(context)!.selectDate),
           onTap: () => onTapDateFunction(context: context),
         ),
         TextField(
@@ -146,7 +144,8 @@ class AddGameInfoWidget extends StatelessWidget {
                 Localization.formatTime(const TimeOfDay(hour: 9, minute: 0)),
           readOnly: true,
           decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.selectTime),
+              hintText: AppLocalizations.of(context)!.selectTime,
+              labelText: AppLocalizations.of(context)!.selectTime),
           onTap: () => onTapTimeFunction(context: context),
         )
       ],
@@ -196,7 +195,8 @@ class AddPlayerInfoWidget extends StatelessWidget {
               _lineupStore.playerNames[0] = value;
             },
             decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.player1)),
+                hintText: AppLocalizations.of(context)!.player1,
+                labelText: AppLocalizations.of(context)!.player1)),
         TextField(
             controller: TextEditingController()
               ..text = _lineupStore.playerNames[1],
@@ -204,7 +204,8 @@ class AddPlayerInfoWidget extends StatelessWidget {
               _lineupStore.playerNames[1] = value;
             },
             decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.player2)),
+                hintText: AppLocalizations.of(context)!.player2,
+                labelText: AppLocalizations.of(context)!.player2)),
         TextField(
             controller: TextEditingController()
               ..text = _lineupStore.playerNames[2],
@@ -212,12 +213,14 @@ class AddPlayerInfoWidget extends StatelessWidget {
               _lineupStore.playerNames[2] = value;
             },
             decoration: InputDecoration(
-                hintText: AppLocalizations.of(context)!.player3)),
+                hintText: AppLocalizations.of(context)!.player3,
+                labelText: AppLocalizations.of(context)!.player3)),
         TextField(
           controller: TextEditingController()
             ..text = _lineupStore.playerNames[3],
-          decoration:
-              InputDecoration(hintText: AppLocalizations.of(context)!.player4),
+          decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.player4,
+              labelText: AppLocalizations.of(context)!.player4),
           onChanged: (value) {
             _lineupStore.playerNames[3] = value;
           },
@@ -240,22 +243,25 @@ class AddOrgaInfoWidget extends StatelessWidget {
           onChanged: (value) {
             _lineupStore.cakeNames[0] = value;
           },
-          decoration:
-              InputDecoration(hintText: AppLocalizations.of(context)!.cake1)),
+          decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.cake1,
+              labelText: AppLocalizations.of(context)!.cake1)),
       TextField(
           controller: TextEditingController()..text = _lineupStore.cakeNames[1],
           onChanged: (value) {
             _lineupStore.cakeNames[1] = value;
           },
-          decoration:
-              InputDecoration(hintText: AppLocalizations.of(context)!.cake2)),
+          decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.cake2,
+              labelText: AppLocalizations.of(context)!.cake2)),
       TextField(
           controller: TextEditingController()..text = _lineupStore.manager,
           onChanged: (value) {
             _lineupStore.manager = value;
           },
-          decoration:
-              InputDecoration(hintText: AppLocalizations.of(context)!.manager)),
+          decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.manager,
+              labelText: AppLocalizations.of(context)!.manager)),
     ]);
   }
 }

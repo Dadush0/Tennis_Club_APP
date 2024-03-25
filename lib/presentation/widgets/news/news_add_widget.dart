@@ -6,12 +6,14 @@ import 'package:tennis_club_app/data/datasources/firebase.dart';
 import 'package:tennis_club_app/localization.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/main.dart';
+import 'package:tennis_club_app/presentation/stores/main_store.dart';
 import 'package:tennis_club_app/presentation/stores/news_store.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class NewsAddWidget extends StatelessWidget {
   NewsAddWidget({super.key});
   final NewsStore _newsStore = locator<NewsStore>();
+  final MainStore _mainStore = locator<MainStore>();
   final TextEditingController datePickerController = TextEditingController();
 
   @override
@@ -75,10 +77,17 @@ class NewsAddWidget extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                _newsStore.addNews();
-                _newsStore.resetNews();
-                _newsStore.getNews();
-                Navigator.pop(context);
+                if (_newsStore.newNews.nonObservableValue.title != '') {
+                  _newsStore.addNews();
+                  _newsStore.resetNews();
+                  _newsStore.getNews();
+                  Navigator.pop(context);
+                } else {
+                  ScaffoldMessenger.of(_mainStore.scaffoldKey.currentContext!)
+                      .showSnackBar(SnackBar(
+                          content: Text(
+                              AppLocalizations.of(context)!.titleMissing)));
+                }
               },
               child: Text(AppLocalizations.of(context)!.create),
             ),

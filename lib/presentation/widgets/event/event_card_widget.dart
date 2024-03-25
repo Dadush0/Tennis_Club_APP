@@ -50,16 +50,67 @@ class EventCardWidget extends StatelessWidget {
                           softWrap: true,
                           maxLines: 30,
                         ),
-                        Text(AppLocalizations.of(context)!.when +
-                            Localization.formatDate(eventModel.date)),
-                        Text(AppLocalizations.of(context)!.where +
-                            eventModel.location),
-                        Text(AppLocalizations.of(context)!.deadline +
-                            Localization.formatDate(eventModel.registerDate)),
-                        Text(AppLocalizations.of(context)!.maxParticipantsInfo +
-                            eventModel.maxParticipants.toString()),
-                        Text(
-                            '${AppLocalizations.of(context)!.costInfo}${eventModel.cost}€'),
+                        RichText(
+                          text: TextSpan(
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: AppLocalizations.of(context)!.when,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold)),
+                              TextSpan(
+                                  text:
+                                      Localization.formatDate(eventModel.date)),
+                            ],
+                          ),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: AppLocalizations.of(context)!.where,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold)),
+                              TextSpan(text: eventModel.location),
+                            ],
+                          ),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: AppLocalizations.of(context)!.deadline,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold)),
+                              TextSpan(
+                                  text: Localization.formatDate(
+                                      eventModel.registerDate)),
+                            ],
+                          ),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: AppLocalizations.of(context)!
+                                      .maxParticipantsInfo,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold)),
+                              TextSpan(
+                                  text: eventModel.maxParticipants.toString()),
+                            ],
+                          ),
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: AppLocalizations.of(context)!.costInfo,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold)),
+                              TextSpan(text: '${eventModel.cost}€'),
+                            ],
+                          ),
+                        ),
                         Row(
                           children: [
                             ElevatedButton(
