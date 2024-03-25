@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:tennis_club_app/data/datasources/firebase.dart';
 import 'package:tennis_club_app/locator.dart' as injector;
@@ -45,8 +47,17 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [Locale('de'), Locale('en')],
-      locale: Locale(language),
+      locale: getLanguage(context, platform),
       home: MainPage(),
     );
+  }
+
+  Locale getLanguage(BuildContext context, TargetPlatform paltform) {
+    if (platform == TargetPlatform.android || platform == TargetPlatform.iOS) {
+      language = Platform.localeName.split('_')[0];
+      return Locale(language);
+    }
+
+    return const Locale('de');
   }
 }

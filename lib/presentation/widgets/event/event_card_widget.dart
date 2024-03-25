@@ -56,7 +56,7 @@ class EventCardWidget extends StatelessWidget {
                             eventModel.location),
                         Text(AppLocalizations.of(context)!.deadline +
                             Localization.formatDate(eventModel.registerDate)),
-                        Text(AppLocalizations.of(context)!.maxParticipants +
+                        Text(AppLocalizations.of(context)!.maxParticipantsInfo +
                             eventModel.maxParticipants.toString()),
                         Text(
                             '${AppLocalizations.of(context)!.costInfo}${eventModel.cost}€'),

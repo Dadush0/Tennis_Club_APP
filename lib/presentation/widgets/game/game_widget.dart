@@ -53,11 +53,14 @@ class GameWidget extends StatelessWidget {
                     _lineupStore.selectedItem = value;
                   },
                 ),
-                ElevatedButton(
-                  onPressed: () =>
-                      _lineupStore.setFavouriteTeam(_lineupStore.selectedItem),
-                  child: Text(AppLocalizations.of(context)!.favourite),
-                ),
+                IconButton(
+                    onPressed: () {
+                      _lineupStore.setFavouriteTeam(_lineupStore.selectedItem);
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content:
+                              Text(AppLocalizations.of(context)!.favourite)));
+                    },
+                    icon: const Icon(Icons.favorite)),
                 Observer(
                   builder: (_) => Visibility(
                       visible: _mainStore.adminView.value,
