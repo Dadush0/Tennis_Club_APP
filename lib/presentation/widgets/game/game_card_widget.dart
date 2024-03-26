@@ -63,7 +63,7 @@ class GameCardWidget extends StatelessWidget {
                   builder: (_) => ExpansionTile(
                     title: Center(
                         child: Text(
-                            '${gameModel.location} ${AppLocalizations.of(context)!.against} ${gameModel.opponentName}')),
+                            '${getLocationLocalized(context, gameModel.location)} ${AppLocalizations.of(context)!.against} ${gameModel.opponentName}')),
                     subtitle: Center(
                         child:
                             Text(Localization.formatDateTime(gameModel.date))),
@@ -97,5 +97,12 @@ class GameCardWidget extends StatelessWidget {
   void deleteGame() {
     _lineupStore.deleteGame(gameModel);
     _lineupStore.getGamesByTeam(_lineupStore.selectedItem);
+  }
+
+  String getLocationLocalized(BuildContext context, String location) {
+    if (location == 'Home' || location == 'Heim') {
+      return AppLocalizations.of(context)!.home;
+    }
+    return AppLocalizations.of(context)!.away;
   }
 }
