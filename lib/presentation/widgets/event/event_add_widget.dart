@@ -78,8 +78,16 @@ class EventAddWidget extends StatelessWidget {
             ),
             TextField(
               onChanged: (value) => {
-                _eventStore.newEvent.nonObservableValue.maxParticipants =
-                    int.parse(value)
+                if (int.parse(value) > 0)
+                  {
+                    _eventStore.newEvent.nonObservableValue.maxParticipants =
+                        int.parse(value)
+                  }
+                else
+                  {
+                    _eventStore.newEvent.nonObservableValue.maxParticipants =
+                        1000
+                  }
               },
               keyboardType: TextInputType.number,
               decoration: InputDecoration(

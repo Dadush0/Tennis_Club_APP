@@ -52,7 +52,7 @@ class NewsCardWidget extends StatelessWidget {
                             newsModel.title,
                             style: Theme.of(context)
                                 .textTheme
-                                .titleMedium!
+                                .titleLarge!
                                 .copyWith(color: Colors.black54),
                           ),
                         ),
@@ -61,17 +61,19 @@ class NewsCardWidget extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute<void>(
-                                          builder: (BuildContext context) =>
-                                              NewsMoreWidget(
-                                                  newsModel: newsModel)));
-                                },
-                                child: Text(
-                                    AppLocalizations.of(context)!.readMore)),
+                            newsModel.content != ''
+                                ? ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute<void>(
+                                              builder: (BuildContext context) =>
+                                                  NewsMoreWidget(
+                                                      newsModel: newsModel)));
+                                    },
+                                    child: Text(
+                                        AppLocalizations.of(context)!.readMore))
+                                : Container(),
                             Observer(
                                 builder: (_) => Visibility(
                                       visible: _mainStore.adminView.value,

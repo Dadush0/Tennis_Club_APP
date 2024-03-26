@@ -31,8 +31,11 @@ class GameWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _lineupStore.getFavouriteTeam();
-    _lineupStore.getGamesByTeam(_lineupStore.selectedItem);
     _lineupStore.getAllTeams();
+    if (_lineupStore.selectedItem == '' && _lineupStore.teamNames.isNotEmpty) {
+      _lineupStore.selectedItem = _lineupStore.teamNames.first;
+    }
+    _lineupStore.getGamesByTeam(_lineupStore.selectedItem);
     return SafeArea(
       child: Column(
         children: <Widget>[
@@ -42,9 +45,7 @@ class GameWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 DropdownMenu<String>(
-                  initialSelection: _lineupStore.selectedItem != ''
-                      ? _lineupStore.selectedItem
-                      : _lineupStore.teamNames.first,
+                  initialSelection: _lineupStore.selectedItem,
                   label: Text(AppLocalizations.of(context)!.teamname),
                   enableSearch: false,
                   dropdownMenuEntries: convertTeamNamesToEntries(),

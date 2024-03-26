@@ -27,7 +27,7 @@ class NewsModel {
     content = '';
     date = DateTime.now();
     releaseDate = DateTime.now();
-    preview = 'tenniscamp23.png';
+    preview = 'logo.png';
   }
 
   static Map<String, dynamic> serializeNews() {

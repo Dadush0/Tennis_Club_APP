@@ -13,6 +13,7 @@
       "away": "Away",
       "home": "Home",
       "addNewGame": "Add new Game",
+      "editGame": "Edit Game",
       "cancel": "Cancel",
       "submit": "Submit",
       "opponent": "Opponent",
@@ -66,5 +67,9 @@
       "name":"Name",
       "participants":"Participants",
       "close": "Close",
-      "titleMissing": "A title has to be entered"
+      "titleMissing": "A title has to be entered",
+      "gameInfoMissing": "OpponentName is missing",
+      "playerInfoMissing": "At least one player name is missing",
+      "orgaInfoMissing": "At least one information is missing",
+      "informationMisFit": "Information has to fit the players names"
 }

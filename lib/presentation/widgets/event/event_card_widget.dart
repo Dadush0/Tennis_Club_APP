@@ -40,18 +40,21 @@ class EventCardWidget extends StatelessWidget {
                             eventModel.title,
                             style: Theme.of(context)
                                 .textTheme
-                                .titleMedium!
+                                .titleLarge!
                                 .copyWith(color: Colors.black54),
                           ),
                         ),
-                        Text(
-                          eventModel.description,
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: true,
-                          maxLines: 30,
-                        ),
+                        eventModel.description != ''
+                            ? Text(
+                                eventModel.description,
+                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
+                                maxLines: 30,
+                              )
+                            : Container(),
                         RichText(
                           text: TextSpan(
+                            style: const TextStyle(color: Colors.black),
                             children: <TextSpan>[
                               TextSpan(
                                   text: AppLocalizations.of(context)!.when,
@@ -63,19 +66,24 @@ class EventCardWidget extends StatelessWidget {
                             ],
                           ),
                         ),
+                        eventModel.location != ''
+                            ? RichText(
+                                text: TextSpan(
+                                  style: const TextStyle(color: Colors.black),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text:
+                                            AppLocalizations.of(context)!.where,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    TextSpan(text: eventModel.location),
+                                  ],
+                                ),
+                              )
+                            : Container(),
                         RichText(
                           text: TextSpan(
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: AppLocalizations.of(context)!.where,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                              TextSpan(text: eventModel.location),
-                            ],
-                          ),
-                        ),
-                        RichText(
-                          text: TextSpan(
+                            style: const TextStyle(color: Colors.black),
                             children: <TextSpan>[
                               TextSpan(
                                   text: AppLocalizations.of(context)!.deadline,
@@ -87,30 +95,38 @@ class EventCardWidget extends StatelessWidget {
                             ],
                           ),
                         ),
-                        RichText(
-                          text: TextSpan(
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: AppLocalizations.of(context)!
-                                      .maxParticipantsInfo,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                              TextSpan(
-                                  text: eventModel.maxParticipants.toString()),
-                            ],
-                          ),
-                        ),
-                        RichText(
-                          text: TextSpan(
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: AppLocalizations.of(context)!.costInfo,
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold)),
-                              TextSpan(text: '${eventModel.cost}€'),
-                            ],
-                          ),
-                        ),
+                        eventModel.maxParticipants != 0
+                            ? RichText(
+                                text: TextSpan(
+                                  style: const TextStyle(color: Colors.black),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: AppLocalizations.of(context)!
+                                            .maxParticipantsInfo,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    TextSpan(
+                                        text: eventModel.maxParticipants
+                                            .toString()),
+                                  ],
+                                ),
+                              )
+                            : Container(),
+                        eventModel.cost != 0
+                            ? RichText(
+                                text: TextSpan(
+                                  style: const TextStyle(color: Colors.black),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text: AppLocalizations.of(context)!
+                                            .costInfo,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold)),
+                                    TextSpan(text: '${eventModel.cost}€'),
+                                  ],
+                                ),
+                              )
+                            : Container(),
                         Row(
                           children: [
                             ElevatedButton(

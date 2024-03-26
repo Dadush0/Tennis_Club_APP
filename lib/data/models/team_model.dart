@@ -10,6 +10,13 @@ class TeamModel {
 
   TeamModel({required this.teamName});
 
+  TeamModel.empty() {
+    teamName = '';
+    games = [];
+    players = [];
+    trainer = '';
+  }
+
   static void deserializeTeams(Map teams) {
     DataModel.lineup.teams = [];
     teams.forEach((key, value) {

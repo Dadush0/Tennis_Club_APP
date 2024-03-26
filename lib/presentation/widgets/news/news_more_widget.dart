@@ -47,7 +47,7 @@ class NewsMoreWidget extends StatelessWidget {
                           newsModel.title,
                           style: Theme.of(context)
                               .textTheme
-                              .titleMedium!
+                              .titleLarge!
                               .copyWith(color: Colors.black54),
                         ),
                       ),

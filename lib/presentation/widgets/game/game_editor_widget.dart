@@ -51,7 +51,7 @@ class GameEditorWidget extends StatelessWidget {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
-              title: Text(AppLocalizations.of(context)!.addNewGame),
+              title: Text(AppLocalizations.of(context)!.editGame),
               content: getCurrentWidget(_lineupStore.dialogIndex.value),
               actions: <Widget>[
                 OutlinedButton(
@@ -64,15 +64,54 @@ class GameEditorWidget extends StatelessWidget {
                 OutlinedButton(
                     child: Text(_lineupStore.submitButton.value),
                     onPressed: () {
+                      if (_lineupStore.dialogIndex.value ==
+                              DialogState.gameInfo.index &&
+                          _lineupStore.opponentName == '') {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(AppLocalizations.of(context)!
+                                .gameInfoMissing)));
+                        return;
+                      } else if (_lineupStore.dialogIndex.value ==
+                              DialogState.playerInfo.index &&
+                          (_lineupStore.playerNames[0] == '' ||
+                              _lineupStore.playerNames[1] == '' ||
+                              _lineupStore.playerNames[2] == '' ||
+                              _lineupStore.playerNames[3] == '')) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(AppLocalizations.of(context)!
+                                .playerInfoMissing)));
+                        return;
+                      } else if (_lineupStore.dialogIndex.value ==
+                              DialogState.orgaInfo.index &&
+                          (_lineupStore.cakeNames[0] == '' ||
+                              _lineupStore.cakeNames[1] == '' ||
+                              _lineupStore.manager == '')) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(AppLocalizations.of(context)!
+                                .orgaInfoMissing)));
+                        return;
+                      } else if (_lineupStore.dialogIndex.value ==
+                              DialogState.orgaInfo.index &&
+                          (!_lineupStore.playerNames
+                                  .contains(_lineupStore.cakeNames[0]) ||
+                              !_lineupStore.playerNames
+                                  .contains(_lineupStore.cakeNames[1]) ||
+                              !_lineupStore.playerNames
+                                  .contains(_lineupStore.manager) ||
+                              !_lineupStore.cakeNames
+                                  .contains(_lineupStore.manager))) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(AppLocalizations.of(context)!
+                                .informationMisFit)));
+                        return;
+                      }
                       _lineupStore.dialogIndex.value++;
 
                       if (_lineupStore.dialogIndex.value ==
                           DialogState.orgaInfo.index) {
                         _lineupStore.changeSubmitButtonText(
                             AppLocalizations.of(context)!.submit);
-                      }
-
-                      if (_lineupStore.dialogIndex.value ==
+                      } else if (_lineupStore.dialogIndex.value ==
                           DialogState.finished.index) {
                         Navigator.pop(context);
                         _lineupStore.dialogIndex.value = 0;

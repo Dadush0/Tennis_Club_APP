@@ -18,7 +18,7 @@ class LineupRepository {
         return element;
       }
     }
-    return lineup.teams.first;
+    return TeamModel.empty();
   }
 
   List<String> getAllTeams() {

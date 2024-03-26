@@ -13,6 +13,7 @@
       "away": "Auswärts",
       "home": "Heim",
       "addNewGame": "Neues Spiel hinzufügen",
+      "editGame": "Spiel editieren",
       "cancel": "Abbrechen",
       "submit": "Bestätigen",
       "opponent": "Gegner",
@@ -66,5 +67,9 @@
       "name":"Name",
       "participants":"Teilnehmer",
       "close": "Schließen",
-      "titleMissing": "Es muss ein Titel eingegeben werden!"
+      "titleMissing": "Es muss ein Titel eingegeben werden!",      
+      "gameInfoMissing": "Gegnername fehlt!",
+      "playerInfoMissing": "Mindestens ein Spieler fehlt!",
+      "orgaInfoMissing": "Mindestens eine Information fehlt!",
+      "informationMisFit": "Informationen müssen zu den Spielernamen passen"
 }
