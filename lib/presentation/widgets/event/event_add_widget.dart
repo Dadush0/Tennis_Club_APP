@@ -55,7 +55,7 @@ class EventAddWidget extends StatelessWidget {
                 ..text = Localization.formatDate(DateTime.now()),
               readOnly: true,
               decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.selectDate),
+                  helperText: AppLocalizations.of(context)!.selectDate),
               onTap: () => onTapDateFunction(context: context),
             ),
             TextField(
@@ -63,7 +63,7 @@ class EventAddWidget extends StatelessWidget {
                 ..text = Localization.formatDate(DateTime.now()),
               readOnly: true,
               decoration: InputDecoration(
-                  hintText: AppLocalizations.of(context)!.selectDeadline),
+                  helperText: AppLocalizations.of(context)!.selectDeadline),
               onTap: () => onTapRegisterDateFunction(context: context),
             ),
             TextField(
