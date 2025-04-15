@@ -8,7 +8,7 @@ import 'package:tennis_club_app/presentation/pages/court_embed_page.dart';
 import 'package:tennis_club_app/presentation/pages/court_page.dart';
 import 'package:tennis_club_app/presentation/pages/event_page.dart';
 import 'package:tennis_club_app/presentation/pages/lineup_page.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tennis_club_app/presentation/localization/app_localizations.dart';
 
 class MainPage extends StatelessWidget {
   MainPage({super.key});

@@ -7,7 +7,7 @@ import 'package:tennis_club_app/presentation/stores/events_store.dart';
 import 'package:tennis_club_app/presentation/stores/main_store.dart';
 import 'package:tennis_club_app/presentation/widgets/delete_widget.dart';
 import 'package:tennis_club_app/presentation/widgets/event/event_more_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tennis_club_app/presentation/localization/app_localizations.dart';
 
 class EventCardWidget extends StatelessWidget {
   EventCardWidget({super.key, required this.eventModel});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tennis_club_app/presentation/localization/app_localizations.dart';
 
 /// This will for flutter web send the user to open the webpage externally
 /// For flutter android and ios, the webview widget is used

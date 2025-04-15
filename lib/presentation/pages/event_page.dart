@@ -6,7 +6,7 @@ import 'package:tennis_club_app/main.dart';
 import 'package:tennis_club_app/presentation/stores/main_store.dart';
 import 'package:tennis_club_app/presentation/widgets/event/event_add_widget.dart';
 import 'package:tennis_club_app/presentation/widgets/event/event_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tennis_club_app/presentation/localization/app_localizations.dart';
 
 class EventPage extends StatelessWidget {
   EventPage({super.key});

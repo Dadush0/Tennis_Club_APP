@@ -5,7 +5,7 @@ import 'package:tennis_club_app/presentation/stores/lineup_store.dart';
 import 'package:tennis_club_app/presentation/stores/main_store.dart';
 import 'package:tennis_club_app/presentation/widgets/game/game_add_widget.dart';
 import 'package:tennis_club_app/presentation/widgets/game/game_card_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tennis_club_app/presentation/localization/app_localizations.dart';
 
 class GameWidget extends StatelessWidget {
   GameWidget({super.key});

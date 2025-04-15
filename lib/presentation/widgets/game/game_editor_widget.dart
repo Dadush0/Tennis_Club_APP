@@ -3,7 +3,7 @@ import 'package:tennis_club_app/data/models/game_model.dart';
 import 'package:tennis_club_app/locator.dart';
 import 'package:tennis_club_app/presentation/stores/lineup_store.dart';
 import 'package:tennis_club_app/presentation/widgets/game/game_add_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tennis_club_app/presentation/localization/app_localizations.dart';
 
 class GameEditorWidget extends StatelessWidget {
   GameEditorWidget({super.key, required this.gameModel});

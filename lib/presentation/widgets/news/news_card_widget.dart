@@ -8,7 +8,7 @@ import 'package:tennis_club_app/presentation/stores/main_store.dart';
 import 'package:tennis_club_app/presentation/stores/news_store.dart';
 import 'package:tennis_club_app/presentation/widgets/delete_widget.dart';
 import 'package:tennis_club_app/presentation/widgets/news/news_more_widget.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tennis_club_app/presentation/localization/app_localizations.dart';
 
 class NewsCardWidget extends StatelessWidget {
   NewsCardWidget({super.key, required this.newsModel});

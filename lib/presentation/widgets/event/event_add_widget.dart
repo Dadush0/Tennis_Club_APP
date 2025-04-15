@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tennis_club_app/localization.dart';
 import 'package:tennis_club_app/main.dart';
 import 'package:tennis_club_app/presentation/stores/events_store.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tennis_club_app/presentation/localization/app_localizations.dart';
 import 'package:tennis_club_app/presentation/stores/main_store.dart';
 
 import '../../../locator.dart';
