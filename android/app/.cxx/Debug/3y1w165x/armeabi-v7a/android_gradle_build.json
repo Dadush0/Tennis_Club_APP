@@ -1,0 +1,28 @@
+{
+  "buildFiles": [
+    "D:\\Programme\\Flutter\\flutter\\packages\\flutter_tools\\gradle\\src\\main\\groovy\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "G:\\Temp Data\\Android SDK\\cmake\\3.18.1\\bin\\ninja.exe",
+      "-C",
+      "G:\\VS_Code_workspace\\tennis_app\\Tennis_Club_APP\\android\\app\\.cxx\\Debug\\3y1w165x\\armeabi-v7a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "G:\\Temp Data\\Android SDK\\cmake\\3.18.1\\bin\\ninja.exe",
+    "-C",
+    "G:\\VS_Code_workspace\\tennis_app\\Tennis_Club_APP\\android\\app\\.cxx\\Debug\\3y1w165x\\armeabi-v7a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {},
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "G:\\Temp Data\\Android SDK\\ndk\\26.3.11579264\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "G:\\Temp Data\\Android SDK\\ndk\\26.3.11579264\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": []
+}

@@ -1,0 +1,2 @@
+G:/VS_Code_workspace/tennis_app/Tennis_Club_APP/android/app/.cxx/Debug/3y1w165x/armeabi-v7a/CMakeFiles/edit_cache.dir
+G:/VS_Code_workspace/tennis_app/Tennis_Club_APP/android/app/.cxx/Debug/3y1w165x/armeabi-v7a/CMakeFiles/rebuild_cache.dir
