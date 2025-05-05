@@ -14,6 +14,9 @@ class GameWidget extends StatelessWidget {
 
   List<GameCardWidget> convertGamesToWidgets() {
     List<GameCardWidget> widgets = [];
+    _lineupStore.lineup.first.games.sort(
+      (a, b) => a.date.compareTo(b.date),
+    );
     for (var game in _lineupStore.lineup.first.games) {
       widgets.add(GameCardWidget(gameModel: game));
     }
@@ -51,6 +54,7 @@ class GameWidget extends StatelessWidget {
                   dropdownMenuEntries: convertTeamNamesToEntries(),
                   onSelected: (value) {
                     _lineupStore.getGamesByTeam(value!);
+                    _lineupStore.resetGameInfo(value);
                     _lineupStore.selectedItem = value;
                   },
                 ),

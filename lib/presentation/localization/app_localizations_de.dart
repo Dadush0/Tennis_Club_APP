@@ -108,7 +108,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get cake3 => 'Kuchen 3';
 
   @override
-  String get manager => 'Betreuer';
+  String get manager => 'Betreuer/Fahrer';
 
   @override
   String get sure => 'Wirklich löschen?';
@@ -217,6 +217,9 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get playerInfoMissing => 'Mindestens ein Spieler fehlt!';
+
+  @override
+  String get playerDuplicate => 'Mindestens ein Spieler ist doppelt!';
 
   @override
   String get orgaInfoMissing => 'Mindestens eine Information fehlt!';

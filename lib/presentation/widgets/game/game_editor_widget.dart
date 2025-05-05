@@ -26,11 +26,13 @@ class GameEditorWidget extends StatelessWidget {
             InputDecoration(hintText: AppLocalizations.of(context)!.cake),
       ));
     }
-    fields.add(TextFormField(
-      initialValue: gameModel.manager.displayName,
-      decoration:
-          InputDecoration(hintText: AppLocalizations.of(context)!.manager),
-    ));
+    for (var manager in gameModel.manager) {
+      fields.add(TextFormField(
+        initialValue: manager.displayName,
+        decoration:
+            InputDecoration(hintText: AppLocalizations.of(context)!.manager),
+      ));
+    }
     return fields;
   }
 
@@ -52,7 +54,8 @@ class GameEditorWidget extends StatelessWidget {
               builder: (BuildContext context, StateSetter setState) {
             return AlertDialog(
               title: Text(AppLocalizations.of(context)!.editGame),
-              content: getCurrentWidget(_lineupStore.dialogIndex.value),
+              content: GameAddFormState.getCurrentWidget(
+                  _lineupStore.dialogIndex.value),
               actions: <Widget>[
                 OutlinedButton(
                   child: Text(AppLocalizations.of(context)!.cancel),
@@ -65,48 +68,60 @@ class GameEditorWidget extends StatelessWidget {
                     child: Text(_lineupStore.submitButton.value),
                     onPressed: () {
                       if (_lineupStore.dialogIndex.value ==
-                              DialogState.gameInfo.index &&
-                          _lineupStore.opponentName == '') {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(AppLocalizations.of(context)!
-                                .gameInfoMissing)));
-                        return;
+                          DialogState.gameInfo.index) {
+                        if (_lineupStore.opponentName == '') {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(AppLocalizations.of(context)!
+                                  .gameInfoMissing)));
+                          return;
+                        }
                       } else if (_lineupStore.dialogIndex.value ==
-                              DialogState.playerInfo.index &&
-                          (_lineupStore.playerNames[0] == '' ||
-                              _lineupStore.playerNames[1] == '' ||
-                              _lineupStore.playerNames[2] == '' ||
-                              _lineupStore.playerNames[3] == '')) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(AppLocalizations.of(context)!
-                                .playerInfoMissing)));
-                        return;
+                          DialogState.playerInfo.index) {
+                        if (_lineupStore.playerNames
+                            .any((element) => element == '')) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(AppLocalizations.of(context)!
+                                  .playerInfoMissing)));
+                          return;
+                        } else if (_lineupStore.playerNames.length !=
+                            _lineupStore.playerNames.toSet().toList().length) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(AppLocalizations.of(context)!
+                                  .playerDuplicate)));
+                          return;
+                        }
                       } else if (_lineupStore.dialogIndex.value ==
-                              DialogState.orgaInfo.index &&
-                          (_lineupStore.cakeNames[0] == '' ||
-                              _lineupStore.cakeNames[1] == '' ||
-                              _lineupStore.manager == '')) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(AppLocalizations.of(context)!
-                                .orgaInfoMissing)));
-                        return;
-                      } else if (_lineupStore.dialogIndex.value ==
-                              DialogState.orgaInfo.index &&
-                          (!_lineupStore.playerNames
-                                  .contains(_lineupStore.cakeNames[0]) ||
-                              !_lineupStore.playerNames
-                                  .contains(_lineupStore.cakeNames[1]) ||
-                              !_lineupStore.playerNames
-                                  .contains(_lineupStore.manager) ||
-                              !_lineupStore.cakeNames
-                                  .contains(_lineupStore.manager))) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(AppLocalizations.of(context)!
-                                .informationMisFit)));
-                        return;
+                          DialogState.orgaInfo.index) {
+                        if (_lineupStore.location !=
+                            AppLocalizations.of(context)!.away) {
+                          if (_lineupStore.cakeNames
+                              .any((element) => element == '')) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(AppLocalizations.of(context)!
+                                    .orgaInfoMissing)));
+                            return;
+                          } else if (_lineupStore.cakeNames.any((element) =>
+                              !_lineupStore.playerNames.contains(element))) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(AppLocalizations.of(context)!
+                                    .informationMisFit)));
+                            return;
+                          }
+                        } else if (_lineupStore.manager[0] == '') {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(AppLocalizations.of(context)!
+                                  .orgaInfoMissing)));
+                          return;
+                        }
+                        if (!_lineupStore.playerNames
+                            .contains(_lineupStore.manager[0])) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(AppLocalizations.of(context)!
+                                  .informationMisFit)));
+                          return;
+                        }
                       }
                       _lineupStore.dialogIndex.value++;
-
                       if (_lineupStore.dialogIndex.value ==
                           DialogState.orgaInfo.index) {
                         _lineupStore.changeSubmitButtonText(
@@ -124,16 +139,5 @@ class GameEditorWidget extends StatelessWidget {
             );
           });
         });
-  }
-
-  Widget? getCurrentWidget(int index) {
-    if (index == DialogState.gameInfo.index) {
-      return AddGameInfoWidget();
-    } else if (index == DialogState.playerInfo.index) {
-      return AddPlayerInfoWidget();
-    } else if (index == DialogState.orgaInfo.index) {
-      return AddOrgaInfoWidget();
-    }
-    return null;
   }
 }

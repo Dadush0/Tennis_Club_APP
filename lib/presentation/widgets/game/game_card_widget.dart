@@ -18,34 +18,28 @@ class GameCardWidget extends StatelessWidget {
 
   List<Widget> convertGameToExpansion(BuildContext context) {
     List<Widget> list = [];
+    List<Widget> text = [];
     for (var player in gameModel.players) {
+      text = [];
+      text.add(Flexible(child: ListTile(title: Text(player.displayName))));
       if (gameModel.cakes
           .any((element) => element.displayName == player.displayName)) {
-        if (gameModel.manager.displayName == player.displayName) {
-          list.add(Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Flexible(child: ListTile(title: Text(player.displayName))),
-                Flexible(
-                    child: ListTile(
-                        title: Text(AppLocalizations.of(context)!.cake))),
-                Flexible(
-                    child: ListTile(
-                        title: Text(AppLocalizations.of(context)!.manager)))
-              ]));
-        } else {
-          list.add(Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Flexible(child: ListTile(title: Text(player.displayName))),
-                Flexible(
-                    child: ListTile(
-                        title: Text(AppLocalizations.of(context)!.cake)))
-              ]));
-        }
+        text.add(Flexible(
+            child: ListTile(title: Text(AppLocalizations.of(context)!.cake))));
+      }
+      if (gameModel.manager
+          .any((element) => element.displayName == player.displayName)) {
+        text.add(Flexible(
+            child:
+                ListTile(title: Text(AppLocalizations.of(context)!.manager))));
+      }
+      list.add(Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: text));
+      /*
       } else {
         list.add(ListTile(title: Text(player.displayName)));
       }
+      */
     }
     return list;
   }

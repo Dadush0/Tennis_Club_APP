@@ -108,7 +108,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cake3 => 'Cake 3';
 
   @override
-  String get manager => 'Manager';
+  String get manager => 'Manager/Driver';
 
   @override
   String get sure => 'Are you sure?';
@@ -217,6 +217,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get playerInfoMissing => 'At least one player name is missing';
+
+  @override
+  String get playerDuplicate => 'At least one player name is duplicate';
 
   @override
   String get orgaInfoMissing => 'At least one information is missing';

@@ -18,7 +18,9 @@ class FirebaseConnection {
     final snapshot = await FirebaseDatabase.instance.ref('lineup').get();
     final Map<String, dynamic> lineup =
         Map<String, dynamic>.from(snapshot.value as Map);
-    TeamModel.deserializeTeams(lineup['teams']);
+    if (lineup.keys.contains('teams')) {
+      TeamModel.deserializeTeams(lineup['teams']);
+    }
   }
 
   static Future<void> readNewsData() async {
@@ -26,7 +28,9 @@ class FirebaseConnection {
     final snapshot = await FirebaseDatabase.instance.ref().get();
     final Map<String, dynamic> news =
         Map<String, dynamic>.from(snapshot.value as Map);
-    NewsModel.deserializeNews(news['news']);
+    if (news.keys.contains('news')) {
+      NewsModel.deserializeNews(news['news']);
+    }
     _newsStore.getNews();
   }
 
@@ -35,7 +39,9 @@ class FirebaseConnection {
     final snapshot = await FirebaseDatabase.instance.ref().get();
     final Map<String, dynamic> events =
         Map<String, dynamic>.from(snapshot.value as Map);
-    EventModel.deserializeEvents(events['events']);
+    if (events.keys.contains('events')) {
+      EventModel.deserializeEvents(events['events']);
+    }
   }
 
   static Future<bool> readPassword(String password) async {

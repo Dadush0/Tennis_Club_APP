@@ -296,7 +296,7 @@ abstract class AppLocalizations {
   /// No description provided for @manager.
   ///
   /// In de, this message translates to:
-  /// **'Betreuer'**
+  /// **'Betreuer/Fahrer'**
   String get manager;
 
   /// No description provided for @sure.
@@ -514,6 +514,12 @@ abstract class AppLocalizations {
   /// In de, this message translates to:
   /// **'Mindestens ein Spieler fehlt!'**
   String get playerInfoMissing;
+
+  /// No description provided for @playerDuplicate.
+  ///
+  /// In de, this message translates to:
+  /// **'Mindestens ein Spieler ist doppelt!'**
+  String get playerDuplicate;
 
   /// No description provided for @orgaInfoMissing.
   ///

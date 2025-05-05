@@ -32,7 +32,7 @@
       "cake1": "Cake 1",
       "cake2": "Cake 2",
       "cake3": "Cake 3",
-      "manager": "Manager",
+      "manager": "Manager/Driver",
       "sure": "Are you sure?",
       "yes": "Yes",
       "against": "against",
@@ -70,6 +70,7 @@
       "titleMissing": "A title has to be entered",
       "gameInfoMissing": "OpponentName is missing",
       "playerInfoMissing": "At least one player name is missing",
+      "playerDuplicate": "At least one player name is duplicate",
       "orgaInfoMissing": "At least one information is missing",
       "informationMisFit": "Information has to fit the players names"
 }

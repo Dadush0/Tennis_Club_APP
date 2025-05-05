@@ -32,7 +32,7 @@
       "cake1": "Kuchen 1",
       "cake2": "Kuchen 2",
       "cake3": "Kuchen 3",
-      "manager": "Betreuer",
+      "manager": "Betreuer/Fahrer",
       "sure": "Bist du sicher?",
       "yes": "Ja",
       "against": "gegen",
@@ -70,6 +70,7 @@
       "titleMissing": "Es muss ein Titel eingegeben werden!",      
       "gameInfoMissing": "Gegnername fehlt!",
       "playerInfoMissing": "Mindestens ein Spieler fehlt!",
+      "playerDuplicate": "Mindestens ein Spieler ist doppelt!",
       "orgaInfoMissing": "Mindestens eine Information fehlt!",
       "informationMisFit": "Informationen müssen zu den Spielernamen passen"
 }

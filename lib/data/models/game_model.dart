@@ -6,7 +6,7 @@ class GameModel {
   late String location;
   late String opponentName;
   late List<PlayerModel> cakes;
-  late PlayerModel manager;
+  late List<PlayerModel> manager;
 
   GameModel(
       {required this.date,
@@ -16,21 +16,6 @@ class GameModel {
       required this.cakes,
       required this.manager});
 
-  GameModel.empty() {
-    GameModel(
-        opponentName: '',
-        location: '',
-        cakes: [PlayerModel.empty(), PlayerModel.empty()],
-        players: [
-          PlayerModel.empty(),
-          PlayerModel.empty(),
-          PlayerModel.empty(),
-          PlayerModel.empty()
-        ],
-        manager: PlayerModel.empty(),
-        date: DateTime.now());
-  }
-
   static Map<String, dynamic> serializeGames(List<GameModel> games) {
     Map<String, dynamic> game = {};
     Map<String, dynamic> gameList = {};
@@ -39,7 +24,7 @@ class GameModel {
       game = {
         "date": element.date.toString(),
         "location": element.location,
-        "manager": element.manager.displayName,
+        "manager": PlayerModel.serializePlayers(element.manager),
         "opponentName": element.opponentName,
         "cakes": PlayerModel.serializePlayers(element.cakes),
         "players": PlayerModel.serializePlayers(element.players),
@@ -59,9 +44,13 @@ class GameModel {
           location: value['location'],
           opponentName: value['opponentName'],
           cakes: [],
-          manager: PlayerModel(displayName: value['manager']));
+          manager: []);
+      gameModel.manager = PlayerModel.deserializePlayers(value['manager']);
       gameModel.players = PlayerModel.deserializePlayers(value['players']);
-      gameModel.cakes = PlayerModel.deserializePlayers(value['cakes']);
+      gameModel.cakes = [];
+      if (value.keys.contains('cakes')) {
+        gameModel.cakes = PlayerModel.deserializePlayers(value['cakes']);
+      }
       gameList.add(gameModel);
     });
     return gameList;

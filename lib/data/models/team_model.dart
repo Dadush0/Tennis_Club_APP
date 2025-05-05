@@ -7,6 +7,7 @@ class TeamModel {
   late List<GameModel> games;
   late List<PlayerModel> players;
   late String trainer;
+  late int playerCount;
 
   TeamModel({required this.teamName});
 
@@ -15,14 +16,20 @@ class TeamModel {
     games = [];
     players = [];
     trainer = '';
+    playerCount = 4;
   }
 
   static void deserializeTeams(Map teams) {
     DataModel.lineup.teams = [];
     teams.forEach((key, value) {
       TeamModel teamModel = TeamModel(teamName: value['teamName']);
-      teamModel.games = GameModel.deserializeGames(value['games']);
+      if (value.keys.contains('games')) {
+        teamModel.games = GameModel.deserializeGames(value['games']);
+      } else {
+        teamModel.games = [];
+      }
       teamModel.trainer = value['trainer'];
+      teamModel.playerCount = value['playerCount'];
       DataModel.lineup.teams.add(teamModel);
     });
   }

@@ -21,6 +21,7 @@ class LineupModel {
         "teamName": element.teamName,
         "trainer": element.trainer,
         "games": GameModel.serializeGames(element.games),
+        "playerCount": element.playerCount,
       };
       teamList.putIfAbsent("t$index", () => team);
       index++;

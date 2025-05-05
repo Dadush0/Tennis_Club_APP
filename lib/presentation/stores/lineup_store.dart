@@ -1,4 +1,5 @@
 import 'package:mobx/mobx.dart';
+import 'package:tennis_club_app/data/models/data_model.dart';
 import 'package:tennis_club_app/data/models/game_model.dart';
 import 'package:tennis_club_app/data/models/player_model.dart';
 import 'package:tennis_club_app/data/models/team_model.dart';
@@ -27,15 +28,15 @@ abstract class _LineupStore with Store {
   final DeleteGame _deleteGame = locator<DeleteGame>();
 
   String opponentName = '';
-  String location = 'Home';
-  List<String> playerNames = ['', '', '', ''];
-  List<String> cakeNames = ['', ''];
-  String manager = '';
+  String location = "Home";
+  List<String> playerNames = ['', '', '', '', '', ''];
+  List<String> cakeNames = ['', '', ''];
+  List<String> manager = ['', ''];
   DateTime dateTime = DateTime.now();
+  List<String> teamNames = [];
 
   @observable
   ObservableList<TeamModel> lineup = <TeamModel>[].asObservable();
-  List<String> teamNames = [];
 
   @observable
   Observable<bool> customTileExpanded = false.obs();
@@ -86,6 +87,7 @@ abstract class _LineupStore with Store {
   @action
   Future<void> changeSwitchButton(bool value) async {
     switchButton.value = value;
+    manager[1] = '';
   }
 
   Future<void> addGame() async {
@@ -94,8 +96,11 @@ abstract class _LineupStore with Store {
     List<PlayerModel> cakes = cakeNames
         .map((e) => players.firstWhere((element) => e == element.displayName))
         .toList();
-    PlayerModel manager =
-        players.firstWhere((element) => element.displayName == this.manager);
+    List<PlayerModel> manager = this
+        .manager
+        .where((e) => e != '')
+        .map((e) => players.firstWhere((element) => e == element.displayName))
+        .toList();
     GameModel game = GameModel(
         date: dateTime,
         players: players,
@@ -105,8 +110,9 @@ abstract class _LineupStore with Store {
         manager: manager);
 
     String teamName = selectedItem != '' ? selectedItem : teamNames.first;
+
     _addGame.call(game, teamName);
-    resetGameInfo();
+    resetGameInfo(teamName);
   }
 
   void editGame(GameModel gameModel) {
@@ -122,19 +128,25 @@ abstract class _LineupStore with Store {
   void setGameInfo(GameModel gameModel) {
     opponentName = gameModel.opponentName;
     location = gameModel.location;
-    changeSwitchButton(location == 'Away');
+    changeSwitchButton(location == 'Away' || location == 'Auswärts');
     playerNames = gameModel.players.map((e) => e.displayName).toList();
     cakeNames = gameModel.cakes.map((e) => e.displayName).toList();
-    manager = gameModel.manager.displayName;
+    manager = gameModel.manager.map((e) => e.displayName).toList();
     dateTime = gameModel.date;
   }
 
-  void resetGameInfo() {
+  void resetGameInfo(String teamName) {
+    int playerCount = DataModel.lineup.teams
+        .firstWhere((element) => element.teamName == teamName)
+        .playerCount;
     opponentName = '';
     location = 'Home';
-    playerNames = ['', '', '', ''];
-    cakeNames = ['', ''];
-    manager = '';
+    playerNames = [];
+    cakeNames = ['', '', ''];
+    for (var i = 0; i < playerCount; ++i) {
+      playerNames.add('');
+    }
+    manager = ['', ''];
     dateTime = DateTime.now();
   }
 }
