@@ -132,6 +132,7 @@ abstract class _LineupStore with Store {
     playerNames = gameModel.players.map((e) => e.displayName).toList();
     cakeNames = gameModel.cakes.map((e) => e.displayName).toList();
     manager = gameModel.manager.map((e) => e.displayName).toList();
+    if (manager.length == 1) manager.add('');
     dateTime = gameModel.date;
   }
 
@@ -142,7 +143,10 @@ abstract class _LineupStore with Store {
     opponentName = '';
     location = 'Home';
     playerNames = [];
-    cakeNames = ['', '', ''];
+    cakeNames = [];
+    for (var i = 0; i < playerCount / 2; ++i) {
+      cakeNames.add('');
+    }
     for (var i = 0; i < playerCount; ++i) {
       playerNames.add('');
     }

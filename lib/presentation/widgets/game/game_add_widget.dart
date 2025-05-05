@@ -292,15 +292,6 @@ class AddOrgaInfoWidget extends StatelessWidget {
                 hintText: AppLocalizations.of(context)!.cake,
                 labelText: AppLocalizations.of(context)!.cake)));
       }
-    } else {
-      cakeInputController.add(TextField(
-          controller: TextEditingController()..text = _lineupStore.manager[1],
-          onChanged: (value) {
-            _lineupStore.manager[1] = value;
-          },
-          decoration: InputDecoration(
-              hintText: AppLocalizations.of(context)!.manager,
-              labelText: AppLocalizations.of(context)!.manager)));
     }
     cakeInputController.add(TextField(
         controller: TextEditingController()..text = _lineupStore.manager[0],
@@ -310,6 +301,16 @@ class AddOrgaInfoWidget extends StatelessWidget {
         decoration: InputDecoration(
             hintText: AppLocalizations.of(context)!.manager,
             labelText: AppLocalizations.of(context)!.manager)));
+    if (_lineupStore.location == AppLocalizations.of(context)!.away) {
+      cakeInputController.add(TextField(
+          controller: TextEditingController()..text = _lineupStore.manager[1],
+          onChanged: (value) {
+            _lineupStore.manager[1] = value;
+          },
+          decoration: InputDecoration(
+              hintText: AppLocalizations.of(context)!.manager,
+              labelText: AppLocalizations.of(context)!.manager)));
+    }
     return Column(
         mainAxisSize: MainAxisSize.min, children: cakeInputController);
   }

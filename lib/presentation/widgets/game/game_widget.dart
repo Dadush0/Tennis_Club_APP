@@ -39,6 +39,7 @@ class GameWidget extends StatelessWidget {
       _lineupStore.selectedItem = _lineupStore.teamNames.first;
     }
     _lineupStore.getGamesByTeam(_lineupStore.selectedItem);
+
     return SafeArea(
       child: Column(
         children: <Widget>[
@@ -59,13 +60,14 @@ class GameWidget extends StatelessWidget {
                   },
                 ),
                 IconButton(
-                    onPressed: () {
-                      _lineupStore.setFavouriteTeam(_lineupStore.selectedItem);
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content:
-                              Text(AppLocalizations.of(context)!.favourite)));
-                    },
-                    icon: const Icon(Icons.favorite)),
+                  onPressed: () {
+                    _lineupStore.setFavouriteTeam(_lineupStore.selectedItem);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text(AppLocalizations.of(context)!.favourite)));
+                  },
+                  icon: Icon(Icons.favorite, color: Colors.red),
+                ),
                 Observer(
                   builder: (_) => Visibility(
                       visible: _mainStore.adminView.value,
