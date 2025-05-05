@@ -1,9 +1,9 @@
 PODS:
   - Firebase/CoreOnly (11.10.0):
     - FirebaseCore (= 11.10.0)
-  - Firebase/Database (11.3.5):
+  - Firebase/Database (11.10.0):
     - Firebase/CoreOnly
-    - FirebaseDatabase (~> 11.3.5)
+    - FirebaseDatabase (~> 11.10.0)
   - Firebase/Storage (11.10.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 11.10.0)
