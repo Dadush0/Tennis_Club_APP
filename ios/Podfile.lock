@@ -1,20 +1,20 @@
 PODS:
   - Firebase/CoreOnly (10.22.0):
     - FirebaseCore (= 10.22.0)
-  - Firebase/Database (10.22.0):
+  - Firebase/Database (11.3.5):
     - Firebase/CoreOnly
     - FirebaseDatabase (~> 10.22.0)
   - Firebase/Storage (10.22.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 10.22.0)
-  - firebase_core (2.27.0):
+  - firebase_core (3.13.0):
     - Firebase/CoreOnly (= 10.22.0)
     - Flutter
-  - firebase_database (10.4.9):
+  - firebase_database (11.3.5):
     - Firebase/Database (= 10.22.0)
     - firebase_core
     - Flutter
-  - firebase_storage (11.6.9):
+  - firebase_storage (12.4.5):
     - Firebase/Storage (= 10.22.0)
     - firebase_core
     - Flutter
