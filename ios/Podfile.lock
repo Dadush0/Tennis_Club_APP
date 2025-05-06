@@ -29,7 +29,7 @@ PODS:
   - FirebaseCoreInternal (11.10.0):
     - "GoogleUtilities/NSData+zlib (~> 8.0)"
   - FirebaseDatabase (11.10.0):
-    - FirebaseAppCheckInterop (~> 10.17)
+    - FirebaseAppCheckInterop (~> 11.10.0)
     - FirebaseCore (~> 11.10.0)
     - FirebaseSharedSwift (~> 11.10.0)
     - leveldb-library (~> 1.22)
