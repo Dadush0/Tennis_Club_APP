@@ -18,13 +18,13 @@ PODS:
     - Firebase/Storage (= 11.10.0)
     - firebase_core
     - Flutter
-  - FirebaseAppCheckInterop (10.23.0)
-  - FirebaseAuthInterop (10.23.0)
+  - FirebaseAppCheckInterop (11.10.0)
+  - FirebaseAuthInterop (11.10.0)
   - FirebaseCore (11.10.0):
     - FirebaseCoreInternal (~> 11.10.0)
     - GoogleUtilities/Environment (~> 8.0)
     - GoogleUtilities/Logger (~> 8.0)
-  - FirebaseCoreExtension (10.23.0):
+  - FirebaseCoreExtension (11.10.0):
     - FirebaseCore (~> 11.10.0)
   - FirebaseCoreInternal (11.10.0):
     - "GoogleUtilities/NSData+zlib (~> 8.0)"
@@ -33,7 +33,7 @@ PODS:
     - FirebaseCore (~> 11.10.0)
     - FirebaseSharedSwift (~> 11.10.0)
     - leveldb-library (~> 1.22)
-  - FirebaseSharedSwift (10.23.0)
+  - FirebaseSharedSwift (11.10.0)
   - FirebaseStorage (11.10.0):
     - FirebaseAppCheckInterop (~> 11.10.0)
     - FirebaseAuthInterop (~> 11.10.0)
