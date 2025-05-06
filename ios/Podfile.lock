@@ -39,7 +39,7 @@ PODS:
     - FirebaseAuthInterop (~> 11.10.0)
     - FirebaseCore (~> 11.10.0)
     - FirebaseCoreExtension (~> 11.10.0)
-    - GTMSessionFetcher/Core (< 4.0, >= 2.1)
+    - GTMSessionFetcher/Core (< 5.0, >= 3.4)
   - Flutter (1.0.0)
   - GoogleUtilities/Environment (8.0):
     - GoogleUtilities/Privacy
@@ -50,7 +50,7 @@ PODS:
   - "GoogleUtilities/NSData+zlib (8.0)":
     - GoogleUtilities/Privacy
   - GoogleUtilities/Privacy (8.0)
-  - GTMSessionFetcher/Core (3.3.2)
+  - GTMSessionFetcher/Core (3.4)
   - image_picker_ios (0.0.1):
     - Flutter
   - leveldb-library (1.22.4)
